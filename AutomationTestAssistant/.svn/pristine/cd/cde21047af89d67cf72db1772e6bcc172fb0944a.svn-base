@@ -1,0 +1,48 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<TestLists xmlns="http://microsoft.com/schemas/VisualStudio/TeamTest/2010">
+  <TestList name="TestThread7Mins" id="09de9988-e01f-4633-9970-bd2dcf37efe9" parentListId="8c43106b-9dc1-4907-a29f-aa66a61bf5b6">
+    <TestLinks>
+      <TestLink id="75ad5b0a-75eb-4234-a662-01671abef0b0" name="TestThread240" storage="testagent\bin\release\testagent.dll" type="Microsoft.VisualStudio.TestTools.TestTypes.Unit.UnitTestElement, Microsoft.VisualStudio.QualityTools.Tips.UnitTest.ObjectModel, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+    </TestLinks>
+  </TestList>
+  <TestList name="TestThread120Secs" id="25d62dfb-34a3-4c3b-bf39-60478e1fa7ac" parentListId="8c43106b-9dc1-4907-a29f-aa66a61bf5b6">
+    <TestLinks>
+      <TestLink id="d1a2d80f-6c30-a445-ee15-5f40924a5084" name="TestThread120" storage="testagent\bin\release\testagent.dll" type="Microsoft.VisualStudio.TestTools.TestTypes.Unit.UnitTestElement, Microsoft.VisualStudio.QualityTools.Tips.UnitTest.ObjectModel, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+    </TestLinks>
+  </TestList>
+  <TestList name="TestThread60Secs" id="285ffad8-1718-4067-9780-48e02270161e" parentListId="8c43106b-9dc1-4907-a29f-aa66a61bf5b6">
+    <TestLinks>
+      <TestLink id="a56b9062-8848-b777-d827-d58c29434a26" name="TestThread60" storage="testagent\bin\release\testagent.dll" type="Microsoft.VisualStudio.TestTools.TestTypes.Unit.UnitTestElement, Microsoft.VisualStudio.QualityTools.Tips.UnitTest.ObjectModel, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+    </TestLinks>
+  </TestList>
+  <TestList name="TestListTemplate" id="408facf7-8013-45c1-a47e-01194bea9497" parentListId="8c43106b-9dc1-4907-a29f-aa66a61bf5b6">
+    <TestLinks>
+      <TestLink id="b32db64b-b03d-108a-4b9c-2659a76a2f30" name="TestPrintAllEgnsFromFileNormalCase" storage="testegnextractor\bin\release\testegnextractor.dll" type="Microsoft.VisualStudio.TestTools.TestTypes.Unit.UnitTestElement, Microsoft.VisualStudio.QualityTools.Tips.UnitTest.ObjectModel, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+      <TestLink id="2898b6a6-4133-345d-222b-3e44ede41f21" name="TestPriceIncreasedEventArgsNewValueWhenPriceIncreases" storage="testproductsandprices\bin\release\testproductsandprices.dll" type="Microsoft.VisualStudio.TestTools.TestTypes.Unit.UnitTestElement, Microsoft.VisualStudio.QualityTools.Tips.UnitTest.ObjectModel, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+      <TestLink id="3a21aa65-76ee-fec4-f0b4-da0c74f94384" name="TestShiftByteArrayRightNormalCase" storage="testencryption\bin\release\testencryption.dll" type="Microsoft.VisualStudio.TestTools.TestTypes.Unit.UnitTestElement, Microsoft.VisualStudio.QualityTools.Tips.UnitTest.ObjectModel, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+      <TestLink id="9b9935bd-3279-9524-558c-51283e1c5910" name="TestEqualsObjectNotEqualTimes" storage="testtime\bin\release\testtime.dll" type="Microsoft.VisualStudio.TestTools.TestTypes.Unit.UnitTestElement, Microsoft.VisualStudio.QualityTools.Tips.UnitTest.ObjectModel, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+      <TestLink id="1ab93267-cab5-507d-6316-20c7e7a01e58" name="TestPrintAllEgnsFromFileEmptyText" storage="testegnextractor\bin\release\testegnextractor.dll" type="Microsoft.VisualStudio.TestTools.TestTypes.Unit.UnitTestElement, Microsoft.VisualStudio.QualityTools.Tips.UnitTest.ObjectModel, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+      <TestLink id="8fc50d8f-5158-a56a-8477-02cc6c052cbf" name="TestEqualsObjectEqualTimes" storage="testtime\bin\release\testtime.dll" type="Microsoft.VisualStudio.TestTools.TestTypes.Unit.UnitTestElement, Microsoft.VisualStudio.QualityTools.Tips.UnitTest.ObjectModel, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+      <TestLink id="726e4272-0009-f900-a04c-aa9c9fc954d4" name="TestShiftByteArrayLeftNormalCase" storage="testencryption\bin\release\testencryption.dll" type="Microsoft.VisualStudio.TestTools.TestTypes.Unit.UnitTestElement, Microsoft.VisualStudio.QualityTools.Tips.UnitTest.ObjectModel, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+      <TestLink id="61d07261-50c7-d2f2-273b-d1f4e562dd46" name="TestPriceIncreasedEventArgsnewValueWhenPriceDecrease" storage="testproductsandprices\bin\release\testproductsandprices.dll" type="Microsoft.VisualStudio.TestTools.TestTypes.Unit.UnitTestElement, Microsoft.VisualStudio.QualityTools.Tips.UnitTest.ObjectModel, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+    </TestLinks>
+  </TestList>
+  <TestList name="Lists of Tests" id="8c43106b-9dc1-4907-a29f-aa66a61bf5b6">
+    <RunConfiguration id="8780a2e3-78a6-4742-922c-4ad691741c2c" name="Local" storage="local.testsettings" type="Microsoft.VisualStudio.TestTools.Common.TestRunConfiguration, Microsoft.VisualStudio.QualityTools.Common, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  </TestList>
+  <TestList name="TestThread90Secs" id="8f7cc983-1f1c-4286-b5a5-bc5ee2989948" parentListId="8c43106b-9dc1-4907-a29f-aa66a61bf5b6">
+    <TestLinks>
+      <TestLink id="aedeb5c6-cf6e-7663-8637-b6188afb337b" name="TestThread90" storage="testagent\bin\release\testagent.dll" type="Microsoft.VisualStudio.TestTools.TestTypes.Unit.UnitTestElement, Microsoft.VisualStudio.QualityTools.Tips.UnitTest.ObjectModel, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+    </TestLinks>
+  </TestList>
+  <TestList name="TestThread240Secs" id="af771717-d6ad-43f9-aa47-1be731921bce" parentListId="8c43106b-9dc1-4907-a29f-aa66a61bf5b6">
+    <TestLinks>
+      <TestLink id="75ad5b0a-75eb-4234-a662-01671abef0b0" name="TestThread240" storage="testagent\bin\release\testagent.dll" type="Microsoft.VisualStudio.TestTools.TestTypes.Unit.UnitTestElement, Microsoft.VisualStudio.QualityTools.Tips.UnitTest.ObjectModel, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+    </TestLinks>
+  </TestList>
+  <TestList name="TestThread30Secs" id="d5e66ae9-aff0-4b3f-bec0-eddbaa011739" parentListId="8c43106b-9dc1-4907-a29f-aa66a61bf5b6">
+    <TestLinks>
+      <TestLink id="d81e6246-db20-b249-ec7a-edb9a7eaf3fe" name="TestThread30" storage="testagent\bin\release\testagent.dll" type="Microsoft.VisualStudio.TestTools.TestTypes.Unit.UnitTestElement, Microsoft.VisualStudio.QualityTools.Tips.UnitTest.ObjectModel, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+    </TestLinks>
+  </TestList>
+</TestLists>

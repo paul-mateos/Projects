@@ -1,0 +1,27 @@
+﻿using System.Collections.Generic;
+using ATADataModel;
+using FirstFloor.ModernUI.Presentation;
+using AutomationTestAssistantCore;
+using System.Collections.ObjectModel;
+
+namespace AutomationTestAssistantDesktopApp
+{
+    public class BeforeExecutionProjectSettingsViewModel : NotifyPropertyChanged
+    {
+        public ObservableCollection<TeamViewModel> Teams { get; set; }
+        public string UserName { get; set; }
+
+        public BeforeExecutionProjectSettingsViewModel()
+        {
+            Teams = new ObservableCollection<TeamViewModel>();
+            UserName = ATACore.RegistryManager.GetUserName();
+            List<Team> teams = ATACore.Managers.TeamManager.GetAllUserTeams(ATACore.Managers.ContextManager.Context, UserName);
+            teams.ForEach(t => Teams.Add(new TeamViewModel(t.TeamId, t.Name)));
+        }
+
+        public ObservableCollection<TeamViewModel> GetTeams()
+        {
+            return Teams;
+        }
+    }
+}

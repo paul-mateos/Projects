@@ -1,0 +1,21 @@
+﻿
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using ATADataModel;
+
+namespace AutomationTestAssistantCore
+{
+    public class TestManager
+    {
+        public List<Test> GetAllTestsByProjectName(ATAEntities context, string projectName)
+        {
+            ATADataModel.Project p = ATACore.Managers.ProjectManager.GetByName(context, projectName);
+            //List<Test> teams = p.Te.ToList();
+
+            return new List<Test>();
+        }
+    }
+}

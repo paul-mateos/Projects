@@ -1,0 +1,18 @@
+﻿<mui:ModernWindow x:Class="TreeNotebook.MainWindow"
+  xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+  xmlns:mui="http://firstfloorsoftware.com/ModernUI"
+  xmlns:local="clr-namespace:TreeNotebook"
+  xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
+  Title="MainWindow" Height="350" Width="525" ContentSource="TestView.xaml" WindowState="Maximized" Loaded="ModernWindow_Loaded" Closing="ModernWindow_Closing">
+    <mui:ModernWindow.TitleLinks>
+        <mui:Link DisplayName="Settings" Source="/SettingsView.xaml" />
+        <mui:Link DisplayName="Change Project" Source="/ProjectEditView.xaml" />
+        <mui:Link DisplayName="Release Notes" Source="/ReleaseNotesView.xaml" />
+        <mui:Link DisplayName="About" Source="/AboutView.xaml" />
+    </mui:ModernWindow.TitleLinks>
+    <mui:ModernWindow.CommandBindings>
+        <CommandBinding  Command="{x:Static local:MainWindow.BrowseBackCommand}" Executed="CommandBinding_Executed"/>
+    </mui:ModernWindow.CommandBindings>
+
+</mui:ModernWindow>

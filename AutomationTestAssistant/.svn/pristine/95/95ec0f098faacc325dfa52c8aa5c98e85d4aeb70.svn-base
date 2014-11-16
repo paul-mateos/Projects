@@ -1,0 +1,19 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using ATADataModel;
+
+namespace AutomationTestAssistantCore
+{
+    public class BaseContext
+    {
+        public ATAEntities Context { get; set; }
+
+        public BaseContext()
+        {
+            ATAEntities context = new ATAEntities();
+        }
+    }
+}

@@ -1,0 +1,289 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Net.Sockets;
+using System.Net;
+using AutomationTestAssistantCore;
+using System.Diagnostics;
+using System.Threading;
+using System.Configuration;
+using System.Reflection;
+using System.Threading.Tasks;
+using System.Collections.Concurrent;
+
+namespace ServerSocket
+{
+    public class ServerAgent : BaseLogger
+    {
+        private static ConcurrentQueue<string> commandsToBeExecuted;
+        private static Process currentlyExecutedProc;
+        private static Mutex mut = new Mutex();
+        private static Task executeCommandThreadWorker;
+        private static Task msBuildLogListnerThreadWorker;        
+        private const string ServerStartedMsg = "Server Started";
+        private const string AcceptedConnectionAgentMsg = "Accept connection from agent";
+        private static ServerAgent agent;
+        //private static TcpClient msBuildClientTcpWriter;
+        private static Object lockObject;
+        private static IpAddressSettings clientSettings;
+        private static IpAddressSettings agentSettings;
+        private static IpAddressSettings msBuildLogSettings;
+
+        static void Main(string[] args)
+        {
+            InitializeSettings();
+            Console.BackgroundColor = ConsoleColor.DarkGreen;
+            commandsToBeExecuted = new ConcurrentQueue<string>();
+            currentlyExecutedProc = null;
+            lockObject = new Object();
+            //TcpListener agentListener = new TcpListener(clientSettings.IPAddress, clientSettings.Port);
+            ////TcpClient agentTcpListener = default(TcpClient);
+            ////TcpClient agentTcpWriter = default(TcpClient);
+            //agentListener.Start();
+            //Console.WriteLine("Wait for first client");
+            //agentTcpListener = agentListener.AcceptTcpClient();
+            //Console.WriteLine("Wait for second client");
+            //agentTcpWriter = agentListener.AcceptTcpClient();
+           
+            // the MsBuild Log Writer to Client will be initialized only in the beginning, only the listener will be initialized every time.
+            //msBuildClientTcpWriter = new TcpClient();
+            //msBuildClientTcpWriter.Connect(agentSettings.IPAddress, agentSettings.Port);
+            BaseLogger.Log.Info(ServerStartedMsg);
+            Console.WriteLine(ServerStartedMsg);
+            BaseLogger.Log.Info(AcceptedConnectionAgentMsg);
+            Console.WriteLine(AcceptedConnectionAgentMsg);
+            TcpListener agentListener = new TcpListener(agentSettings.GetIPAddress(), clientSettings.Port);
+            agentListener.Start();  
+            agent = new ServerAgent();
+            Console.WriteLine("Before Client Process started");
+            Task clientProcessMessageThreadWorker = Task.Factory.StartNew(() => agent.ProcessClientMessage(agentListener), TaskCreationOptions.LongRunning);
+            //executeCommandThreadWorker = Task.Factory.StartNew(() => agent.ExecuteCommands(agentTcpWriter, agentTcpListener, agentListener));
+            Console.WriteLine("Before Execution Process started");
+            executeCommandThreadWorker = Task.Factory.StartNew(() => agent.ExecuteCommands(agentListener), TaskCreationOptions.LongRunning);
+            Console.WriteLine("After Work Processes started");
+            Task.WaitAll(new Task[] { clientProcessMessageThreadWorker, executeCommandThreadWorker });
+            //clientProcessMessageThreadWorker.Wait();
+        }
+
+        private static void InitializeSettings()
+        {
+            clientSettings = new IpAddressSettings(ConfigurationManager.AppSettings["clientIp"], ConfigurationManager.AppSettings["clientPort"]);
+            agentSettings = new IpAddressSettings(ConfigurationManager.AppSettings["agentIp"], ConfigurationManager.AppSettings["agentPort"]);
+            msBuildLogSettings = new IpAddressSettings(ConfigurationManager.AppSettings["agentIp"], ConfigurationManager.AppSettings["msBuildAgentPort"]);
+        }
+
+        //private void ExecuteCommands(TcpClient agentTcpWriter, TcpClient agentTcpListener, TcpListener agentListener)
+        private void ExecuteCommands(TcpListener agentListener)
+        {
+            try
+            {
+                //TcpClient agentTcpListener = default(TcpClient);
+                TcpClient agentTcpWriter = default(TcpClient);
+                //while (true)
+                //{
+                //    try
+                //    {
+                //        agentTcpWriter.Connect(clientSettings.IPAddress, clientSettings.Port);
+                //        break;
+                //    }
+                //    catch(SocketException)
+                //    {
+                //        Thread.Sleep(500);
+                //    }                
+                //}
+                //agentListener.Start();
+                //agentTcpListener = agentListener.AcceptTcpClient();
+                Console.WriteLine("Before Execution Lock");
+                lock (lockObject)
+                {
+                    //Monitor.Wait(agentListener);
+                    //mut.WaitOne();
+                    Thread.Sleep(1000);
+                    Console.WriteLine("In Execution Lock");
+                    agentTcpWriter = agentListener.AcceptTcpClient();
+                    //mut.ReleaseMutex();
+                }
+                Console.WriteLine("After Execution Lock");
+                TcpClient msBuildClientTcpWriter = new TcpClient();
+                while (true)
+                {
+                    try
+                    {
+                        msBuildClientTcpWriter.Connect(clientSettings.GetIPAddress(), agentSettings.Port);
+                        break;
+                    }
+                    catch (SocketException)
+                    {
+                        Thread.Sleep(500);
+                    }
+                }
+             
+                Console.WriteLine("Commands Execution Task Connected");
+                while (true)
+                {
+                    //mut.WaitOne();
+                    if (commandsToBeExecuted.Count > 0 && (currentlyExecutedProc == null || currentlyExecutedProc.HasExited))
+                    {
+                        string currentCommandXml = String.Empty;
+                        bool dequeueSuccessfull   = commandsToBeExecuted.TryDequeue(out currentCommandXml);
+                        if (!dequeueSuccessfull)
+                            continue;
+                        //ATACore.CommandExecutor.GetCommandToBeExecutedFromMessage(currentCommandXml);
+                        string dequeuedMsg = String.Format("Command {0} Dequeued on the Agent!", ATACore.CommandExecutor.GetCommandToBeExecutedFromMessage(currentCommandXml));
+                        ATACore.TcpWrapperProcessor.TcpClientWrapper.SendMessageToClient(agentTcpWriter, dequeuedMsg);
+                        //Command currentAgentCommand = ATACore.CommandExecutor.GetAgentCommandFromMessage(currentCommandSigniture);
+                        //string currentCommand = ATACore.CommandExecutor.GetCommandToBeExecutedFromMessage(currentCommandSigniture);
+                        //string currentCommandArgsStr = ATACore.CommandExecutor.GetCommandToBeExecutedArgsFromMessage(currentCommandSigniture);
+                        if (commandsToBeExecuted.Count > 0)
+                        {
+                            // Waits until the both threads are synchronized. The backgroudworker2 should be initialized again
+                            //msBuildLogListnerThreadWorker.Join(30000);
+                            msBuildLogListnerThreadWorker.Wait();
+                        }
+                        //lock (this)
+                        //{
+                            // Locks the current thread until the agentMsBuildListner is initialized                     
+                        var taskMsbuildLogInitialization = Task<CommunicationPair>.Factory.StartNew(() => ATACore.TcpWrapperProcessor.TcpMsBuildLoggerProcessor.InitializeMsBuildLogCommunicationEntities(msBuildLogSettings));
+                        CommunicationPair msBuildLogCommunicationPair = taskMsbuildLogInitialization.Result;
+                        msBuildLogListnerThreadWorker = Task.Factory.StartNew(() => ATACore.TcpWrapperProcessor.TcpMsBuildLoggerProcessor.ProcessMsBuildLoggerMessage(msBuildClientTcpWriter, msBuildLogCommunicationPair), TaskCreationOptions.LongRunning);
+                            //msBuildLogListnerThreadWorker.Start();
+                            //Monitor.Wait(this);
+                        //}
+
+                        currentlyExecutedProc = ATACore.CommandExecutor.QueueCommandToExecute(currentCommandXml);
+
+
+                        string agentResponseMessage = String.Concat("Start Executing ", ATACore.CommandExecutor.GetCommandToBeExecutedFromMessage(currentCommandXml));
+                        ATACore.TcpWrapperProcessor.TcpClientWrapper.SendMessageToClient(agentTcpWriter, agentResponseMessage);
+                    }
+                    else
+                    {
+                        Thread.Sleep(1000);
+                    }
+                    //mut.ReleaseMutex();
+                }
+
+            }
+            catch (ThreadAbortException)
+            {
+                BaseLogger.Log.Info("THREAD ABORTED");
+                return;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.ToString());
+                BaseLogger.Log.Error("Exception in ExecuteCommand", ex);
+            }
+        }
+
+        private void ProcessClientMessage(TcpListener agentListener)
+        {
+            bool connected = true;
+            //int endIndexOfMsg = -1;
+            TcpClient agentTcpListener = default(TcpClient);
+            Console.WriteLine("Before Client Lock");
+            lock (lockObject)
+            {                              
+                //TcpClient agentTcpWriter = default(TcpClient);
+                //agentListener.Start();
+            //mut.WaitOne();
+                Console.WriteLine("In Client Lock");
+                Thread.Sleep(1000);
+                agentTcpListener = agentListener.AcceptTcpClient();
+            //mut.ReleaseMutex();
+            //Monitor.Pulse(agentListener);
+            }
+            Console.WriteLine("After Client Lock");
+            //agentTcpWriter = agentListener.AcceptTcpClient();
+            Console.WriteLine("Client Message Processing Task Connected");
+            try
+            {
+                while (connected)
+                {
+                    // Only one thread a time can use the Tcp objects and the listener because of that we use mutex to protect the shared resource. Only one thread a time can own the mutex.
+                    // we use the WaitOne to signal other threads that the resource is currently used by this thread. After work we release the mutex.
+                    //mut.WaitOne();
+
+                    string dataFromClient = ATACore.TcpWrapperProcessor.TcpClientWrapper.ReadClientMessage(agentTcpListener);
+                    if (!String.IsNullOrEmpty(dataFromClient))
+                    {
+                        connected = ProcessCurrentAgentCommand(agentTcpListener, agentTcpListener, agentListener, dataFromClient);
+                    }
+                    //mut.ReleaseMutex();
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                BaseLogger.Log.Error("Exception in ProcessClientMessge", ex);
+            }
+        }
+
+        private bool ProcessCurrentAgentCommand(TcpClient agentTcpReader, TcpClient agentTcpWriter, TcpListener agentListener, string dataFromClient)
+        {
+            Command currentAgentCommand = ATACore.CommandExecutor.GetCommandToBeExecutedFromMessage(dataFromClient);
+            NetworkStream networkStream = agentTcpWriter.GetStream();
+            bool connected = true;
+            switch (currentAgentCommand)
+            {
+                case Command.DISCONNECT:
+                    connected = DisconnectAgent(agentTcpReader, agentTcpWriter, agentListener);
+                    break;
+                case Command.KILL:
+                    KillCurrentlyExecutingProcess(agentTcpWriter);
+                    break;
+                default:
+                    commandsToBeExecuted.Enqueue(dataFromClient);
+                    string queuedMsg = String.Format("Command {0} Enqueued on the Agent!", dataFromClient);
+                    BaseLogger.Log.Info(queuedMsg);
+                    ATACore.TcpWrapperProcessor.TcpClientWrapper.SendMessageToClient(agentTcpWriter, queuedMsg);
+                    break;
+            }
+
+            return connected;
+        }
+
+        private void KillCurrentlyExecutingProcess(TcpClient agentTcpWriter)
+        {
+            bool killed = false;
+            while (!killed)
+            {
+                if (currentlyExecutedProc == null)
+                {
+                    Thread.Sleep(500);
+                    continue;
+                }
+                else if (!currentlyExecutedProc.HasExited)
+                {
+                    string killMessage = String.Format("Process {0} with ID:{1} was killed successfully on Machine: {2}", currentlyExecutedProc.ProcessName, currentlyExecutedProc.Id, Environment.MachineName);
+                    ATACore.TcpWrapperProcessor.TcpClientWrapper.SendMessageToClient(agentTcpWriter, killMessage);
+                    BaseLogger.Log.Info(killMessage);
+                    currentlyExecutedProc.Kill();
+                    killed = true;
+                }
+                else
+                {
+                    break;
+                }
+            }
+        }
+
+        private bool DisconnectAgent(TcpClient clientReader, TcpClient clientWriter, TcpListener serverSocketListener)
+        {
+            KillCurrentlyExecutingProcess(clientWriter);
+            //executeCommandThreadWorker.Abort();
+            string backgroudWorkerStoppedMsg = "Background worker 1 stopped!";
+            ATACore.TcpWrapperProcessor.TcpClientWrapper.SendMessageToClient(clientWriter, backgroudWorkerStoppedMsg);
+            //msBuildLogListnerThreadWorker.Abort();
+            string backgroudWorkerStoppedMsg2 = "Background worker 2 stopped!";
+            ATACore.TcpWrapperProcessor.TcpClientWrapper.SendMessageToClient(clientWriter, backgroudWorkerStoppedMsg2);
+            string agentDisconnectedMsg = "Agent disconnected!";
+            ATACore.TcpWrapperProcessor.TcpClientWrapper.SendMessageToClient(clientWriter, agentDisconnectedMsg);
+
+            ATACore.TcpWrapperProcessor.TcpListenerWrapper.CloseTcpMsLogger(serverSocketListener, clientWriter, clientReader);
+
+            return false;
+        }
+    }
+}

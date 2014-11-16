@@ -1,0 +1,572 @@
+﻿namespace ServerClient
+{
+    partial class Main
+    {
+        /// <summary>
+        /// Required designer variable.
+        /// </summary>
+        private System.ComponentModel.IContainer components = null;
+
+        /// <summary>
+        /// Clean up any resources being used.
+        /// </summary>
+        /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing && (components != null))
+            {
+                components.Dispose();
+            }
+            base.Dispose(disposing);
+        }
+
+        #region Windows Form Designer generated code
+
+        /// <summary>
+        /// Required method for Designer support - do not modify
+        /// the contents of this method with the code editor.
+        /// </summary>
+        private void InitializeComponent()
+        {
+            this.btnSendData = new System.Windows.Forms.Button();
+            this.lblClientIp = new System.Windows.Forms.Label();
+            this.btnClose = new System.Windows.Forms.Button();
+            this.btnConnect = new System.Windows.Forms.Button();
+            this.tbClientIp = new System.Windows.Forms.TextBox();
+            this.tbMessage = new System.Windows.Forms.TextBox();
+            this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
+            this.button1 = new System.Windows.Forms.Button();
+            this.backgroundWorker2 = new System.ComponentModel.BackgroundWorker();
+            this.tbAgentIp = new System.Windows.Forms.TextBox();
+            this.lblAgentIp = new System.Windows.Forms.Label();
+            this.tbMain = new System.Windows.Forms.TabControl();
+            this.tabPageMethods = new System.Windows.Forms.TabPage();
+            this.lblUserName = new System.Windows.Forms.Label();
+            this.lblTeamProjUrl = new System.Windows.Forms.Label();
+            this.tbUserName = new System.Windows.Forms.TextBox();
+            this.tfsServerUrl = new System.Windows.Forms.TextBox();
+            this.dgvWorkspaces = new System.Windows.Forms.DataGridView();
+            this.TfsPaths = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.LocalPaths = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.TfsProjectCollections = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.WorkspaceName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dgvMethods = new System.Windows.Forms.DataGridView();
+            this.CheckBoxes = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+            this.MethodNames = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Class = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Id = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dgvProjects = new System.Windows.Forms.DataGridView();
+            this.TestProjects = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.tabPageMainLog = new System.Windows.Forms.TabPage();
+            this.rtbMain = new System.Windows.Forms.RichTextBox();
+            this.tabPageMsBuildLog = new System.Windows.Forms.TabPage();
+            this.rtbMsBuild = new System.Windows.Forms.RichTextBox();
+            this.btnRefresh = new System.Windows.Forms.Button();
+            this.label3 = new System.Windows.Forms.Label();
+            this.tbListName = new System.Windows.Forms.TextBox();
+            this.btnCreateWorkspaces = new System.Windows.Forms.Button();
+            this.btnDeleteWorkspaces = new System.Windows.Forms.Button();
+            this.btnGetLatest = new System.Windows.Forms.Button();
+            this.rbTfsServerUrl = new System.Windows.Forms.TextBox();
+            this.tbTfsServerUrl = new System.Windows.Forms.TextBox();
+            this.lblMsBuildLogIpAddress = new System.Windows.Forms.Label();
+            this.tbMsBuildLogIp = new System.Windows.Forms.TextBox();
+            this.btnDisconnect = new System.Windows.Forms.Button();
+            this.btnStopCurrentlyExecutedProcess = new System.Windows.Forms.Button();
+            this.tbMain.SuspendLayout();
+            this.tabPageMethods.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvWorkspaces)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvMethods)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvProjects)).BeginInit();
+            this.tabPageMainLog.SuspendLayout();
+            this.tabPageMsBuildLog.SuspendLayout();
+            this.SuspendLayout();
+            // 
+            // btnSendData
+            // 
+            this.btnSendData.Location = new System.Drawing.Point(10, 477);
+            this.btnSendData.Name = "btnSendData";
+            this.btnSendData.Size = new System.Drawing.Size(108, 39);
+            this.btnSendData.TabIndex = 0;
+            this.btnSendData.Text = "Execute";
+            this.btnSendData.UseVisualStyleBackColor = true;
+            this.btnSendData.Click += new System.EventHandler(this.btnSendData_Click);
+            // 
+            // lblClientIp
+            // 
+            this.lblClientIp.AutoSize = true;
+            this.lblClientIp.Location = new System.Drawing.Point(28, 12);
+            this.lblClientIp.Name = "lblClientIp";
+            this.lblClientIp.Size = new System.Drawing.Size(45, 13);
+            this.lblClientIp.TabIndex = 2;
+            this.lblClientIp.Text = "Client Ip";
+            // 
+            // btnClose
+            // 
+            this.btnClose.Location = new System.Drawing.Point(136, 477);
+            this.btnClose.Name = "btnClose";
+            this.btnClose.Size = new System.Drawing.Size(65, 39);
+            this.btnClose.TabIndex = 3;
+            this.btnClose.Text = "Close";
+            this.btnClose.UseVisualStyleBackColor = true;
+            this.btnClose.Click += new System.EventHandler(this.btnClose_Click);
+            // 
+            // btnConnect
+            // 
+            this.btnConnect.Location = new System.Drawing.Point(210, 477);
+            this.btnConnect.Name = "btnConnect";
+            this.btnConnect.Size = new System.Drawing.Size(65, 39);
+            this.btnConnect.TabIndex = 4;
+            this.btnConnect.Text = "Connect";
+            this.btnConnect.UseVisualStyleBackColor = true;
+            this.btnConnect.Click += new System.EventHandler(this.btnConnect_Click);
+            // 
+            // tbClientIp
+            // 
+            this.tbClientIp.Location = new System.Drawing.Point(101, 9);
+            this.tbClientIp.Name = "tbClientIp";
+            this.tbClientIp.Size = new System.Drawing.Size(100, 20);
+            this.tbClientIp.TabIndex = 5;
+            this.tbClientIp.Text = "192.168.1.138:8888";
+            // 
+            // tbMessage
+            // 
+            this.tbMessage.Location = new System.Drawing.Point(13, 538);
+            this.tbMessage.Name = "tbMessage";
+            this.tbMessage.Size = new System.Drawing.Size(891, 20);
+            this.tbMessage.TabIndex = 6;
+            this.tbMessage.Text = "MST#D:\\AutomationTestHelper\\MsTest.proj#D:\\AutomationTestHelper\\AutomationTestAss" +
+    "istant.vsmdi D:\\AutomationTestHelper\\aaa110111.trx";
+            // 
+            // backgroundWorker1
+            // 
+            this.backgroundWorker1.DoWork += new System.ComponentModel.DoWorkEventHandler(this.backgroundWorker1_DoWork);
+            // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(281, 477);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(65, 39);
+            this.button1.TabIndex = 15;
+            this.button1.Text = "Clean";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.btnClean_Click);
+            // 
+            // backgroundWorker2
+            // 
+            this.backgroundWorker2.DoWork += new System.ComponentModel.DoWorkEventHandler(this.backgroundWorker2_DoWork);
+            // 
+            // tbAgentIp
+            // 
+            this.tbAgentIp.Location = new System.Drawing.Point(258, 9);
+            this.tbAgentIp.Name = "tbAgentIp";
+            this.tbAgentIp.Size = new System.Drawing.Size(107, 20);
+            this.tbAgentIp.TabIndex = 20;
+            this.tbAgentIp.Text = "192.168.1.120:8887";
+            // 
+            // lblAgentIp
+            // 
+            this.lblAgentIp.AutoSize = true;
+            this.lblAgentIp.Location = new System.Drawing.Point(207, 12);
+            this.lblAgentIp.Name = "lblAgentIp";
+            this.lblAgentIp.Size = new System.Drawing.Size(47, 13);
+            this.lblAgentIp.TabIndex = 21;
+            this.lblAgentIp.Text = "Agent Ip";
+            // 
+            // tbMain
+            // 
+            this.tbMain.Controls.Add(this.tabPageMethods);
+            this.tbMain.Controls.Add(this.tabPageMainLog);
+            this.tbMain.Controls.Add(this.tabPageMsBuildLog);
+            this.tbMain.Location = new System.Drawing.Point(10, 35);
+            this.tbMain.Name = "tbMain";
+            this.tbMain.SelectedIndex = 0;
+            this.tbMain.Size = new System.Drawing.Size(1551, 421);
+            this.tbMain.TabIndex = 22;
+            // 
+            // tabPageMethods
+            // 
+            this.tabPageMethods.Controls.Add(this.lblUserName);
+            this.tabPageMethods.Controls.Add(this.lblTeamProjUrl);
+            this.tabPageMethods.Controls.Add(this.tbUserName);
+            this.tabPageMethods.Controls.Add(this.tfsServerUrl);
+            this.tabPageMethods.Controls.Add(this.dgvWorkspaces);
+            this.tabPageMethods.Controls.Add(this.dgvMethods);
+            this.tabPageMethods.Controls.Add(this.dgvProjects);
+            this.tabPageMethods.Location = new System.Drawing.Point(4, 22);
+            this.tabPageMethods.Name = "tabPageMethods";
+            this.tabPageMethods.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPageMethods.Size = new System.Drawing.Size(1543, 395);
+            this.tabPageMethods.TabIndex = 0;
+            this.tabPageMethods.Text = "Main";
+            this.tabPageMethods.UseVisualStyleBackColor = true;
+            // 
+            // lblUserName
+            // 
+            this.lblUserName.AutoSize = true;
+            this.lblUserName.Location = new System.Drawing.Point(997, 368);
+            this.lblUserName.Name = "lblUserName";
+            this.lblUserName.Size = new System.Drawing.Size(60, 13);
+            this.lblUserName.TabIndex = 12;
+            this.lblUserName.Text = "User Name";
+            // 
+            // lblTeamProjUrl
+            // 
+            this.lblTeamProjUrl.AutoSize = true;
+            this.lblTeamProjUrl.Location = new System.Drawing.Point(716, 369);
+            this.lblTeamProjUrl.Name = "lblTeamProjUrl";
+            this.lblTeamProjUrl.Size = new System.Drawing.Size(95, 13);
+            this.lblTeamProjUrl.TabIndex = 11;
+            this.lblTeamProjUrl.Text = "Team Project URL";
+            // 
+            // tbUserName
+            // 
+            this.tbUserName.Location = new System.Drawing.Point(1063, 362);
+            this.tbUserName.Name = "tbUserName";
+            this.tbUserName.Size = new System.Drawing.Size(155, 20);
+            this.tbUserName.TabIndex = 10;
+            this.tbUserName.Text = "aangelov-pc\\aangelov";
+            // 
+            // tfsServerUrl
+            // 
+            this.tfsServerUrl.Location = new System.Drawing.Point(830, 365);
+            this.tfsServerUrl.Name = "tfsServerUrl";
+            this.tfsServerUrl.Size = new System.Drawing.Size(155, 20);
+            this.tfsServerUrl.TabIndex = 9;
+            this.tfsServerUrl.Text = "http://aangelov-pc:8080/tfs/";
+            // 
+            // dgvWorkspaces
+            // 
+            this.dgvWorkspaces.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
+            this.dgvWorkspaces.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvWorkspaces.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.TfsPaths,
+            this.LocalPaths,
+            this.TfsProjectCollections,
+            this.WorkspaceName});
+            this.dgvWorkspaces.Location = new System.Drawing.Point(716, 126);
+            this.dgvWorkspaces.Name = "dgvWorkspaces";
+            this.dgvWorkspaces.Size = new System.Drawing.Size(821, 224);
+            this.dgvWorkspaces.TabIndex = 8;
+            // 
+            // TfsPaths
+            // 
+            this.TfsPaths.HeaderText = "Tfs Paths";
+            this.TfsPaths.Name = "TfsPaths";
+            this.TfsPaths.Width = 71;
+            // 
+            // LocalPaths
+            // 
+            this.LocalPaths.HeaderText = "Local Paths";
+            this.LocalPaths.Name = "LocalPaths";
+            this.LocalPaths.Width = 81;
+            // 
+            // TfsProjectCollections
+            // 
+            this.TfsProjectCollections.HeaderText = "Tfs Project Collections";
+            this.TfsProjectCollections.Name = "TfsProjectCollections";
+            this.TfsProjectCollections.Width = 125;
+            // 
+            // WorkspaceName
+            // 
+            this.WorkspaceName.HeaderText = "WorkspaceName";
+            this.WorkspaceName.Name = "WorkspaceName";
+            this.WorkspaceName.Width = 115;
+            // 
+            // dgvMethods
+            // 
+            this.dgvMethods.AllowUserToAddRows = false;
+            this.dgvMethods.AllowUserToDeleteRows = false;
+            this.dgvMethods.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.DisplayedCells;
+            this.dgvMethods.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.DisplayedCells;
+            this.dgvMethods.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvMethods.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.CheckBoxes,
+            this.MethodNames,
+            this.Class,
+            this.Id});
+            this.dgvMethods.Location = new System.Drawing.Point(6, 6);
+            this.dgvMethods.Name = "dgvMethods";
+            this.dgvMethods.Size = new System.Drawing.Size(704, 379);
+            this.dgvMethods.StandardTab = true;
+            this.dgvMethods.TabIndex = 7;
+            // 
+            // CheckBoxes
+            // 
+            this.CheckBoxes.HeaderText = "CheckBoxes";
+            this.CheckBoxes.Name = "CheckBoxes";
+            this.CheckBoxes.Width = 73;
+            // 
+            // MethodNames
+            // 
+            this.MethodNames.HeaderText = "MethodNames";
+            this.MethodNames.Name = "MethodNames";
+            this.MethodNames.Width = 101;
+            // 
+            // Class
+            // 
+            this.Class.HeaderText = "Class";
+            this.Class.Name = "Class";
+            this.Class.Width = 57;
+            // 
+            // Id
+            // 
+            this.Id.HeaderText = "Id";
+            this.Id.Name = "Id";
+            this.Id.Width = 41;
+            // 
+            // dgvProjects
+            // 
+            this.dgvProjects.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
+            this.dgvProjects.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvProjects.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.TestProjects});
+            this.dgvProjects.Location = new System.Drawing.Point(716, 6);
+            this.dgvProjects.Name = "dgvProjects";
+            this.dgvProjects.Size = new System.Drawing.Size(821, 114);
+            this.dgvProjects.TabIndex = 6;
+            this.dgvProjects.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvProjects_CellValueChanged);
+            // 
+            // TestProjects
+            // 
+            this.TestProjects.HeaderText = "Test Projects";
+            this.TestProjects.Name = "TestProjects";
+            this.TestProjects.Width = 94;
+            // 
+            // tabPageMainLog
+            // 
+            this.tabPageMainLog.Controls.Add(this.rtbMain);
+            this.tabPageMainLog.Location = new System.Drawing.Point(4, 22);
+            this.tabPageMainLog.Name = "tabPageMainLog";
+            this.tabPageMainLog.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPageMainLog.Size = new System.Drawing.Size(1543, 395);
+            this.tabPageMainLog.TabIndex = 1;
+            this.tabPageMainLog.Text = "Main Log";
+            this.tabPageMainLog.UseVisualStyleBackColor = true;
+            // 
+            // rtbMain
+            // 
+            this.rtbMain.Location = new System.Drawing.Point(11, 6);
+            this.rtbMain.Name = "rtbMain";
+            this.rtbMain.Size = new System.Drawing.Size(1194, 372);
+            this.rtbMain.TabIndex = 20;
+            this.rtbMain.Text = "";
+            // 
+            // tabPageMsBuildLog
+            // 
+            this.tabPageMsBuildLog.Controls.Add(this.rtbMsBuild);
+            this.tabPageMsBuildLog.Location = new System.Drawing.Point(4, 22);
+            this.tabPageMsBuildLog.Name = "tabPageMsBuildLog";
+            this.tabPageMsBuildLog.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPageMsBuildLog.Size = new System.Drawing.Size(1543, 395);
+            this.tabPageMsBuildLog.TabIndex = 2;
+            this.tabPageMsBuildLog.Text = "MS BuildLog";
+            this.tabPageMsBuildLog.UseVisualStyleBackColor = true;
+            // 
+            // rtbMsBuild
+            // 
+            this.rtbMsBuild.Location = new System.Drawing.Point(6, 3);
+            this.rtbMsBuild.Name = "rtbMsBuild";
+            this.rtbMsBuild.Size = new System.Drawing.Size(1194, 386);
+            this.rtbMsBuild.TabIndex = 22;
+            this.rtbMsBuild.Text = "";
+            // 
+            // btnRefresh
+            // 
+            this.btnRefresh.Location = new System.Drawing.Point(352, 477);
+            this.btnRefresh.Name = "btnRefresh";
+            this.btnRefresh.Size = new System.Drawing.Size(65, 39);
+            this.btnRefresh.TabIndex = 23;
+            this.btnRefresh.Text = "Refresh";
+            this.btnRefresh.UseVisualStyleBackColor = true;
+            this.btnRefresh.Click += new System.EventHandler(this.btnRefresh_Click);
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(11, 572);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(72, 13);
+            this.label3.TabIndex = 13;
+            this.label3.Text = "TestListName";
+            // 
+            // tbListName
+            // 
+            this.tbListName.Location = new System.Drawing.Point(89, 566);
+            this.tbListName.Name = "tbListName";
+            this.tbListName.Size = new System.Drawing.Size(165, 20);
+            this.tbListName.TabIndex = 14;
+            this.tbListName.Text = "TestListTemplate";
+            // 
+            // btnCreateWorkspaces
+            // 
+            this.btnCreateWorkspaces.Location = new System.Drawing.Point(733, 477);
+            this.btnCreateWorkspaces.Name = "btnCreateWorkspaces";
+            this.btnCreateWorkspaces.Size = new System.Drawing.Size(108, 39);
+            this.btnCreateWorkspaces.TabIndex = 24;
+            this.btnCreateWorkspaces.Text = "Create Workspaces";
+            this.btnCreateWorkspaces.UseVisualStyleBackColor = true;
+            this.btnCreateWorkspaces.Click += new System.EventHandler(this.btnCreateWorkspaces_Click);
+            // 
+            // btnDeleteWorkspaces
+            // 
+            this.btnDeleteWorkspaces.Location = new System.Drawing.Point(862, 477);
+            this.btnDeleteWorkspaces.Name = "btnDeleteWorkspaces";
+            this.btnDeleteWorkspaces.Size = new System.Drawing.Size(108, 39);
+            this.btnDeleteWorkspaces.TabIndex = 25;
+            this.btnDeleteWorkspaces.Text = "Delete Workspaces";
+            this.btnDeleteWorkspaces.UseVisualStyleBackColor = true;
+            this.btnDeleteWorkspaces.Click += new System.EventHandler(this.btnDeleteWorkspaces_Click);
+            // 
+            // btnGetLatest
+            // 
+            this.btnGetLatest.Location = new System.Drawing.Point(987, 477);
+            this.btnGetLatest.Name = "btnGetLatest";
+            this.btnGetLatest.Size = new System.Drawing.Size(108, 39);
+            this.btnGetLatest.TabIndex = 26;
+            this.btnGetLatest.Text = "Get Latest";
+            this.btnGetLatest.UseVisualStyleBackColor = true;
+            this.btnGetLatest.Click += new System.EventHandler(this.btnGetLatest_Click);
+            // 
+            // rbTfsServerUrl
+            // 
+            this.rbTfsServerUrl.Location = new System.Drawing.Point(873, 365);
+            this.rbTfsServerUrl.Name = "rbTfsServerUrl";
+            this.rbTfsServerUrl.Size = new System.Drawing.Size(332, 20);
+            this.rbTfsServerUrl.TabIndex = 9;
+            // 
+            // tbTfsServerUrl
+            // 
+            this.tbTfsServerUrl.Location = new System.Drawing.Point(873, 365);
+            this.tbTfsServerUrl.Name = "tbTfsServerUrl";
+            this.tbTfsServerUrl.Size = new System.Drawing.Size(332, 20);
+            this.tbTfsServerUrl.TabIndex = 9;
+            // 
+            // lblMsBuildLogIpAddress
+            // 
+            this.lblMsBuildLogIpAddress.AutoSize = true;
+            this.lblMsBuildLogIpAddress.Location = new System.Drawing.Point(371, 12);
+            this.lblMsBuildLogIpAddress.Name = "lblMsBuildLogIpAddress";
+            this.lblMsBuildLogIpAddress.Size = new System.Drawing.Size(74, 13);
+            this.lblMsBuildLogIpAddress.TabIndex = 28;
+            this.lblMsBuildLogIpAddress.Text = "MsBuildLog Ip";
+            // 
+            // tbMsBuildLogIp
+            // 
+            this.tbMsBuildLogIp.Location = new System.Drawing.Point(451, 9);
+            this.tbMsBuildLogIp.Name = "tbMsBuildLogIp";
+            this.tbMsBuildLogIp.Size = new System.Drawing.Size(112, 20);
+            this.tbMsBuildLogIp.TabIndex = 27;
+            this.tbMsBuildLogIp.Text = "192.168.1.120:8889";
+            // 
+            // btnDisconnect
+            // 
+            this.btnDisconnect.Location = new System.Drawing.Point(423, 477);
+            this.btnDisconnect.Name = "btnDisconnect";
+            this.btnDisconnect.Size = new System.Drawing.Size(70, 39);
+            this.btnDisconnect.TabIndex = 29;
+            this.btnDisconnect.Text = "Disconnect";
+            this.btnDisconnect.UseVisualStyleBackColor = true;
+            this.btnDisconnect.Click += new System.EventHandler(this.btnDisconnect_Click);
+            // 
+            // btnStopCurrentlyExecutedProcess
+            // 
+            this.btnStopCurrentlyExecutedProcess.Location = new System.Drawing.Point(512, 477);
+            this.btnStopCurrentlyExecutedProcess.Name = "btnStopCurrentlyExecutedProcess";
+            this.btnStopCurrentlyExecutedProcess.Size = new System.Drawing.Size(178, 39);
+            this.btnStopCurrentlyExecutedProcess.TabIndex = 30;
+            this.btnStopCurrentlyExecutedProcess.Text = "Stop Currently Executed Process";
+            this.btnStopCurrentlyExecutedProcess.UseVisualStyleBackColor = true;
+            this.btnStopCurrentlyExecutedProcess.Click += new System.EventHandler(this.btnStopCurrentlyExecutedProcess_Click);
+            // 
+            // Main
+            // 
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.ClientSize = new System.Drawing.Size(1573, 598);
+            this.Controls.Add(this.btnStopCurrentlyExecutedProcess);
+            this.Controls.Add(this.btnDisconnect);
+            this.Controls.Add(this.lblMsBuildLogIpAddress);
+            this.Controls.Add(this.tbMsBuildLogIp);
+            this.Controls.Add(this.btnGetLatest);
+            this.Controls.Add(this.btnDeleteWorkspaces);
+            this.Controls.Add(this.btnCreateWorkspaces);
+            this.Controls.Add(this.btnRefresh);
+            this.Controls.Add(this.tbMain);
+            this.Controls.Add(this.lblAgentIp);
+            this.Controls.Add(this.tbAgentIp);
+            this.Controls.Add(this.button1);
+            this.Controls.Add(this.tbListName);
+            this.Controls.Add(this.label3);
+            this.Controls.Add(this.tbMessage);
+            this.Controls.Add(this.tbClientIp);
+            this.Controls.Add(this.btnConnect);
+            this.Controls.Add(this.btnClose);
+            this.Controls.Add(this.lblClientIp);
+            this.Controls.Add(this.btnSendData);
+            this.Name = "Main";
+            this.Text = "TestExecutorClient";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Main_FormClosing);
+            this.tbMain.ResumeLayout(false);
+            this.tabPageMethods.ResumeLayout(false);
+            this.tabPageMethods.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvWorkspaces)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvMethods)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvProjects)).EndInit();
+            this.tabPageMainLog.ResumeLayout(false);
+            this.tabPageMsBuildLog.ResumeLayout(false);
+            this.ResumeLayout(false);
+            this.PerformLayout();
+
+        }
+
+        #endregion
+
+        private System.Windows.Forms.Button btnSendData;
+        private System.Windows.Forms.Label lblClientIp;
+        private System.Windows.Forms.Button btnClose;
+        private System.Windows.Forms.Button btnConnect;
+        private System.Windows.Forms.TextBox tbClientIp;
+        private System.Windows.Forms.TextBox tbMessage;
+        private System.ComponentModel.BackgroundWorker backgroundWorker1;
+        private System.Windows.Forms.Button button1;
+        private System.ComponentModel.BackgroundWorker backgroundWorker2;
+        private System.Windows.Forms.TextBox tbAgentIp;
+        private System.Windows.Forms.Label lblAgentIp;
+        private System.Windows.Forms.TabControl tbMain;
+        private System.Windows.Forms.TabPage tabPageMethods;
+        private System.Windows.Forms.TabPage tabPageMainLog;
+        private System.Windows.Forms.RichTextBox rtbMain;
+        private System.Windows.Forms.TabPage tabPageMsBuildLog;
+        private System.Windows.Forms.RichTextBox rtbMsBuild;
+        private System.Windows.Forms.DataGridView dgvProjects;
+        private System.Windows.Forms.Button btnRefresh;
+        private System.Windows.Forms.DataGridView dgvMethods;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.TextBox tbListName;
+        private System.Windows.Forms.DataGridView dgvWorkspaces;
+        private System.Windows.Forms.Button btnCreateWorkspaces;
+        private System.Windows.Forms.Button btnDeleteWorkspaces;
+        private System.Windows.Forms.Button btnGetLatest;
+        private System.Windows.Forms.TextBox tfsServerUrl;
+        private System.Windows.Forms.DataGridViewCheckBoxColumn CheckBoxes;
+        private System.Windows.Forms.DataGridViewTextBoxColumn MethodNames;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Class;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Id;
+        private System.Windows.Forms.DataGridViewTextBoxColumn TestProjects;
+        private System.Windows.Forms.TextBox rbTfsServerUrl;
+        private System.Windows.Forms.TextBox tbTfsServerUrl;
+        private System.Windows.Forms.TextBox tbUserName;
+        private System.Windows.Forms.DataGridViewTextBoxColumn TfsPaths;
+        private System.Windows.Forms.DataGridViewTextBoxColumn LocalPaths;
+        private System.Windows.Forms.DataGridViewTextBoxColumn TfsProjectCollections;
+        private System.Windows.Forms.DataGridViewTextBoxColumn WorkspaceName;
+        private System.Windows.Forms.Label lblUserName;
+        private System.Windows.Forms.Label lblTeamProjUrl;
+        private System.Windows.Forms.Label lblMsBuildLogIpAddress;
+        private System.Windows.Forms.TextBox tbMsBuildLogIp;
+        private System.Windows.Forms.Button btnDisconnect;
+        private System.Windows.Forms.Button btnStopCurrentlyExecutedProcess;
+    }
+}
+

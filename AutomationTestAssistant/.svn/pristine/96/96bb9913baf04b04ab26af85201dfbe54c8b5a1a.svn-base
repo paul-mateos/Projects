@@ -1,0 +1,75 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Threading.Tasks;
+using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Documents;
+using CustomControls;
+using System.Collections.ObjectModel;
+using ATADataModel;
+using AutomationTestAssistantCore;
+using FirstFloor.ModernUI.Windows.Controls;
+using FirstFloor.ModernUI.Windows.Navigation;
+using FirstFloor.ModernUI.Windows;
+
+namespace AutomationTestAssistantDesktopApp
+{
+    public partial class AddTeamView : UserControl, IContent
+    {
+        public AddTeamViewModel AddTeamViewModel { get; set; }
+        private const string TeamSuccessfullyAddedMessage = "Team successfully added!";
+        public AddTeamView()
+        {
+            InitializeComponent();  
+            AddTeamViewModel = new AddTeamViewModel();
+            mainGrid.DataContext = AddTeamViewModel;
+        }
+
+        private void btnCancel_Click(object sender, RoutedEventArgs e)
+        {
+            Window window = Window.GetWindow(this);          
+            window.Close();
+        }
+
+        private void btnAdd_Click(object sender, RoutedEventArgs e)
+        {
+            List<string> projectNames = AddTeamViewModel.ObservableProjects.ToList();
+            List<string> agentMachineNames = AddTeamViewModel.ObservableAgentMachines.ToList();
+            ATACore.Managers.TeamManager.AddNew(ATACore.Managers.ContextManager.Context, tbTeamName.Text, projectNames, agentMachineNames);
+            ATACore.Managers.ContextManager.Context.Dispose();
+            ModernDialog.ShowMessage(TeamSuccessfullyAddedMessage, "Success!", MessageBoxButton.OK);
+            Window window = Window.GetWindow(this);
+            window.Close();
+        }
+
+        private void btnAddNewAgentMachine_Click(object sender, RoutedEventArgs e)
+        {
+            Navigator.Navigate("/AddAgentMachineView.xaml#returnUrl=/AddTeamView.xaml", this);
+        }
+
+        private void btnAddNewProject_Click(object sender, RoutedEventArgs e)
+        {
+            Navigator.Navigate("/AddProjectView.xaml#returnUrl=/AddTeamView.xaml", this);
+        }
+
+        public void OnFragmentNavigation(FragmentNavigationEventArgs e)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void OnNavigatedFrom(NavigationEventArgs e)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void OnNavigatedTo(NavigationEventArgs e)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void OnNavigatingFrom(NavigatingCancelEventArgs e)
+        {
+            AddTeamViewModel = new AddTeamViewModel();
+        }
+    }
+}

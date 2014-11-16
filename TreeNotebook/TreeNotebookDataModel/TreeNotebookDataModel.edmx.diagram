@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="2bdbcb8528194eca8e47ca2346efc196" Name="Diagram1">
+        <EntityTypeShape EntityType="TreeNotebookModel.Node" Width="1.5" PointX="0.75" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="TreeNotebookModel.Project" Width="1.5" PointX="0.75" PointY="5.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="TreeNotebookModel.ProjectsNode" Width="1.5" PointX="3" PointY="1.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="TreeNotebookModel.sysdiagram" Width="1.5" PointX="2.75" PointY="4.75" IsExpanded="true" />
+        <AssociationConnector Association="TreeNotebookModel.FK_Nodes_Nodes" ManuallyRouted="false" />
+        <AssociationConnector Association="TreeNotebookModel.FK_ProjectsNodes_Nodes" ManuallyRouted="false" />
+        <AssociationConnector Association="TreeNotebookModel.FK_ProjectsNodes_Projects" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="TreeNotebookModel.HistoryNodes" Width="1.5" PointX="5.125" PointY="4.625" />
+        <EntityTypeShape EntityType="TreeNotebookModel.HistoryProjectNode" Width="1.5" PointX="6.875" PointY="4.875" />
+        <EntityTypeShape EntityType="TreeNotebookModel.HistoryProjects" Width="1.5" PointX="8.5" PointY="5" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

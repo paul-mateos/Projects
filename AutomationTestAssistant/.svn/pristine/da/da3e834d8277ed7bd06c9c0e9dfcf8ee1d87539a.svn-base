@@ -1,0 +1,27 @@
+﻿using System.Windows;
+using System.Windows.Controls;
+
+namespace AutomationTestAssistantDesktopApp
+{
+    public partial class TestsExecutionView : UserControl
+    {  
+        public AdminProjectSettingsViewModel AdminProjectSettingsViewModel { get; set; }
+
+        public TestsExecutionView()
+        {
+            InitializeComponent();
+            AdminProjectSettingsViewModel = new AdminProjectSettingsViewModel();
+            mainGrid.DataContext = AdminProjectSettingsViewModel.GetTeams();        
+        }
+
+        //private void btnGetFull_Click(object sender, RoutedEventArgs e)
+        //{
+        //    MainWindow.AdminProjectSettingsViewModel = AdminProjectSettingsViewModel;
+        //    Navigator.Navigate("/ProjectSettingsLoadingView.xaml", this);
+        //}
+
+        //private void UserControl_Loaded_1(object sender, RoutedEventArgs e)
+        //{            
+        //}
+    }
+}

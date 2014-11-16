@@ -1,0 +1,162 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.ComponentModel;
+using System.IO;
+using System.Linq;
+using System.Reflection;
+using System.Text;
+using System.Threading.Tasks;
+using ATADataModel;
+using AutomationTestAssistantCore;
+
+namespace AutomationTestAssistantDesktopApp
+{
+    public class ProjectTestsExecutionViewModel : ATADataModel.Project, INotifyPropertyChanged
+    {
+        public List<string> WorkspacesForDelete { get; set; }
+
+        private string localPath;
+        public string LocalPath
+        {
+            get
+            {
+                return localPath;
+            }
+            set
+            {
+                localPath = value;
+                OnPropertyChanged("LocalPath");
+            }
+        }
+
+        private bool isSelected;
+        public bool IsSelected {
+            get
+            {
+                return isSelected;
+            }
+            set
+            {
+                isSelected = value;
+                OnPropertyChanged("IsSelected");
+            }
+        }
+        public string UserName { get; set; }
+
+        private void OnPropertyChanged(string property)
+        {
+            PropertyChangedEventHandler handler = PropertyChanged;
+            if (handler != null)
+            {
+                handler(this, new PropertyChangedEventArgs(property));
+            }
+            if (ObservableTests != null && ObservableTests.Count > 0)
+            {
+                foreach (TestsViewModel cT in tests)
+                {
+                    cT.IsSelected = IsSelected;
+                }   
+            }              
+        }
+
+        public ProjectTestsExecutionViewModel(int projectId, string name, string tfsPath, string tfsUrl, bool selected, string localPath, List<string> workspacesForDelete)
+        {
+            base.ProjectId = projectId;
+            base.Name = name;
+            base.TfsPath = tfsPath;
+            base.TfsUrl = tfsUrl;
+            IsSelected = selected;
+            LocalPath = localPath;
+            WorkspacesForDelete = workspacesForDelete;
+            InitializeTestsObservableCollection();
+        }
+
+        public ProjectTestsExecutionViewModel(ProjectViewModel project) : 
+            this(project.ProjectId, project.Name, project.TfsPath, project.TfsUrl, project.IsSelected, project.LocalPath, project.WorkspacesForDelete)
+        {
+        }
+
+        private void InitializeTestsObservableCollection()
+        {
+            tests = new ObservableCollection<TestsViewModel>();
+            if (IsSelected)
+            {
+                List<Test> allTests = ATACore.Managers.TestManager.GetAllTestsByProjectName(ATACore.Managers.ContextManager.Context, base.Name);
+                List<Test> testsToBeDisplayed = AddMethodsForProjectInternal(allTests);
+                testsToBeDisplayed.ForEach(t => tests.Add(new TestsViewModel(t)));
+            }
+
+        }
+
+        private List<Test> AddMethodsForProjectInternal(List<Test> allTests)
+        {
+            List<Test> testsToBeDisplayed = new List<Test>();
+            if (!File.Exists(LocalPath))
+            {
+                string currentProjectDllPath = ATACore.Project.ProjectInfoCollector.GetAssemblyPathByProjectPath(LocalPath, Name);
+                MethodInfo[] currentDllMethods = ATACore.Project.ProjectInfoCollector.GetProjectTestMethods(currentProjectDllPath);
+                testsToBeDisplayed = GetTestsToBeDisplayed(allTests, currentProjectDllPath, currentDllMethods);
+                MarkAsDeletedMissingTests(allTests);
+            }
+
+            return testsToBeDisplayed;
+        }
+
+        private void MarkAsDeletedMissingTests(List<Test> allTests)
+        {
+            ATAEntities context = ATACore.Managers.ContextManager.Context;
+            foreach (var cT in allTests)
+            {
+                ATACore.Managers.TestManager.RemoveTest(context, ProjectId, cT);
+            }
+            context.Dispose();
+        }
+
+        private List<Test> GetTestsToBeDisplayed(List<Test> allTests, string currentProjectDllPath, MethodInfo[] currentDllMethods)
+        {
+            List<Test> testsToBeDisplayed = new List<Test>();
+            foreach (var cM in currentDllMethods)
+            {
+                string cTestMethodId = ATACore.TestExecution.TestListGenerator.GenerateTestMethodId(cM, currentProjectDllPath);
+                Test test = allTests.Where(t => t.MethodId.Equals(cTestMethodId)).FirstOrDefault();
+                if (test != null)
+                {
+                    testsToBeDisplayed.Add(test);
+                    allTests.Remove(test);
+                }
+                else
+                {
+                    Test newTestToAdd = new Test()
+                    {
+                        Name = cM.Name,
+                        FullName = cM.DeclaringType.FullName,
+                        MethodId = cTestMethodId,
+                        ClassName = cM.DeclaringType.Name
+                    };
+                    testsToBeDisplayed.Add(newTestToAdd);
+                    ATACore.Managers.TestManager.AddNewTest(ATACore.Managers.ContextManager.Context, ProjectId, newTestToAdd);
+                    ATACore.Managers.ContextManager.Context.Dispose();
+                }
+            }
+
+            return testsToBeDisplayed;
+        }
+
+        private ObservableCollection<TestsViewModel> tests;
+
+        public ObservableCollection<TestsViewModel> ObservableTests
+        {
+            get
+            {
+                return tests;
+            }
+            set
+            {
+                tests = value;               
+            }
+        }
+
+        public event PropertyChangedEventHandler PropertyChanged;
+    }
+}

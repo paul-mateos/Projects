@@ -1,0 +1,15 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace AutomationTestAssistantCore
+{
+    public enum Statuses
+    {
+        Active = 1,
+        ToBeApproved= 2,
+        PendingActivation = 3
+    }
+}

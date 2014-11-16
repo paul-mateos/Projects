@@ -1,0 +1,16 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace AutomationTestAssistantCore
+{
+    public enum MemberRoles
+    {
+        Admin = 1,
+        Executor = 2, 
+        Analyst = 3,
+        TeamAdmin = 4
+    }
+}

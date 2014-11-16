@@ -1,0 +1,30 @@
+﻿<UserControl x:Class="AutomationTestAssistantDesktopApp.ExecutionView"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:mui="http://firstfloorsoftware.com/ModernU"
+      mc:Ignorable="d" 
+      d:DesignHeight="760" d:DesignWidth="1500" Loaded="UserControl_Loaded_1">
+   
+    <Grid Name="mainGrid">
+        <StackPanel Orientation="Vertical">
+            <ProgressBar Visibility="Visible" Name="msBuildProgress" Minimum="0" Maximum="1" Height="16" IsIndeterminate="True" Margin="50"/>
+            <RichTextBox Name="rtbExecution" Width="1400" Height="300" >
+                <RichTextBox.Resources>
+                    <Style TargetType="{x:Type Paragraph}">
+                        <Setter Property="Margin" Value="0"/>
+                    </Style>
+                </RichTextBox.Resources>
+            </RichTextBox>
+
+            <RichTextBox Name="rtbMsBuild" Width="1400" Height="300" Margin="20">
+                <RichTextBox.Resources>
+                    <Style TargetType="{x:Type Paragraph}">
+                        <Setter Property="Margin" Value="0"/>
+                    </Style>
+                </RichTextBox.Resources>
+            </RichTextBox>
+        </StackPanel>
+    </Grid>    
+</UserControl>

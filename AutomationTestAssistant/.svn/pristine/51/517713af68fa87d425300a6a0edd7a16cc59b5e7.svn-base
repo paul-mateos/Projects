@@ -1,0 +1,16 @@
+﻿using System.Windows;
+using System.Windows.Controls;
+
+namespace AutomationTestAssistantDesktopApp
+{
+    public partial class TestsExecutionView : UserControl
+    {  
+        public TestsExecutionViewModel TestsExecutionViewModel { get; set; }
+        public TestsExecutionView()
+        {
+            InitializeComponent();
+            TestsExecutionViewModel = new TestsExecutionViewModel(MainWindow.AdminProjectSettingsViewModel);
+            mainGrid.DataContext = TestsExecutionViewModel.GetTeams();        
+        }
+    }
+}

@@ -1,0 +1,50 @@
+﻿<UserControl x:Class="AutomationTestAssistantDesktopApp.AllResultsView"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:mui="http://firstfloorsoftware.com/ModernU"
+      mc:Ignorable="d" 
+      d:DesignHeight="760" d:DesignWidth="1500" Loaded="UserControl_Loaded">
+   
+    <Grid Name="mainGrid">
+        <Grid Name="allTestResultRunsGrid">
+     
+            <StackPanel Orientation="Vertical">
+                <TextBlock Text="ALL TEST RESULTS" Style="{StaticResource Heading1}" Margin="0,0,0,8" />
+              
+                <DataGrid Name="allTestResultRunsDataGrid"  
+                                AutoGenerateColumns="False">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="Computer Name"
+                                Binding="{Binding ComputerName}" />
+                        <DataGridTextColumn Header="Ran By"
+                                Binding="{Binding RanBy}" />
+                        <DataGridTextColumn Header="Total"
+                                Binding="{Binding Total}" />
+                        <DataGridTextColumn Header="Executed"
+                                Binding="{Binding Executed}" />
+                        <DataGridTextColumn Header="Passed"
+                                Binding="{Binding Passed}" />
+                        <DataGridTextColumn Header="Failed"
+                                Binding="{Binding Failed}" />
+                        <DataGridTextColumn Header="NotExecuted"
+                                Binding="{Binding NotExecuted}" />
+                        <DataGridTextColumn Header="Start"
+                                Binding="{Binding Start}" />
+                        <DataGridTextColumn Header="Finish"
+                                Binding="{Binding Finish}" />                     
+                        <DataGridTemplateColumn>
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <Button Click="ViewButton_Click">View</Button>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+                    </DataGrid.Columns>
+                </DataGrid>
+            </StackPanel>
+           
+        </Grid>
+    </Grid>    
+</UserControl>

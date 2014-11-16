@@ -1,0 +1,201 @@
+﻿using System;
+using System.Collections.Concurrent;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.ComponentModel;
+using System.Diagnostics;
+using System.IO;
+using System.Net;
+using System.Net.Sockets;
+using System.Threading;
+using System.Threading.Tasks;
+using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Documents;
+using System.Windows.Threading;
+using ATADataModel;
+using AutomationTestAssistantCore;
+using AutomationTestAssistantCore.ExecutionEngine.Messages;
+using FirstFloor.ModernUI.Windows.Controls;
+
+namespace AutomationTestAssistantDesktopApp
+{
+    public partial class ProjectSettingsLoadingView : UserControl
+    {  
+        private delegate void UpdateProgress(string currentProgress);
+        private delegate void NavigateToNextPage();
+
+        public ProjectSettingsLoadingView()
+        {
+            InitializeComponent();       
+        }
+
+        private void ProcessSelectedProjectInfos()
+        {
+            try
+            {
+                string tfsProjectPath = @"D:\AutomationTestAssistant\TfsOperations.proj";
+                string currentUserName = ATACore.RegistryManager.GetUserName();
+                string currentTfsUserName = ATACore.Managers.MemberManager.GetTfsUserNameByUserName(ATACore.Managers.ContextManager.Context, currentUserName);
+                ATACore.Managers.ContextManager.Context.Dispose();
+                List<Task> taskToBeExecuted = new List<Task>();
+                taskToBeExecuted.Add(new Task(() => {}));
+                int currentTask = 0;
+                foreach (var cTeam in MainWindow.AdminProjectSettingsViewModel.Teams)
+                {
+                    foreach (var cProject in cTeam.ObservableProjects)
+                    {
+                        if (cProject.IsSelected)
+                        {
+                            string localPath = GetProjectLocalPath(currentUserName, cProject.TfsPath);
+
+
+                            string workspaceName = ATACore.RegistryManager.GetWorkspaceName(currentUserName, localPath);
+                            Task t = Task.Factory.StartNew(() =>
+                            {
+                                if (!String.IsNullOrEmpty(workspaceName))
+                                    DeleteWorkSpaceIfExists(tfsProjectPath, currentTfsUserName, cProject.TfsUrl, MainWindow.msBuildLogSettings, workspaceName);
+                                ATACore.Utilities.FilesDeleter.DeleteAllFilesAndFolders(localPath);
+                            });
+
+                            string newWorkspaceName = Guid.NewGuid().ToString();
+                            //IF ALREADY EXISTS IS GOING TO UPDATE THE OLD VALUE SHOULD BE TESTED!
+                            string tfsUrl = cProject.TfsUrl;
+                            string tfsPath = cProject.TfsPath;
+                            IpAddressSettings cIS = MainWindow.msBuildLogSettings;
+
+                            Task t1 = t.ContinueWith((antecedent) => CreateNewWorkspace(tfsProjectPath, currentUserName, tfsUrl, tfsPath, localPath, cIS, newWorkspaceName));
+
+                            Task t2 = t1.ContinueWith((antecedent) => GetLatest(tfsProjectPath, currentTfsUserName, localPath, cIS));
+
+                            Task t3 = t2.ContinueWith((antecedent) => PrepareAllCurrentProjectAddiotionalPaths(tfsProjectPath, currentUserName, currentTfsUserName, cProject, cIS));
+                            string pName = cProject.Name;
+
+                            Task t4 = t3.ContinueWith((antecedent) => BuildCurrentProject(localPath, pName, cIS));
+                          
+                            t4.Wait();
+                        }
+                    }
+                }
+                NavigateToNextPage ng = new NavigateToNextPage(Navigate);
+                mainGrid.Dispatcher.BeginInvoke(ng, DispatcherPriority.Send);
+            }
+            catch
+            {
+                return;
+            }
+        }
+
+        private void DisplayClientMessage(string text)
+        {
+            rtbStatus.AppendText(String.Format("\n{0}\n", text));
+            rtbStatus.ScrollToEnd();
+        }
+
+        private void Navigate()
+        {
+                ModernWindow mw = Window.GetWindow(this) as ModernWindow;
+                Uri u1 = new Uri("/LoginView.xaml", UriKind.Relative);
+                mw.ContentSource = u1;
+        }
+
+        private void BuildCurrentProject(string localPath, string name, IpAddressSettings msBuildLoggerIpSettings)
+        {
+            Process currentlyExecutedProcess;
+            string currentProjectFullPath = GetCurrentProjectFullPath(localPath, name);
+            MessageArgsBuild buildArgs = new MessageArgsBuild(currentProjectFullPath, msBuildLoggerIpSettings);
+            currentlyExecutedProcess = ATACore.CommandLine.CommandLineExecutor.ExecuteBuild(buildArgs);
+            currentlyExecutedProcess.WaitForExit(Int32.MaxValue);
+        }
+
+        private string GetCurrentProjectFullPath(string localPath, string name)
+        {
+            string currentProjectFullPath = String.Concat(Path.Combine(localPath, name), ".csproj");
+            return currentProjectFullPath;
+        }
+
+        private void GetLatest(string tfsProjectPath, string currentTfsUserName, string localPath, IpAddressSettings msBuildLoggerIpSettings)
+        {
+            Process currentlyExecutedProcess;
+            MessageArgsTfsGettingLatest tfsGetLatestArgs = new MessageArgsTfsGettingLatest(Command.TFGL, tfsProjectPath, msBuildLoggerIpSettings, localPath, currentTfsUserName);
+            currentlyExecutedProcess = ATACore.CommandLine.CommandLineExecutor.ExecuteTfsGetLatest(tfsGetLatestArgs);
+            currentlyExecutedProcess.WaitForExit(Int32.MaxValue);
+        }
+
+        private void PrepareAllCurrentProjectAddiotionalPaths(string tfsProjectPath, string currentUserName, string currentTfsUserName, ProjectViewModel cProject, IpAddressSettings msBuildLoggerIpSettings)
+        {
+            foreach (var cAdditionalPath in cProject.ObservableAdditionalPaths)
+            {
+                string localPath = GetProjectLocalPath(currentUserName, cAdditionalPath.TfsPath);
+                string workspaceName = ATACore.RegistryManager.GetWorkspaceName(currentUserName, localPath);
+                string tfsUrl = cAdditionalPath.TfsUrl;
+                string tfsPath = cAdditionalPath.TfsPath;
+                Task t1 = Task.Factory.StartNew(() => DeleteWorkSpaceIfExists(tfsProjectPath, currentTfsUserName, tfsUrl, msBuildLoggerIpSettings, workspaceName));
+                ATACore.Utilities.FilesDeleter.DeleteAllFilesAndFolders(localPath);
+                string newWorkspaceName = Guid.NewGuid().ToString();
+              
+                Task t2 = t1.ContinueWith((antecedent) => CreateNewWorkspace(tfsProjectPath, currentUserName, tfsUrl, tfsPath, localPath, msBuildLoggerIpSettings, newWorkspaceName));
+               
+                Task t3 = t2.ContinueWith((antecedent) => GetLatest(tfsProjectPath, currentTfsUserName, localPath, msBuildLoggerIpSettings));
+                t3.Wait();
+            }
+        }
+
+        private void CreateNewWorkspace(string tfsProjectPath, string currentUserName, string tfsUrl, string tfsPath, string localPath, IpAddressSettings msBuildLoggerIpSettings, string newWorkspaceName)
+        {
+            MessageArgsWorkspaceCreation tfsWorkspaceCreationArgs = new MessageArgsWorkspaceCreation(Command.TFSWN, tfsProjectPath, tfsUrl, msBuildLoggerIpSettings, newWorkspaceName, tfsPath, localPath);
+            Process currentlyExecutedProcess = ATACore.CommandLine.CommandLineExecutor.ExecuteTfsCreateNewWorkspace(tfsWorkspaceCreationArgs);
+            currentlyExecutedProcess.WaitForExit(Int32.MaxValue);
+            ATACore.RegistryManager.WriterWorkspaceNameToRegistry(currentUserName, localPath, newWorkspaceName);
+        }
+
+        private void DeleteWorkSpaceIfExists(string tfsProjectPath, string currentTfsUserName, string tfsUrl, IpAddressSettings msBuildLoggerIpSettings, string workspaceName)
+        {
+            if (!String.IsNullOrEmpty(workspaceName))
+            {
+                MessageArgsWorkspaceDeletion tfsWorkspaceDeletionArgs = new MessageArgsWorkspaceDeletion(Command.TFSWD, tfsProjectPath, msBuildLoggerIpSettings, tfsUrl, workspaceName, currentTfsUserName);
+                Process currentlyExecutedProcess = ATACore.CommandLine.CommandLineExecutor.ExecuteTfsDeleteWorkspace(tfsWorkspaceDeletionArgs);
+                currentlyExecutedProcess.WaitForExit(Int32.MaxValue);
+            }
+        }
+
+        private string GetProjectLocalPath(string currentUserName, string tfsPath)
+        {
+            string localPath = ATACore.RegistryManager.GetProjectLocalPath(currentUserName, tfsPath);
+            return localPath;
+        }
+
+        private void DisplayMsBuildLog()
+        {
+            UpdateProgress uiUpdater = new UpdateProgress(DisplayClientMessage);
+            while (true)
+            {
+                try
+                {
+                    if (MainWindow.messagesToBeSend.Count > 0)
+                    {
+                        MessageArgsLogger msgArgs;
+                        bool isDequeued = MainWindow.messagesToBeSend.TryDequeue(out msgArgs);
+                        if (isDequeued)
+                        {
+                            rtbStatus.Dispatcher.BeginInvoke(uiUpdater, DispatcherPriority.Send, msgArgs.LogMessage);
+                        }
+                    }
+                }
+                catch
+                {
+                    break;
+                }
+            }
+        }
+
+        private void On_Loaded(object sender, RoutedEventArgs e)
+        {
+            MainWindow.MsBuildLogListnerThreadWorker =
+            Task.Factory.StartNew(() => ATACore.TcpWrapperProcessor.TcpMsBuildLoggerProcessor.ProcessMsBuildLoggerMessage(MainWindow.messagesToBeSend, MainWindow.msBuildLogSettings), TaskCreationOptions.LongRunning);
+
+            MainWindow.MessageLoggerThreadWorker = Task.Factory.StartNew(() => DisplayMsBuildLog());
+            Task mainTask = Task.Factory.StartNew(() => ProcessSelectedProjectInfos());            
+        }
+    }
+}

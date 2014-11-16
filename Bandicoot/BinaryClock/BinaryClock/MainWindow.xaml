@@ -1,0 +1,67 @@
+﻿<Window x:Class="BinaryClock.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="MainWindow" Height="115" Width="60" ResizeMode="NoResize" WindowStyle="None"
+        MouseDown="Window_MouseDown_1" MouseLeftButtonUp="Window_MouseLeftButtonUp_1" Background="#00000000" AllowsTransparency="True" ShowInTaskbar="False" Topmost="True">
+    <Grid Margin="-2,0,-6,0">
+        <Grid.Effect>
+            <BlurEffect Radius="2"/>
+        </Grid.Effect>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="0*"/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>    
+        <Grid.Resources>
+            <Style TargetType="Ellipse">
+                <Setter Property="Fill" Value="#F0F0F0" />
+                <Setter Property="HorizontalAlignment" Value="Left" />
+                <Setter Property="VerticalAlignment" Value="Top" />
+                <Setter Property="Height" Value="20" />
+                <Setter Property="Width" Value="20" />
+                <Setter Property="Width" Value="20" />
+            </Style>
+        </Grid.Resources>
+
+        <Ellipse Name="cSec" Margin="10,10,0,0" VerticalAlignment="Top" Grid.Column="1" >
+            <Ellipse.Effect>
+                <DropShadowEffect Color="Black" Opacity=".65" ShadowDepth="2"  />
+            </Ellipse.Effect>
+        </Ellipse>
+        <Ellipse Name="c28" Margin="35,10,0,0" VerticalAlignment="Top" Grid.Column="1">                
+            <Ellipse.Effect>                          
+                <DropShadowEffect Color="Black" Opacity=".65" ShadowDepth="2"  />
+            </Ellipse.Effect>
+           
+        </Ellipse>
+        <Ellipse Name="c14" Margin="10,35,0,0" VerticalAlignment="Top" Grid.Column="1">
+            <Ellipse.Effect>
+                <DropShadowEffect Color="Black" Opacity=".65" ShadowDepth="2"  />
+            </Ellipse.Effect>
+        </Ellipse>
+        <Ellipse Name="c24" Margin="35,35,0,0" VerticalAlignment="Top" Grid.Column="1">
+            <Ellipse.Effect>
+                <DropShadowEffect Color="Black" Opacity=".65" ShadowDepth="2"  />
+            </Ellipse.Effect>
+        </Ellipse>
+        <Ellipse Name="c12" Margin="10,60,0,0" VerticalAlignment="Top" Grid.Column="1">
+            <Ellipse.Effect>
+                <DropShadowEffect Color="Black" Opacity=".65" ShadowDepth="2"  />
+            </Ellipse.Effect>
+        </Ellipse>
+        <Ellipse Name="c22" Margin="35,60,0,0" VerticalAlignment="Top" Grid.Column="1">
+            <Ellipse.Effect>
+                <DropShadowEffect Color="Black" Opacity=".65" ShadowDepth="2"  />
+            </Ellipse.Effect>
+        </Ellipse>
+        <Ellipse Name="c11" Margin="10,85,0,0" VerticalAlignment="Top" Grid.Column="1">
+            <Ellipse.Effect>
+                <DropShadowEffect Color="Black" Opacity=".65" ShadowDepth="2"  />
+            </Ellipse.Effect>
+        </Ellipse>
+        <Ellipse Name="c21" Margin="35,85,0,0" VerticalAlignment="Top" Grid.Column="1">
+            <Ellipse.Effect>
+                <DropShadowEffect Color="Black" Opacity=".65" ShadowDepth="2"  />
+            </Ellipse.Effect>
+        </Ellipse>
+    </Grid>
+</Window>

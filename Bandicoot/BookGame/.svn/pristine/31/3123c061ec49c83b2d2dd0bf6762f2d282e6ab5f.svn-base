@@ -1,0 +1,193 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Data;
+using System.Windows.Documents;
+using System.Windows.Input;
+using System.Windows.Media;
+using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
+using System.Windows.Shapes;
+using BookGame.ViewModels;
+
+namespace BookGame
+{
+    public partial class GameBoardView : UserControl
+    {
+        public GameBoardViewModel GameBoardViewModel { get; set; }
+
+        public GameBoardView()
+        {
+            InitializeComponent();
+        }
+
+        private void UserControl_Loaded_1(object sender, RoutedEventArgs e)
+        {
+            GameBoardViewModel = new GameBoardViewModel();
+            
+            InitializeTriangle();
+            BindStonesToEllipsesInTriangle();
+
+            BindStonesToEllipsesInLeftTurnPanel();
+            BindStonesToEllipsesInRightTurnPanel();
+        }
+
+        private void BindStonesToEllipsesInLeftTurnPanel()
+        {
+            e211.DataContext = GameBoardViewModel.LeftTurnPanel[0, 0];
+            e212.DataContext = GameBoardViewModel.LeftTurnPanel[0, 1];
+            e213.DataContext = GameBoardViewModel.LeftTurnPanel[0, 2];
+
+            e221.DataContext = GameBoardViewModel.LeftTurnPanel[1, 0];
+            e222.DataContext = GameBoardViewModel.LeftTurnPanel[1, 1];
+            e223.DataContext = GameBoardViewModel.LeftTurnPanel[1, 2];
+
+            e231.DataContext = GameBoardViewModel.LeftTurnPanel[2, 0];
+            e232.DataContext = GameBoardViewModel.LeftTurnPanel[2, 1];
+            e233.DataContext = GameBoardViewModel.LeftTurnPanel[2, 2];
+
+            e241.DataContext = GameBoardViewModel.LeftTurnPanel[3, 0];
+            e242.DataContext = GameBoardViewModel.LeftTurnPanel[3, 1];
+            e243.DataContext = GameBoardViewModel.LeftTurnPanel[3, 2];
+
+            e251.DataContext = GameBoardViewModel.LeftTurnPanel[4, 0];
+            e252.DataContext = GameBoardViewModel.LeftTurnPanel[4, 1];
+            e253.DataContext = GameBoardViewModel.LeftTurnPanel[4, 2];
+
+            e261.DataContext = GameBoardViewModel.LeftTurnPanel[5, 0];
+            e262.DataContext = GameBoardViewModel.LeftTurnPanel[5, 1];
+            e263.DataContext = GameBoardViewModel.LeftTurnPanel[5, 2];
+
+            e271.DataContext = GameBoardViewModel.LeftTurnPanel[6, 0];
+            e272.DataContext = GameBoardViewModel.LeftTurnPanel[6, 1];
+            e273.DataContext = GameBoardViewModel.LeftTurnPanel[6, 2];
+
+            e281.DataContext = GameBoardViewModel.LeftTurnPanel[7, 0];
+            e282.DataContext = GameBoardViewModel.LeftTurnPanel[7, 1];
+            e283.DataContext = GameBoardViewModel.LeftTurnPanel[7, 2];
+
+            e291.DataContext = GameBoardViewModel.LeftTurnPanel[8, 0];
+            e292.DataContext = GameBoardViewModel.LeftTurnPanel[8, 1];
+            e293.DataContext = GameBoardViewModel.LeftTurnPanel[8, 2];
+
+            e2101.DataContext = GameBoardViewModel.LeftTurnPanel[9, 0];
+            e2102.DataContext = GameBoardViewModel.LeftTurnPanel[9, 1];
+            e2103.DataContext = GameBoardViewModel.LeftTurnPanel[9, 2];
+
+            e2111.DataContext = GameBoardViewModel.LeftTurnPanel[10, 0];
+            e2112.DataContext = GameBoardViewModel.LeftTurnPanel[10, 1];
+            e2113.DataContext = GameBoardViewModel.LeftTurnPanel[10, 2];
+        }
+
+        private void BindStonesToEllipsesInRightTurnPanel()
+        {
+            e111.DataContext = GameBoardViewModel.LeftTurnPanel[0, 0];
+            e112.DataContext = GameBoardViewModel.LeftTurnPanel[0, 1];
+            e113.DataContext = GameBoardViewModel.LeftTurnPanel[0, 2];
+
+            e121.DataContext = GameBoardViewModel.LeftTurnPanel[1, 0];
+            e122.DataContext = GameBoardViewModel.LeftTurnPanel[1, 1];
+            e123.DataContext = GameBoardViewModel.LeftTurnPanel[1, 2];
+
+            e131.DataContext = GameBoardViewModel.LeftTurnPanel[2, 0];
+            e132.DataContext = GameBoardViewModel.LeftTurnPanel[2, 1];
+            e133.DataContext = GameBoardViewModel.LeftTurnPanel[2, 2];
+
+            e141.DataContext = GameBoardViewModel.LeftTurnPanel[3, 0];
+            e142.DataContext = GameBoardViewModel.LeftTurnPanel[3, 1];
+            e143.DataContext = GameBoardViewModel.LeftTurnPanel[3, 2];
+
+            e151.DataContext = GameBoardViewModel.LeftTurnPanel[4, 0];
+            e152.DataContext = GameBoardViewModel.LeftTurnPanel[4, 1];
+            e153.DataContext = GameBoardViewModel.LeftTurnPanel[4, 2];
+
+            e161.DataContext = GameBoardViewModel.LeftTurnPanel[5, 0];
+            e162.DataContext = GameBoardViewModel.LeftTurnPanel[5, 1];
+            e163.DataContext = GameBoardViewModel.LeftTurnPanel[5, 2];
+
+            e171.DataContext = GameBoardViewModel.LeftTurnPanel[6, 0];
+            e172.DataContext = GameBoardViewModel.LeftTurnPanel[6, 1];
+            e173.DataContext = GameBoardViewModel.LeftTurnPanel[6, 2];
+
+            e181.DataContext = GameBoardViewModel.LeftTurnPanel[7, 0];
+            e182.DataContext = GameBoardViewModel.LeftTurnPanel[7, 1];
+            e183.DataContext = GameBoardViewModel.LeftTurnPanel[7, 2];
+
+            e191.DataContext = GameBoardViewModel.LeftTurnPanel[8, 0];
+            e192.DataContext = GameBoardViewModel.LeftTurnPanel[8, 1];
+            e193.DataContext = GameBoardViewModel.LeftTurnPanel[8, 2];
+
+            e1101.DataContext = GameBoardViewModel.LeftTurnPanel[9, 0];
+            e1102.DataContext = GameBoardViewModel.LeftTurnPanel[9, 1];
+            e1103.DataContext = GameBoardViewModel.LeftTurnPanel[9, 2];
+
+            e1111.DataContext = GameBoardViewModel.LeftTurnPanel[10, 0];
+            e1112.DataContext = GameBoardViewModel.LeftTurnPanel[10, 1];
+            e1113.DataContext = GameBoardViewModel.LeftTurnPanel[10, 2];
+        }
+
+        private void BindStonesToEllipsesInTriangle()
+        {
+            e11.DataContext = GameBoardViewModel.Triangle["e11"];
+
+            e21.DataContext = GameBoardViewModel.Triangle["e21"];
+            e22.DataContext = GameBoardViewModel.Triangle["e22"];
+
+            e31.DataContext = GameBoardViewModel.Triangle["e31"];
+            e32.DataContext = GameBoardViewModel.Triangle["e32"];
+            e33.DataContext = GameBoardViewModel.Triangle["e33"];
+
+            e41.DataContext = GameBoardViewModel.Triangle["e41"];
+            e42.DataContext = GameBoardViewModel.Triangle["e42"];
+            e43.DataContext = GameBoardViewModel.Triangle["e43"];
+            e44.DataContext = GameBoardViewModel.Triangle["e44"];
+
+            e51.DataContext = GameBoardViewModel.Triangle["e51"];
+            e52.DataContext = GameBoardViewModel.Triangle["e52"];
+            e53.DataContext = GameBoardViewModel.Triangle["e53"];
+            e54.DataContext = GameBoardViewModel.Triangle["e54"];
+            e55.DataContext = GameBoardViewModel.Triangle["e55"];
+
+            e61.DataContext = GameBoardViewModel.Triangle["e61"];
+            e62.DataContext = GameBoardViewModel.Triangle["e62"];
+            e63.DataContext = GameBoardViewModel.Triangle["e63"];
+            e64.DataContext = GameBoardViewModel.Triangle["e64"];
+            e65.DataContext = GameBoardViewModel.Triangle["e65"];
+            e66.DataContext = GameBoardViewModel.Triangle["e66"];
+        }
+
+        private void InitializeTriangle()
+        {
+            GameBoardViewModel.Triangle.Add("e11", new Stone());
+
+            GameBoardViewModel.Triangle.Add("e21", new Stone());
+            GameBoardViewModel.Triangle.Add("e22", new Stone());
+
+            GameBoardViewModel.Triangle.Add("e31", new Stone());
+            GameBoardViewModel.Triangle.Add("e32", new Stone());
+            GameBoardViewModel.Triangle.Add("e33", new Stone());
+
+            GameBoardViewModel.Triangle.Add("e41", new Stone());
+            GameBoardViewModel.Triangle.Add("e42", new Stone());
+            GameBoardViewModel.Triangle.Add("e43", new Stone());
+            GameBoardViewModel.Triangle.Add("e44", new Stone());
+
+            GameBoardViewModel.Triangle.Add("e51", new Stone());
+            GameBoardViewModel.Triangle.Add("e52", new Stone());
+            GameBoardViewModel.Triangle.Add("e53", new Stone());
+            GameBoardViewModel.Triangle.Add("e54", new Stone());
+            GameBoardViewModel.Triangle.Add("e55", new Stone());
+
+            GameBoardViewModel.Triangle.Add("e61", new Stone());
+            GameBoardViewModel.Triangle.Add("e62", new Stone());
+            GameBoardViewModel.Triangle.Add("e63", new Stone());
+            GameBoardViewModel.Triangle.Add("e64", new Stone());
+            GameBoardViewModel.Triangle.Add("e65", new Stone());
+            GameBoardViewModel.Triangle.Add("e66", new Stone());
+        }
+    }
+}

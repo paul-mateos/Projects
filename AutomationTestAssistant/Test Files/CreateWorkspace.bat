@@ -1,0 +1,4 @@
+"C:\Windows\Microsoft.NET\Framework\v4.0.30319\MsBuild.exe" "D:\AutomationTestAssistant\TfsOperations.proj" /t:DeleteWorkspace /p:WorkspaceName="TestProfessionalE"
+"C:\Windows\Microsoft.NET\Framework\v4.0.30319\MsBuild.exe" "D:\AutomationTestAssistant\TfsOperations.proj" /t:CreateWorkspace /p:WorkspaceName="1" /p:TfsPath="$\TestProfessional\AutomationTestAssistant\TestTime" /p:LocalPath="E:\TestProfessional\AutomationTestAssistant\TestTime"
+"C:\Windows\Microsoft.NET\Framework\v4.0.30319\MsBuild.exe" "D:\AutomationTestAssistant\TfsOperations.proj" /t:GetLatest /p:PathToGet="E:\TestProfessional\AutomationTestAssistant\TestTime"
+"C:\Program Files (x86)\Microsoft Visual Studio 10.0\Common7\IDE\tf.exe" 

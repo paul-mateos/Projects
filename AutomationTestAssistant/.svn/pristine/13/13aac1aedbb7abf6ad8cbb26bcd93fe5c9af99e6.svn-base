@@ -1,0 +1,50 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using ATADataModel;
+using AutomationTestAssistantCore;
+
+namespace AutomationTestAssistantDesktopApp
+{
+    public class ProjectViewModel : ATADataModel.Project
+    {
+        public ProjectViewModel(int projectId, string name, string tfsPath, string tfsUrl)
+        {
+            base.ProjectId = projectId;
+            base.Name = name;
+            base.TfsPath = tfsPath;
+            base.TfsUrl = tfsUrl;
+            InitializeAdditionalPathsObservableCollection();
+        }
+
+        public ProjectViewModel(ATADataModel.Project project) : 
+            this(project.ProjectId, project.Name, project.TfsPath, project.TfsUrl)
+        {
+        }
+
+        private void InitializeAdditionalPathsObservableCollection()
+        {
+            additionalPaths = new ObservableCollection<ATADataModel.AdditionalPath>();
+            List<AdditionalPath> additionalPathsList = ATACore.Managers.AdditionalPathManager.GetAllAdditionalPathsByProjectId(ATACore.Managers.ContextManager.Context, ProjectId);
+            ATACore.Managers.ContextManager.Context.Dispose();
+            additionalPathsList.ForEach(p => additionalPaths.Add(p));
+        }
+
+        private ObservableCollection<ATADataModel.AdditionalPath> additionalPaths;
+
+        public ObservableCollection<ATADataModel.AdditionalPath> ObservableAdditionalPaths
+        {
+            get
+            {
+                return additionalPaths;
+            }
+            set
+            {
+                additionalPaths = value;               
+            }
+        }
+    }
+}

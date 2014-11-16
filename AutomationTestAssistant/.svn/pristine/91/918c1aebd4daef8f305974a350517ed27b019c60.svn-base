@@ -1,0 +1,108 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Data;
+using System.Windows.Documents;
+using System.Windows.Input;
+using System.Windows.Media;
+using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
+using System.Windows.Shapes;
+using ATADataModel;
+using System.Data.Entity;
+using AutomationTestAssistantCore;
+using MuiTest;
+using System.ComponentModel;
+using System.Globalization;
+
+namespace AutomationTestAssistantDesktopApp
+{
+    public partial class Login : UserControl
+    {
+        private const string ToBeApprovedMessage = "Your Account will be approved in short period!";
+        private const string InvalidCredentialsMessage = "Invalid email or password!";
+        private const string RequiredFieldsValidationMessage = "You should fill the required fields!";
+        public MemberProxy MemberProxy { get; set; }
+
+        public Login()
+        {
+            InitializeComponent(); 
+        }
+
+        private void btnLogin_Click(object sender, RoutedEventArgs e)
+        {
+            ResetValidationMessage();
+            MemberProxy.Password = tbPassword.Password;
+            bool areFilled = MemberProxy.AreRequiredCredentialsFieldsFilled();
+            if (!areFilled)
+            {
+                DisplayValidationMessage(RequiredFieldsValidationMessage);
+                return;              
+            }
+       
+            var context = new ATAEntities();
+            Member currentMember = ATACore.Managers.MemberManager.RetrieveMemberByCredentials(this.tbMemberUserName.Text, tbPassword.Password);
+            if (currentMember != null)
+                ResolveStatus(currentMember);
+            else
+                DisplayIncorrectUserCredentialsMessage();
+         
+        }
+
+        private void DisplayIncorrectUserCredentialsMessage()
+        {
+            DisplayValidationMessage(InvalidCredentialsMessage);
+        }       
+
+        private void ResolveStatus(Member currentMember)
+        {
+            Statuses currentUserStatus = ATACore.Managers.MemberManager.GetMemberStatus(currentMember);
+            switch (currentUserStatus)
+            {
+                case Statuses.Active:
+                    ResetValidationMessage();
+                    DisplayAfterLoginActiveUserWindow();
+                    break;
+                case Statuses.ToBeApproved:
+                    DisplayValidationMessage(ToBeApprovedMessage);
+                    break;
+                case Statuses.PendingActivation:
+
+                    break;
+                default:
+                    break;
+            }
+        }
+
+        private void DisplayAfterLoginActiveUserWindow()
+        {
+            Window window = Window.GetWindow(this);
+            MainWindowAfterLogin mnw = new MainWindowAfterLogin();
+            mnw.Show();
+            window.Close();
+        }
+
+        private void Login_Loaded(object sender, RoutedEventArgs e)
+        {
+            this.tbMemberUserName.Focus();
+            MemberProxy = new MemberProxy();
+            DataContext = MemberProxy;           
+        }
+
+        private void DisplayValidationMessage(string validationMessage)
+        {
+            tbValidationMessage.Text = validationMessage;
+            tbValidationMessage.Visibility = System.Windows.Visibility.Visible;
+        }
+
+        private void ResetValidationMessage()
+        {
+            tbValidationMessage.Text = String.Empty;
+            tbValidationMessage.Visibility = System.Windows.Visibility.Hidden;
+        }
+    }   
+}

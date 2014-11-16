@@ -1,0 +1,33 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.ComponentModel;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using ATADataModel;
+using AutomationTestAssistantCore;
+
+namespace AutomationTestAssistantDesktopApp
+{
+    public class ExecutionResultRunViewModel : ExecutionResultRun
+    {
+        public string Start { get; set; }
+        public string Finish { get; set; }
+        public string RanBy { get; set; }
+
+        public ExecutionResultRunViewModel(ExecutionResultRun executionResultRun)
+        {
+            string dateTimeFormat = "MM/dd/yy H:mm:ss";
+            Start = ((DateTime)executionResultRun.Start).ToString(dateTimeFormat);
+            Finish = ((DateTime)executionResultRun.Finish).ToString(dateTimeFormat);
+            RanBy = executionResultRun.Member.UserName;
+            Executed = executionResultRun.Executed;
+            Total = executionResultRun.Total;
+            Passed = executionResultRun.Passed;
+            Failed = executionResultRun.Failed;
+            NotExecuted = executionResultRun.NotExecuted;
+            ComputerName = executionResultRun.ComputerName;
+        }
+    }
+}

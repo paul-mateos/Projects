@@ -1,0 +1,26 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using AutomationTestAssistantCore;
+using System.IO;
+using System.Xml;
+using ATADataModel;
+
+namespace TestApiConsoleApplication
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            //Member member = ATACore.Data.MemberData.GetMember("admin", "admin");
+            //var context = new ATAEntities();
+            //Member member = context.GetMember("admin", "admin");
+            //Member member = context.Members.Where(m => m.UserName.Equals("admin") && m.Password.Equals("admin")).FirstOrDefault();
+            //var query = from m in context.Members select m;
+            //Console.WriteLine(member.UserName);
+
+        }
+    }  
+}
+

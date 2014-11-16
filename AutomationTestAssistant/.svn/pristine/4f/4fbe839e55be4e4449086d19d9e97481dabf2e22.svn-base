@@ -1,0 +1,85 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.ComponentModel;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using ATADataModel;
+using AutomationTestAssistantCore;
+
+namespace AutomationTestAssistantDesktopApp
+{
+    public class ProjectTestsExecutionViewModel : ATADataModel.Project, INotifyPropertyChanged
+    {
+        private string localPath;
+        public string LocalPath
+        {
+            get
+            {
+                return localPath;
+            }
+            set
+            {
+                localPath = value;
+                OnPropertyChanged("LocalPath");
+            }
+        }
+
+        public bool IsSelected { get; set; }
+        public string UserName { get; set; }
+
+        private void OnPropertyChanged(string property)
+        {
+            if (!String.IsNullOrEmpty(LocalPath))
+            {
+                ATACore.RegistryManager.WriterLocalPathToRegistry(UserName, TfsPath, LocalPath);
+            }       
+        }
+
+        public ProjectTestsExecutionViewModel(int projectId, string name, string tfsPath, string tfsUrl)
+        {
+            base.ProjectId = projectId;
+            base.Name = name;
+            base.TfsPath = tfsPath;
+            base.TfsUrl = tfsUrl;
+            InitializeTestsObservableCollection();
+        }
+
+        public ProjectTestsExecutionViewModel(ATADataModel.Project project) : 
+            this(project.ProjectId, project.Name, project.TfsPath, project.TfsUrl)
+        {
+        }
+
+        public ProjectTestsExecutionViewModel(ATADataModel.Project project, string userName) :
+            this(project.ProjectId, project.Name, project.TfsPath, project.TfsUrl)
+        {
+            LocalPath = ATACore.RegistryManager.GetProjectLocalPath(userName, TfsPath);
+        }
+
+        private void InitializeTestsObservableCollection()
+        {
+            tests = new ObservableCollection<TestsViewModel>();
+            List<Test> testsList = ATACore.Managers.TestManager.GetAllTestsByProjectName(ATACore.Managers.ContextManager.Context, base.Name);
+            ATACore.Managers.ContextManager.Context.Dispose();
+            UserName = ATACore.RegistryManager.GetUserName();
+            testsList.ForEach(t => tests.Add(new TestsViewModel(t)));
+        }
+
+        private ObservableCollection<TestsViewModel> tests;
+
+        public ObservableCollection<TestsViewModel> ObservableTests
+        {
+            get
+            {
+                return tests;
+            }
+            set
+            {
+                tests = value;               
+            }
+        }
+
+        public event PropertyChangedEventHandler PropertyChanged;
+    }
+}

@@ -1,0 +1,139 @@
+﻿<UserControl x:Class="PhantomTube.Views.YouTubePlayerView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+                xmlns:local="clr-namespace:PhantomTube.Views"
+             xmlns:mui="http://firstfloorsoftware.com/ModernU"
+             mc:Ignorable="d" 
+             d:DesignHeight="1000" d:DesignWidth="1000" Loaded="UserControl_Loaded">
+    <Grid>
+       
+        <Grid Name="mainGrid" Visibility="Visible" >
+            <Grid.CommandBindings>
+                <CommandBinding Command="{x:Static local:YouTubePlayerView.PlayNextCommand}" Executed="playNext_Command"/>
+                <CommandBinding Command="{x:Static local:YouTubePlayerView.RemoveQueueSongCommand}" Executed="removeQueueSongs_Command"/>
+            </Grid.CommandBindings>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="70"/>
+                <RowDefinition Height="50"/>
+                <RowDefinition Height="50"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="30"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="1.5*"/>
+            </Grid.ColumnDefinitions>
+            <ProgressBar Name="progressBar" Minimum="0" Maximum="1" Height="16" IsIndeterminate="True" Margin="0,0,0,16" Visibility="Hidden" Grid.Row="4" Grid.Column="0" />
+            <TextBlock Text="Desktop YouTube Player" Grid.Row="0" Margin="10,0,10,30" Height="40" Width="Auto" FontSize="26" FontWeight="Bold" HorizontalAlignment="Left"/>
+            <StackPanel Orientation="Horizontal" Grid.Row="1" Grid.ColumnSpan="2">
+                <TextBlock  Text="YouTube Playlist ID" Margin="10" Height="25" Width="Auto" FontWeight="Bold" HorizontalAlignment="Left" />
+                <ComboBox Height="25" Margin="10" Width="200" ItemsSource="{Binding ObservablePlaylists}" SelectedValue="{Binding Path=SelectedPlaylist, Mode=TwoWay}" DisplayMemberPath="Name" Name="cbPlaylists"  />
+                <Button Name="btnDisplayPlaylistSongs" Margin="30,10,0,10" Height="30" Width="100" Content="Display" VerticalAlignment="Center" Click="btnDisplayPlaylistSongs_Click" IsDefault="True" HorizontalAlignment="Right"/>
+            </StackPanel>
+            <TextBox Text="{Binding SongsFilter, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Stretch" Margin="10" Height="25" FontWeight="Bold" KeyUp="TextBox_KeyUp" Grid.Column="0" Grid.Row="2"/>
+            <Grid Grid.Row="3" Margin="0,0,0,30" Grid.Column="0">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="2*"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                <DataGrid ItemsSource="{Binding Path=ObservableSongs, Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" AutoGenerateColumns="False" Name="dgSongs" Height="Auto" 
+                      VirtualizingPanel.ScrollUnit="Pixel" Visibility="Hidden"  IsReadOnly="True" Grid.Row="0">
+                <DataGrid.ItemContainerStyle>
+                    <Style TargetType="{x:Type DataGridRow}"  BasedOn="{StaticResource {x:Type DataGridRow}}">
+                        <EventSetter Event="MouseDoubleClick" Handler="dgSongs_MouseDoubleClick" />
+                    </Style>
+                </DataGrid.ItemContainerStyle>
+                    <DataGrid.ContextMenu>
+                        <ContextMenu>
+                            <MenuItem Command="{x:Static local:YouTubePlayerView.PlayNextCommand}" Header="Play Next" />
+                        </ContextMenu>
+                    </DataGrid.ContextMenu>
+                    <DataGrid.Columns>                   
+                    <DataGridTextColumn Header="Artist" Binding="{Binding Artist}" Width="*">
+                        <DataGridTextColumn.HeaderStyle>
+                            <Style TargetType="DataGridColumnHeader" BasedOn="{StaticResource {x:Type DataGridColumnHeader}}">
+                                <Setter Property="HorizontalContentAlignment" Value="Left"/>
+                            </Style>
+                        </DataGridTextColumn.HeaderStyle>
+                    </DataGridTextColumn>
+                    <DataGridTextColumn Header="Title" Binding="{Binding Title}" Width="*">
+                        <DataGridTextColumn.HeaderStyle>
+                            <Style TargetType="DataGridColumnHeader" BasedOn="{StaticResource {x:Type DataGridColumnHeader}}">
+                                <Setter Property="HorizontalContentAlignment" Value="Left"/>
+                            </Style>
+                        </DataGridTextColumn.HeaderStyle>
+                    </DataGridTextColumn>     
+                </DataGrid.Columns>
+            </DataGrid>
+                
+            <GridSplitter Height="5" ResizeDirection="Auto"  HorizontalAlignment="Stretch"  VerticalAlignment="Stretch" Grid.Row="1" Margin="0,5,0,0"/>
+                <Grid Grid.Row="2">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+                    <TextBlock Text="Songs To Be Played Next"  Margin="0,5,10,5" Grid.Row="0" Height="Auto" Width="Auto" FontWeight="Bold" HorizontalAlignment="Left"/>
+                    <DataGrid ItemsSource="{Binding Path=ObservableQueueSongs, Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" AutoGenerateColumns="False" Name="dgQueueSongs" Height="Auto" 
+                    VirtualizingPanel.ScrollUnit="Pixel" Visibility="Hidden"  IsReadOnly="True" Grid.Row="1" VerticalScrollBarVisibility="Visible">
+                        <DataGrid.ContextMenu>
+                            <ContextMenu>
+                                <MenuItem Command="{x:Static local:YouTubePlayerView.RemoveQueueSongCommand}" Header="Remove" />
+                            </ContextMenu>
+                        </DataGrid.ContextMenu>
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="Artist" Binding="{Binding Artist}" Width="*">
+                                <DataGridTextColumn.HeaderStyle>
+                                    <Style TargetType="DataGridColumnHeader" BasedOn="{StaticResource {x:Type DataGridColumnHeader}}">
+                                        <Setter Property="HorizontalContentAlignment" Value="Left"/>
+                                    </Style>
+                                </DataGridTextColumn.HeaderStyle>
+                            </DataGridTextColumn>
+                            <DataGridTextColumn Header="Title" Binding="{Binding Title}" Width="*">
+                                <DataGridTextColumn.HeaderStyle>
+                                    <Style TargetType="DataGridColumnHeader" BasedOn="{StaticResource {x:Type DataGridColumnHeader}}">
+                                        <Setter Property="HorizontalContentAlignment" Value="Left"/>
+                                    </Style>
+                                </DataGridTextColumn.HeaderStyle>
+                            </DataGridTextColumn>
+                        </DataGrid.Columns>
+                    </DataGrid>
+                </Grid>
+            </Grid>
+        <GridSplitter Width="5" ResizeDirection="Auto" HorizontalAlignment="Stretch"  VerticalAlignment="Stretch" Grid.Row="1" Grid.RowSpan="5" Grid.Column="1"/>
+
+            <StackPanel Orientation="Vertical" Grid.Column="2" Grid.Row="0" Grid.RowSpan="5">
+                <ProgressBar Name="playerProgressBar" Minimum="0" Maximum="1" Height="16" IsIndeterminate="True" Margin="0,0,0,16" Visibility="Hidden" />
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Left">
+                    <TextBlock  Text="{Binding Path=CurrentPlayedSong.OriginalTitle, Mode=OneWay}" Margin="0,0,10,10" Height="25" Width="Auto" FontWeight="Bold" HorizontalAlignment="Left" />
+                    <TextBox Name="tbCurrentSongUrl" Text="{Binding Path=CurrentPlayedSong.Url, Mode=OneWay}" Margin="10,0,10,15" Height="25" Width="Auto" MinWidth="300" IsReadOnly="True" />
+                </StackPanel>
+                <MediaElement x:Name="player" Width="640pt" Height="360pt" LoadedBehavior="Manual" Volume="{Binding Volume}" MediaEnded="player_MediaEnded" MouseDown="player_MouseDown" MediaOpened="player_MediaOpened" HorizontalAlignment="Left"/>
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Margin="5" VerticalAlignment="Center" FontWeight="Bold">Progress</TextBlock>
+                    <Slider Name="timelineSlider" VerticalAlignment="Center" Margin="5,0,0,0" Minimum="0"
+                            Maximum="{Binding Path=CurrentPlayedSong.Duration, Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" Value="0" Width="350" SmallChange="0.5" Thumb.DragStarted="timelineSlider_DragStarted"  Thumb.DragCompleted="timelineSlider_DragCompleted"/>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal">
+                    <Button Name="btnLast" Margin="5,10,0,5"  Height="30" Width="50" Content="&lt;&lt;" VerticalAlignment="Center" Click="btnLast_Click"/>
+                    <Button Name="btnPause" Margin="5,10,0,5"  Height="30" Width="50" Content=">" VerticalAlignment="Center" Click="btnPause_Click"/>
+                    <Button Name="btnStop" Margin="5,10,0,5"  Height="30" Width="50" Content="[]" VerticalAlignment="Center" Click="btnStop_Click"/>
+                    <Button Name="btnNext" Margin="5,10,0,5"  Height="30" Width="50" Content=">>" VerticalAlignment="Center" Click="btnNext_Click"/>
+                    <TextBlock Margin="5,5,10,10" VerticalAlignment="Center" FontWeight="Bold">Volume</TextBlock>
+                    <Slider Name="volumeSlider" VerticalAlignment="Center" ValueChanged="volumeSlider_ValueChanged" 
+                            Minimum="0" Maximum="1" Width="100"
+                            Value="{Binding Path=Volume, Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"/>
+                    <TextBlock Margin="10,10,10,10" VerticalAlignment="Center" Text="{Binding Path=CurrentSongTimer, Mode=OneWay,UpdateSourceTrigger=PropertyChanged}"/>
+                </StackPanel>
+              
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" Grid.Row="4">
+                <TextBlock Text="Songs Count:" Margin="0,5,5,0" Height="25" Width="Auto" FontWeight="Bold"/>
+                <TextBlock Name="tbSongsCount"  Text="{Binding SongsCount}" Margin="0,5,5,0" Height="25" Width="Auto" />
+            </StackPanel>
+        </Grid>
+    </Grid>
+</UserControl>

@@ -1,0 +1,113 @@
+﻿using System;
+using System.Text;
+using System.Collections.Generic;
+using System.Linq;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System.Reflection;
+using AutomationTestAssistantCore;
+using System.IO;
+
+namespace TestAutomationTestAssistantCore
+{
+    [TestClass]
+    public class TestProjectInfoCollector
+    {
+        [TestMethod]
+        public void TestGetProjectTestMethodsGetOnlyTestMethods()
+        {
+            string currentExecutablePath = System.Reflection.Assembly.GetExecutingAssembly().Location;
+            int mainFolderPathStartIndex = currentExecutablePath.IndexOf("AutomationTestAssistant");
+            string mainFolderPath = currentExecutablePath.Substring(0, mainFolderPathStartIndex);
+            string asseblyFullPath = String.Concat(mainFolderPath, "AutomationTestAssistant\\TestAutomationTestAssistantCore\\TestProductsAndPrices.dll");
+            MethodInfo[] currentDllMethods = ATACore.Project.ProjectInfoCollector.GetProjectTestMethods(Path.GetFullPath(asseblyFullPath));
+            int testMethodCount = currentDllMethods.Length;
+            Assert.AreEqual<int>(7, testMethodCount);
+        }
+
+        [TestMethod]
+        public void TestGetProjectTestMethodsMultipleAssembliesGetOnlyTestMethods()
+        {
+            string currentExecutablePath = System.Reflection.Assembly.GetExecutingAssembly().Location;
+            int mainFolderPathStartIndex = currentExecutablePath.IndexOf("AutomationTestAssistant");
+            string mainFolderPath = currentExecutablePath.Substring(0, mainFolderPathStartIndex);
+            string asseblyFullPath1 = String.Concat(mainFolderPath, "AutomationTestAssistant\\TestAutomationTestAssistantCore\\TestProductsAndPrices.dll");
+            string asseblyFullPath2 = String.Concat(mainFolderPath, "AutomationTestAssistant\\TestAutomationTestAssistantCore\\TestProductsAndPrices1.dll");
+            List<string> asseblyList = new List<string>()
+            {
+                Path.GetFullPath(asseblyFullPath1),
+                Path.GetFullPath(asseblyFullPath2)
+            };
+            MethodInfo[] currentDllMethods = ATACore.Project.ProjectInfoCollector.GetProjectTestMethodsMultipleAssemblies(asseblyList);
+            int testMethodCount = currentDllMethods.Length;
+            Assert.AreEqual<int>(14, testMethodCount);
+        }
+
+        [TestMethod]
+        public void TestGetRelatedTestProjectsOnlyOneRelated()
+        {
+            string currentExecutablePath = System.Reflection.Assembly.GetExecutingAssembly().Location;
+            string projectFullPath = String.Concat(currentExecutablePath, "\\..\\..\\..\\..\\TestTime\\TestTime.csproj");
+            List<string> currentRelatedProjects = ATACore.Project.ProjectInfoCollector.GetRelatedProjects(Path.GetFullPath(projectFullPath));
+            int relatedProjectsCount = currentRelatedProjects.Count;
+            Assert.AreEqual<int>(1, relatedProjectsCount);
+            Assert.AreEqual<string>("..\\Classes-for-Testing\\Classes-for-Testing.csproj", currentRelatedProjects[0]);
+        }
+
+        [TestMethod]
+        public void TestGetRelatedTestProjectsTwoRelated()
+        {
+            string currentExecutablePath = System.Reflection.Assembly.GetExecutingAssembly().Location;
+            string projectFullPath = String.Concat(currentExecutablePath, "\\..\\..\\..\\..\\TestEncryption\\TestEncryption.csproj");
+            List<string> currentRelatedProjects = ATACore.Project.ProjectInfoCollector.GetRelatedProjects(Path.GetFullPath(projectFullPath));
+            int relatedProjectsCount = currentRelatedProjects.Count;
+            Assert.AreEqual<int>(2, relatedProjectsCount);
+            Assert.AreEqual<string>("..\\Classes-for-Testing\\Classes-for-Testing.csproj", currentRelatedProjects[0]);
+            Assert.AreEqual<string>("..\\Classes-for-Testing\\Classes-for-Testing.csproj", currentRelatedProjects[1]);
+        }
+
+        [TestMethod]
+        public void TestGetRelatedTestProjectsNoRelated()
+        {
+            string currentExecutablePath = System.Reflection.Assembly.GetExecutingAssembly().Location;
+            string projectFullPath = String.Concat(currentExecutablePath, "\\..\\..\\..\\..\\AutomationTestAssistantCore\\AutomationTestAssistantCore.csproj");
+            List<string> currentRelatedProjects = ATACore.Project.ProjectInfoCollector.GetRelatedProjects(Path.GetFullPath(projectFullPath));
+            int relatedProjectsCount = currentRelatedProjects.Count;
+            Assert.AreEqual<int>(0, relatedProjectsCount);
+        }
+
+        [TestMethod]
+        public void TestGetAssemblyPathByProjectPath()
+        {
+            //string currentExecutablePath = System.Reflection.Assembly.GetExecutingAssembly().Location;
+            //string projectRelativeFullPath = String.Concat(currentExecutablePath, "\\..\\..\\..\\..\\TestTime\\TestTime.csproj");
+            //string projectFullPath = Path.GetFullPath(projectRelativeFullPath);
+            //string realAssemblyPath = ATACore.Project.ProjectInfoCollector.GetAssemblyPathByProjectPath(projectFullPath);
+            //FileInfo currentProject = new FileInfo(projectFullPath);
+            //string expectedAssemblyPath = String.Concat(currentProject.DirectoryName, "\\bin\\Release\\TestTime.dll");
+            //Assert.AreEqual<string>(expectedAssemblyPath, realAssemblyPath);
+        }
+
+        [TestMethod]
+        public void TestGetAssemblyPathsByProjectPaths()
+        {
+            string currentExecutablePath = System.Reflection.Assembly.GetExecutingAssembly().Location;
+            string projectRelativeFullPath = String.Concat(currentExecutablePath, "\\..\\..\\..\\..\\TestTime\\TestTime.csproj");
+            string projectRelativeFullPath1 = String.Concat(currentExecutablePath, "\\..\\..\\..\\..\\TestEncryption\\TestEncryption.csproj");
+            string projectFullPath = Path.GetFullPath(projectRelativeFullPath);
+            string projectFullPath1 = Path.GetFullPath(projectRelativeFullPath1);
+            List<string> projectFullPaths = new List<string>()
+            {
+                projectFullPath,
+                projectFullPath1
+            };
+         
+            //List<string> realAssemblyPaths = ATACore.Project.ProjectInfoCollector.GetAssemblyPathsByProjectPaths(projectFullPaths);
+            FileInfo proj1 = new FileInfo(projectFullPath);
+            FileInfo proj2 = new FileInfo(projectFullPath1);
+            string expectedAssemblyPath = String.Concat(proj1.DirectoryName, "\\bin\\Release\\TestTime.dll");
+            string expectedAssemblyPath1 = String.Concat(proj2.DirectoryName, "\\bin\\Release\\TestEncryption.dll");
+            //Assert.AreEqual<string>(expectedAssemblyPath, realAssemblyPaths[0]);
+            //Assert.AreEqual<string>(expectedAssemblyPath1, realAssemblyPaths[1]);
+        }
+    }
+}

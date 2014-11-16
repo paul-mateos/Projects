@@ -1,0 +1,86 @@
+﻿<UserControl x:Class="AutomationTestAssistantDesktopApp.Page3"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:mui="http://firstfloorsoftware.com/ModernUI"
+      mc:Ignorable="d" 
+      d:DesignHeight="600" d:DesignWidth="1500">
+
+            <Grid Background="#FFE5E5E5">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <StackPanel>
+                    <StackPanel Orientation="Horizontal">
+                        <DataGrid Name="dgMethods"/>
+                    </StackPanel>
+                </StackPanel>
+
+                <Grid Grid.Column="2" Background="#FFE5E5E5">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="5*"/>
+                        <RowDefinition Height="4*"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+                    <DataGrid 
+                            Grid.Row="0"  
+                            Name="dgvProjects" 
+                            AlternatingRowBackground="LightBlue"
+                            AlternationCount="2"
+                            AutoGenerateColumns="False">
+                        <DataGrid.Columns>
+                            <mui:DataGridTextColumn Header="Project Path" Width="750" />
+                        </DataGrid.Columns>
+                    </DataGrid>
+
+                    <DataGrid 
+                            Grid.Row="1" 
+                            Name="dgvTfsSettings"
+                            AlternatingRowBackground="LightBlue"
+                            AlternationCount="2"
+                            AutoGenerateColumns="False"
+                            >
+                        <DataGrid.Columns>
+                            <mui:DataGridTextColumn Header="Tfs Path" Width="*"
+                                 />
+                            <mui:DataGridTextColumn Header="Local Path" Width="*"
+                                />
+                            <mui:DataGridTextColumn Header="Tfs Project Collection" Width="*"
+                                 />
+                            <mui:DataGridTextColumn Header="Workspace Name" Width="*" />
+                        </DataGrid.Columns>
+                    </DataGrid>
+
+                    <StackPanel Grid.Row="2" Orientation="Horizontal">
+                        <TextBlock Text="Team Project URL"
+                                       HorizontalAlignment="Right"
+                                       VerticalAlignment="Bottom"
+                                       Margin="5"
+                            />
+                        <TextBox Grid.Column="3"
+                             Name="tbTeamProjectUrl"
+                             Width="250"
+                             Height="20"
+                             HorizontalAlignment="Left"
+                             VerticalAlignment="Bottom"
+                             Margin="5" 
+                            />
+                        <TextBlock Text="User Name"
+                                       HorizontalAlignment="Right"
+                                       VerticalAlignment="Bottom"
+                                       Margin="5"
+                            />
+                        <TextBox Grid.Column="3"
+                             Name="tbTfsUserName"
+                             Width="250"
+                             Height="20"
+                             HorizontalAlignment="Left"
+                             VerticalAlignment="Bottom"
+                             Margin="5" 
+                            />
+                    </StackPanel>
+                </Grid>
+            </Grid>
+</UserControl>

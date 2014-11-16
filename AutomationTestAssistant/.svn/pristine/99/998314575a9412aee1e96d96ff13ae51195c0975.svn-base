@@ -1,0 +1,58 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using ATADataModel;
+using AutomationTestAssistantCore;
+
+namespace AutomationTestAssistantDesktopApp
+{
+    public class TeamViewModel : Team
+    {
+        public TeamViewModel(int id, string name)
+        {
+            base.TeamId = id;
+            base.Name = name;
+            projects = new ObservableCollection<ProjectViewModel>();
+            agentMachines = new ObservableCollection<AgentMachine>();
+            List<ATADataModel.Project> projectsList = ATACore.Managers.ProjectManager.GetAllProjectsByTeamId(ATACore.Managers.ContextManager.Context, TeamId);
+            
+            projectsList.ForEach(p => projects.Add(new ProjectViewModel(p)));
+            List<ATADataModel.AgentMachine> agentMachinesList = ATACore.Managers.AgentMachineManager.GetAllAgentMachinesByTeamId(ATACore.Managers.ContextManager.Context, TeamId);
+            agentMachinesList.ForEach(a => agentMachines.Add(a));
+            ATACore.Managers.ContextManager.Context.Dispose();
+        }
+
+        private ObservableCollection<ProjectViewModel> projects;
+
+        public ObservableCollection<ProjectViewModel> ObservableProjects
+        {
+            get
+            {
+                return projects;
+            }
+            set
+            {
+                projects = value;
+               
+            }
+        }
+
+        private ObservableCollection<AgentMachine> agentMachines;
+
+        public ObservableCollection<AgentMachine> ObservableAgentMachines
+        {
+            get
+            {
+                return agentMachines;
+            }
+            set
+            {
+                agentMachines = value;
+
+            }
+        }
+    }
+}

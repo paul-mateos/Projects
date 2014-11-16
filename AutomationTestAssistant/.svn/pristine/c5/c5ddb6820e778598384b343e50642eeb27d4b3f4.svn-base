@@ -1,0 +1,63 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Net.Sockets;
+using System.Threading;
+using System.Net;
+using AutomationTestAssistantCore;
+using System.Collections.Concurrent;
+using AutomationTestAssistantCore.ExecutionEngine.Messages;
+using AutomationTestAssistantCore.ExecutionEngine.Contracts;
+
+namespace AutomationTestAssistantCore
+{
+    public class TcpMsBuildLoggerProcessor : BaseLogger
+    {
+        public CommunicationPair InitializeMsBuildLogCommunicationEntities(IpAddressSettings settings)
+        {
+            TcpListener agentMsBuildListener = new TcpListener(settings.GetIPAddress(), settings.Port);
+            agentMsBuildListener.Server.SetSocketOption(SocketOptionLevel.Socket, SocketOptionName.ReuseAddress, 1);
+            TcpClient agentTcpMsbuildReader = default(TcpClient);
+
+            return new CommunicationPair(agentTcpMsbuildReader, agentMsBuildListener);
+        }
+
+
+        public void ProcessMsBuildLoggerMessage(ConcurrentQueue<MessageArgsLogger> messagesToBeSend, CommunicationPair communicationPair)
+        {
+            communicationPair.TcpListener.Start();
+            communicationPair.TcpClient = communicationPair.TcpListener.AcceptTcpClient();
+
+            ProcessMsBuildLoggerMessageInternal(messagesToBeSend, communicationPair);
+        }
+
+        private void ProcessMsBuildLoggerMessageInternal(ConcurrentQueue<MessageArgsLogger> messagesToBeSend, CommunicationPair communicationPair)
+        {
+            try
+            {
+                while (true)
+                {
+                    string dataFromClient = ATACore.TcpWrapperProcessor.TcpClientWrapper.ReadClientMessage(communicationPair.TcpClient);
+                    if (!String.IsNullOrEmpty(dataFromClient))
+                    {
+                        if (dataFromClient.Equals("END"))
+                        {
+                            Log.Info("MsLogger END");
+                            return;
+                        }
+                        ATACore.CommandExecutor.EnqueueNewMessage(dataFromClient, MessageSource.MsBuildLogger, messagesToBeSend);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Log.Error("Exception in ProcessClientMessge", ex);
+            }
+            finally
+            {
+                ATACore.TcpWrapperProcessor.TcpListenerWrapper.CloseTcpMsLogger(communicationPair.TcpListener, communicationPair.TcpClient);
+            }
+        }    
+    }
+}

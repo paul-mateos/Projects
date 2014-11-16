@@ -1,0 +1,94 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Data;
+using System.Windows.Documents;
+using System.Windows.Input;
+using System.Windows.Media;
+using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
+using System.Windows.Shapes;
+using CustomControls;
+using System.Collections.ObjectModel;
+using ATADataModel;
+using AutomationTestAssistantCore;
+
+namespace AutomationTestAssistantDesktopApp
+{
+    public partial class Registration : UserControl
+    {
+        private const string ToBeApprovedMessage = "Your Account will be approved in short period!";
+        private const string InvalidCredentialsMessage = "Invalid email or password!";
+        private const string RequiredFieldsValidationMessage = "You should fill required fields!";
+        private const string PasswordEqualValidationMessage = "Passwords don't match!";
+        public ObservableCollection<CheckedItem> CheckedTeams { get; set; }
+
+        public Registration()
+        {
+            InitializeComponent();
+        }
+
+        public MemberProxy MemberProxy { get; set; }
+
+        private void btnRegister_Click(object sender, RoutedEventArgs e)
+        {
+            ResetValidationMessage();
+            List<string> selectedTeamNames = GetSelectedTeams();
+            MemberProxy.Password = tbPassword.Password;
+            MemberProxy.PasswordConfirm = tbPasswordConfirm.Password;
+            bool areFilled = MemberProxy.AreRequiredFieldsFilled();
+            if (!areFilled)
+            {
+                DisplayValidationMessage(RequiredFieldsValidationMessage);
+                return;
+            }
+            bool arePasswordEqual = MemberProxy.ArePasswordEqual();
+            if (!arePasswordEqual)
+            {
+                DisplayValidationMessage(PasswordEqualValidationMessage);
+                return;
+            }
+            Member newMember = ATACore.Managers.MemberManager.CreateUser(MemberProxy.UserName, tbPassword.Password, MemberProxy.Email,
+                MemberProxy.TfsUserName, cbRole.SelectedItem.ToString(), selectedTeamNames, MemberProxy.Comment);
+        }       
+
+        private List<string> GetSelectedTeams()
+        {
+            List<string> selectedTeamNames = new List<string>();
+            foreach (var item in CheckedTeams)
+            {
+                if (item.Selected)
+                    selectedTeamNames.Add(item.Description);
+            }
+            return selectedTeamNames;
+        }
+
+        private void Registration_Loaded(object sender, RoutedEventArgs e)
+        {
+            this.tbMemberUserName.Focus();
+            MemberProxy = new MemberProxy();
+            DataContext = MemberProxy;
+            cbRole.DataContext = MemberProxy.Roles;
+            
+            CheckedTeams = new ObservableCollection<CheckedItem>();
+            MemberProxy.Teams.ForEach(x => CheckedTeams.Add(x));
+            lbTeam.DataContext = CheckedTeams;
+        }
+
+        private void DisplayValidationMessage(string validationMessage)
+        {
+            tbValidationMessage.Text = validationMessage;
+            tbValidationMessage.Visibility = System.Windows.Visibility.Visible;
+        }
+
+        private void ResetValidationMessage()
+        {
+            tbValidationMessage.Text = String.Empty;
+            tbValidationMessage.Visibility = System.Windows.Visibility.Hidden;
+        }
+    }
+}

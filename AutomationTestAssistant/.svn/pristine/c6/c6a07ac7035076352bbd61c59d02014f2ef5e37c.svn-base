@@ -1,0 +1,56 @@
+﻿<Project DefaultTargets="CreateWorkspace" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <!-- Default properties -->
+  <PropertyGroup>
+    <RootPath>E:\TestProfessional\</RootPath>
+    <TfsServerUrl>http://aangelov-pc:8080/tfs/defaultcollection</TfsServerUrl>
+    <WorkspaceName>TestProfessionalE</WorkspaceName>
+    <UserName>aangelov-pc\aangelov</UserName>
+    <PathToGet>E:/TestProfessional</PathToGet>
+    <Tf>"C:\Program Files (x86)\Microsoft Visual Studio 10.0\Common7\IDE\tf.exe"</Tf>
+    
+    <TfsPath>$/TestProfessional</TfsPath>
+    <LocalPath>$(RootPath)</LocalPath>
+  </PropertyGroup>
+  <!-- Define your mappings here -->
+  <!--<ItemGroup>
+    <WorkspaceMapping Include="$/TestProfessional">
+      <LocalPath>$(RootPath)</LocalPath>
+    </WorkspaceMapping>
+    <WorkspaceMapping Include="$/TestProfessional/TestTime">
+      <LocalPath>$(RootPath)\TestTime</LocalPath>
+    </WorkspaceMapping> 
+  </ItemGroup>-->
+  
+  <Target Name="CreateWorkspace">
+    <!-- Checking input parameters -->
+    <!--<Error Condition="$(WorkspaceName) == ''" Text="Please specify WorkspaceName property"/>
+    <Error Condition="$(RootPath) == ''" Text="Please specify RootPath property"/>
+    <Error Condition="!HasTrailingSlash('$(RootPath)')" Text="Please make sure RootPath is slash terminated"/>-->
+    <!-- Create new workspace-->
+    <Exec Command="$(Tf) workspace /new /noprompt /server:&quot;$(TfsServerUrl)&quot; &quot;$(WorkspaceName)&quot;" />
+    <!-- Remove default mapping -->
+    <Exec Command="$(Tf) workfold /unmap /workspace:&quot;$(WorkspaceName)&quot; $/"/>
+    <!-- Create new mappings (uses MSBuild batching) -->
+    <Exec Command="$(Tf) workfold  /map &quot;$(TfsPath)&quot; &quot;$(LocalPath)&quot; /workspace:&quot;$(WorkspaceName)&quot;"/>
+    <!-- Great success! -->
+    <Message Text="Workspace '$(WorkspaceName)' created sucessfully"/>
+    <!-- List created mappings -->
+    <Exec Command="$(Tf) workfold /workspace:&quot;$(WorkspaceName)&quot;"/>
+  </Target>
+
+  <Target Name="DeleteWorkspace">
+    <!-- Checking input parameters -->
+    <!--<Error Condition="$(WorkspaceName) == ''" Text="Please specify WorkspaceName property"/>
+    <Error Condition="$(UserName) == ''" Text="Please specify UserName property"/>
+    <Error Condition="$(TfsServerUrl) == ''" Text="Please specify TfsServerUrl property"/>-->
+    <!-- Create new workspace-->
+    <Exec Command="$(Tf) workspace /delete /noprompt /collection:&quot;$(TfsServerUrl)&quot; &quot;$(WorkspaceName)&quot;;$(UserName)" />
+  </Target>
+
+  <Target Name="GetLatest">
+    <!-- Checking input parameters -->
+    <!--<Error Condition="$(PathToGet) == ''" Text="Please specify PathToGet property"/>-->  
+    <!-- Get Force Get Latest for the specified path-->
+    <Exec Command="$(Tf) get &quot;$(PathToGet)&quot; /recursive /all /overwrite /noprompt" />
+  </Target>
+</Project>

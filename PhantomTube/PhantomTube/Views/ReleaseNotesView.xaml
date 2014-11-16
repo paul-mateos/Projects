@@ -1,0 +1,39 @@
+﻿<UserControl x:Class="PhantomTube.Views.ReleaseNotesView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:mui="http://firstfloorsoftware.com/ModernUI"
+             mc:Ignorable="d">
+    <Grid>
+        <ScrollViewer>
+            <StackPanel >
+                <TextBlock Text="Release Notes" FontSize="26" Height="Auto" Margin="0,0,0,15"/>
+                <mui:BBCodeBlock BBCode="[b]Version[/b]: 1.0.0.2     [b]Date[/b]: 28.05.2014" Margin="0,0,10,15"/>
+                <mui:BBCodeBlock BBCode="-add vertical grid splitter youtube player" Margin="0,0,0,15" />
+                <mui:BBCodeBlock BBCode="-remove delete button playlist youtube player" Margin="0,0,0,15" />
+                <mui:BBCodeBlock BBCode="-add queue songs grid" Margin="0,0,0,15" />
+                <mui:BBCodeBlock BBCode="-add grid splitter playlist and queue songs" Margin="0,0,0,15" />
+                <mui:BBCodeBlock BBCode="-add queue songs logic" Margin="0,0,0,15" />
+                <mui:BBCodeBlock BBCode="-add play next menu item main songs grid" Margin="0,0,0,15" />
+                <mui:BBCodeBlock BBCode="-add remove songs from queue grid" Margin="0,0,0,15" />
+                <mui:BBCodeBlock BBCode="-fix Play button UI bug" Margin="0,0,0,15" />
+                <mui:BBCodeBlock BBCode="-add next song button" Margin="0,0,0,15" />
+                <mui:BBCodeBlock BBCode="-add last song button" Margin="0,0,0,15" />
+                <mui:BBCodeBlock BBCode="-add new icon" Margin="0,0,0,15" />
+                <mui:BBCodeBlock BBCode="-add additional themes" Margin="0,0,0,15" />
+                
+                <mui:BBCodeBlock BBCode="[b]Version[/b]: 1.0.0.1     [b]Date[/b]: 28.05.2014" Margin="0,0,10,15"/>
+                <mui:BBCodeBlock BBCode="-time progress slider - drag " Margin="0,0,0,15" />
+                <mui:BBCodeBlock BBCode="-time progress slider move on song progress " Margin="0,0,0,15" />
+                <mui:BBCodeBlock BBCode="-fix volume initialization from registry bug " Margin="0,0,0,15" />
+                <mui:BBCodeBlock BBCode="-current duration label " Margin="0,0,0,15" />
+                <mui:BBCodeBlock BBCode="-current progress label timer " Margin="0,0,0,15" />
+                <mui:BBCodeBlock BBCode="-current played song URL " Margin="0,0,0,15" />
+                
+                <mui:BBCodeBlock BBCode="[b]Version[/b]: 1.0.0.0     [b]Date[/b]: 06.05.2014" Margin="0,0,10,15"/>
+                <mui:BBCodeBlock BBCode="-add feature to list all YouTube specific playlist songs" Margin="0,0,0,15" />
+            </StackPanel>
+        </ScrollViewer>
+    </Grid>
+</UserControl>

@@ -1,0 +1,14 @@
+﻿<Project DefaultTargets="Execute" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <!-- Default properties -->
+  <PropertyGroup>
+    <MsTest>C:\Program Files (x86)\Microsoft Visual Studio 11.0\Common7\IDE\MsTest.exe</MsTest>
+    <TestListName>TestListTemplate</TestListName>
+  </PropertyGroup>
+
+  <Target Name="Execute">
+    <!-- Checking input parameters -->
+    <Error Condition="$(TestListPath) == ''" Text="Please specify PathToGet property"/>
+    <Error Condition="$(TestListName) == ''" Text="Please specify PathToGet property"/>
+    <Exec Command="&quot;$(MsTest)&quot; /testmetadata:&quot;$(TestListPath)&quot; /resultsfile:&quot;$(ResultsFilePath)&quot; /testlist:&quot;$(TestListName)&quot;" />
+  </Target>
+</Project>

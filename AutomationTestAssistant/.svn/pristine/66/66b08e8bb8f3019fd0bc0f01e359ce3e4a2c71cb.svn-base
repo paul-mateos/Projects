@@ -1,0 +1,58 @@
+﻿<UserControl x:Class="AutomationTestAssistantDesktopApp.ExecutionResultsView"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:mui="http://firstfloorsoftware.com/ModernU"
+      mc:Ignorable="d" 
+      d:DesignHeight="760" d:DesignWidth="1500">
+   
+    <Grid Name="mainGrid">
+        <Grid.Resources>
+            <Style TargetType="TextBlock">
+                <Setter Property="Margin" Value="10" />
+                <Setter Property="FontSize" Value="18" />
+                <Setter Property="VerticalAlignment" Value="Center" />
+                <Setter Property="HorizontalAlignment" Value="Right" />
+            </Style>
+        </Grid.Resources>
+        <Grid Name="executionResultRunGrid">
+     
+            <StackPanel Orientation="Vertical">
+                <TextBlock Text="TEST RESULTS" Style="{StaticResource Heading1}" Margin="0,0,0,8" />
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Text="Total: " FontWeight="Bold"/>
+                    <TextBlock Text="{Binding Total}" />
+
+                    <TextBlock Text="Executed:" FontWeight="Bold"/>
+                    <TextBlock Text="{Binding Executed}" />
+
+                    <TextBlock Text="Passed:" FontWeight="Bold"/>
+                    <TextBlock Text="{Binding Passed}" Foreground="#FF2C8917" />
+
+                    <TextBlock Text="NotExecuted:" FontWeight="Bold"/>
+                    <TextBlock Text="{Binding NotExecuted}" />
+
+                    <TextBlock Text="Failed:" FontWeight="Bold"/>
+                    <TextBlock Text="{Binding Failed}" Foreground="#FFD41C1C" />
+            
+                </StackPanel>
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Text="Start:" FontWeight="Bold"/>
+                    <TextBlock Text="{Binding Start}" />
+
+                    <TextBlock Text="Finish:" FontWeight="Bold"/>
+                    <TextBlock Text="{Binding Finish}" />
+
+                    <TextBlock Text="RanBy:" FontWeight="Bold"/>
+                    <TextBlock Text="{Binding RanBy}" />
+
+                    <TextBlock Text="Computer Name:" FontWeight="Bold"/>
+                    <TextBlock Text="{Binding ComputerName}" />
+                </StackPanel>
+                <DataGrid Name="testResultRunDataGrid"  AutoGenerateColumns="True" />
+            </StackPanel>
+           
+        </Grid>
+    </Grid>    
+</UserControl>

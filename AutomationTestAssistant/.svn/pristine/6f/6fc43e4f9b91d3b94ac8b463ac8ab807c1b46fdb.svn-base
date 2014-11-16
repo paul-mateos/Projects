@@ -1,0 +1,331 @@
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Windows.Forms;
+using System.Net.Sockets;
+using System.Threading;
+using System.Net;
+using System.IO;
+using System.Reflection;
+using AutomationTestAssistantCore;
+
+namespace ServerClient
+{
+    public partial class Main : Form
+    {
+        private TcpClient clientTcpWriter;
+        private TcpClient clientTcpListner;
+        private TcpListener serverMsBuildUpdaterListener;
+        private TcpClient clientMsBuildTcpAgentListner;
+        //private static TcpClient msBuildClientTcpWriter;
+        //private static Thread msBuildLogListnerThreadWorker;
+        private delegate void UpdateProgress(string currentProgress);
+        private bool isConnected;
+        private List<string> testIds;
+        private string relativeMsTestProjPath = "\\..\\..\\..\\..\\MsTest.proj";
+        private string relativeTfsProjPath = "\\..\\..\\..\\..\\TfsOperations.proj";
+        private string msTestProjFullPath;
+        private string tfsProjFullPath;
+        private IpAddressSettings clientSettings;
+        private IpAddressSettings agentSettings;
+        private IpAddressSettings msBuildLogSettings;
+
+        public Main()
+        {
+            InitializeComponent();
+            testIds = new List<string>();
+            BuildMsBuildProjectsFullPaths();
+            GetIpsInformation();
+            dgvProjects.Rows[0].Cells[0].Value = @"D:\AutomationTestAssistant\TestTime\TestTime.csproj";
+        }
+
+        private void GetIpsInformation()
+        {
+            agentSettings = new IpAddressSettings(tbAgentIp.Text);
+            clientSettings = new IpAddressSettings(tbClientIp.Text);
+            msBuildLogSettings = new IpAddressSettings(tbMsBuildLogIp.Text);
+        }
+
+        private void TestGetIpsInformation()
+        {
+            agentSettings = new IpAddressSettings("127.0.0.1:8887");
+            clientSettings = new IpAddressSettings("127.0.0.1:8888");
+            msBuildLogSettings = new IpAddressSettings("127.0.0.1:8889");
+        }
+
+        private void BuildMsBuildProjectsFullPaths()
+        {
+            string currentExecutablePath = Assembly.GetExecutingAssembly().Location;
+
+            string asseblyFullPath = String.Concat(currentExecutablePath, relativeMsTestProjPath);
+            msTestProjFullPath = Path.GetFullPath(asseblyFullPath);
+            asseblyFullPath = String.Concat(currentExecutablePath, relativeTfsProjPath);
+            tfsProjFullPath = Path.GetFullPath(asseblyFullPath);
+        }      
+
+        private void btnSendData_Click(object sender, EventArgs e)
+        {
+            List<string> projectPaths = GetProjectPaths();
+            List<string> assembliesPaths = ATACore.Project.ProjectInfoCollector.GetAssemblyPathsByProjectPaths(projectPaths);
+            List<TestLink> testLinks = ATACore.TestExecution.TestListGenerator.GetProjectTestLinksMultipleAssemblies(assembliesPaths);
+            MethodInfo[] methodInfos = ATACore.Project.ProjectInfoCollector.GetProjectTestMethodsMultipleAssemblies(assembliesPaths);
+            List<string> testIdsToBeExecuted = FilterCheckedTests();
+            testLinks = ATACore.TestExecution.TestListGenerator.RemoveTestLinksNotSpecifiedIds(testIdsToBeExecuted, testLinks);
+            string testListContent = ATACore.TestExecution.TestListGenerator.GenerateListOfSpecifiedTests(testLinks);          
+
+            string uniqueTestResultName = ATACore.Utilities.TimeStampGenerator.GenerateTrxFilePath();
+            //HACK NEED TO BE REWRITTEN, Test Links STORAGE Should be mapped to the get latest on the agent
+            string messageToBeSend = ATACore.CommandExecutor.GenerateMsTestMessage(msTestProjFullPath.Replace("D", "C"), testListContent.Replace("D:\\", "C:\\"), uniqueTestResultName, tbListName.Text, msBuildLogSettings);
+
+            ATACore.TcpWrapperProcessor.TcpClientWrapper.SendMessageToClient(clientTcpWriter, messageToBeSend);
+        }       
+
+        private void btnClose_Click(object sender, EventArgs e)
+        {
+            isConnected = false;
+            clientTcpWriter.Close();
+            clientTcpListner.Close();
+        }
+
+        private void btnConnect_Click(object sender, EventArgs e)
+        {
+            //TestGetIpsInformation();
+            GetIpsInformation();
+            backgroundWorker2.RunWorkerAsync();
+            lock (this)
+            {
+                // Waits until the listener in the backgroundworker2 is initialized
+                Monitor.Wait(this);
+            }
+            UpdateProgress uiUpdater = new UpdateProgress(DisplayClientMessage);
+            {
+                clientTcpWriter = new TcpClient();
+                clientTcpListner = new TcpClient();
+                lock(this)
+                {                    
+                    clientTcpWriter.Connect(agentSettings.IpString, clientSettings.Port);
+                    Thread.Sleep(2000);  
+                    clientTcpListner.Connect(agentSettings.IpString, clientSettings.Port);                                  
+                }
+                isConnected = true;   
+                rtbMain.Text = "Client Socket Program - Server Connected ...";
+
+                backgroundWorker1.RunWorkerAsync();
+            }
+        }
+
+        // Will update the status of the agents execution until the client is connected with the agent.
+        private void backgroundWorker1_DoWork(object sender, DoWorkEventArgs e)
+        {
+            while (isConnected)
+            {
+                NetworkStream serverStream = clientTcpListner.GetStream();
+                byte[] inStream = new byte[10025];
+                serverStream.Read(inStream, 0, (int)clientTcpListner.ReceiveBufferSize);
+                string returndata = System.Text.Encoding.ASCII.GetString(inStream);
+                UpdateProgress uiUpdater = new UpdateProgress(DisplayClientMessage);
+                if (returndata != String.Empty)
+                {
+                    this.Invoke(uiUpdater, returndata);
+                }
+                Thread.Sleep(1000);
+            }
+        }
+
+        private void btnClean_Click(object sender, EventArgs e)
+        {
+            rtbMain.Text = String.Empty;
+            rtbMsBuild.Text = String.Empty;
+        }
+
+        private void btnSendCustomCommand_Click(object sender, EventArgs e)
+        {
+            ATACore.TcpWrapperProcessor.TcpClientWrapper.SendMessageToClient(clientTcpWriter, tbCustomCommand.Text);
+        }
+
+        private void backgroundWorker2_DoWork(object sender, DoWorkEventArgs e)
+        {
+            lock (this)
+            {
+                IPAddress ipAddress = clientSettings.GetIPAddress();
+                serverMsBuildUpdaterListener = new TcpListener(ipAddress, agentSettings.Port);
+                // Gives a Signal to the initial thread that the agent client Listener is initialized
+                Monitor.Pulse(this);
+            }
+            UpdateProgress uiUpdater1 = new UpdateProgress(DisplayClientMessage);
+            serverMsBuildUpdaterListener.Start();
+            clientMsBuildTcpAgentListner = default(TcpClient);
+            clientMsBuildTcpAgentListner = serverMsBuildUpdaterListener.AcceptTcpClient();
+
+            // Will update the status of the agents execution (MS Build Log) until the client is connected with the agent.
+            UpdateProgress uiUpdater = new UpdateProgress(DisplayMsBuildLogMessage);
+            while (isConnected)
+            {
+                NetworkStream serverStream = clientMsBuildTcpAgentListner.GetStream();
+                byte[] inStream = new byte[10025];
+                serverStream.Read(inStream, 0, (int)clientMsBuildTcpAgentListner.ReceiveBufferSize);
+                string returndata = System.Text.Encoding.ASCII.GetString(inStream);
+
+                if (returndata != String.Empty)
+                {
+                    this.Invoke(uiUpdater, returndata);
+                }
+            }
+        }
+
+        private void btnRefresh_Click(object sender, EventArgs e)
+        {
+            RefreshInternal();
+        }     
+
+        private void btnCreateWorkspaces_Click(object sender, EventArgs e)
+        {            
+            for (int i = 0; i < dgvWorkspaces.Rows.Count; i++)
+            {
+                string currentTfsPath = dgvWorkspaces.Rows[i].Cells[0].Value.ToString();
+                string currentLocalPath = dgvWorkspaces.Rows[i].Cells[1].Value.ToString();
+                string currentCollection = dgvWorkspaces.Rows[i].Cells[2].Value.ToString();
+                string currentServerUrl = String.Concat(tfsServerUrl.Text, currentCollection);
+                string currentWorkspaceName = Guid.NewGuid().ToString();
+                dgvWorkspaces.Rows[i].Cells[3].Value = currentWorkspaceName;                
+                string messageToBeSend = ATACore.CommandExecutor.GenerateCreateWorkspacetMessage(tfsProjFullPath, currentServerUrl, currentWorkspaceName, currentTfsPath, currentLocalPath, agentSettings);
+                ATACore.TcpWrapperProcessor.TcpClientWrapper.SendMessageToClient(clientTcpWriter, messageToBeSend);            
+            }           
+        }
+
+        private void btnDeleteWorkspaces_Click(object sender, EventArgs e)
+        {
+            for (int i = 0; i < dgvWorkspaces.Rows.Count; i++)
+            {
+                string currentTfsPath = dgvWorkspaces.Rows[i].Cells[1].Value.ToString();
+                string currentLocalPath = dgvWorkspaces.Rows[i].Cells[2].Value.ToString();
+                string currentCollection = dgvWorkspaces.Rows[i].Cells[2].Value.ToString();
+                string currentServerUrl = String.Concat(tfsServerUrl.Text, currentCollection);
+                string currentWorkspaceName = dgvWorkspaces.Rows[i].Cells[3].Value.ToString();
+                string messageToBeSend = ATACore.CommandExecutor.GenerateDeleteWorkspacetMessage(tfsProjFullPath, currentServerUrl, currentWorkspaceName, tbUserName.Text, agentSettings);
+                ATACore.TcpWrapperProcessor.TcpClientWrapper.SendMessageToClient(clientTcpWriter, messageToBeSend);
+            }
+        }
+
+        private void btnGetLatest_Click(object sender, EventArgs e)
+        {
+            for (int i = 0; i < dgvWorkspaces.Rows.Count; i++)
+            {
+                string currentTfsPath = dgvWorkspaces.Rows[i].Cells[1].Value.ToString();
+                string currentLocalPath = dgvWorkspaces.Rows[i].Cells[2].Value.ToString();
+                string currentCollection = dgvWorkspaces.Rows[i].Cells[2].Value.ToString();
+                string currentServerUrl = String.Concat(tfsServerUrl.Text, currentCollection);
+                string messageToBeSend = ATACore.CommandExecutor.GenerateTfsGetLatestMessage(tfsProjFullPath, currentLocalPath, tbUserName.Text, agentSettings);
+                ATACore.TcpWrapperProcessor.TcpClientWrapper.SendMessageToClient(clientTcpWriter, messageToBeSend);
+            }
+        }
+
+        #region Private Helper methods    
+
+        private void AddMethodsToCheckBoxListInternal(string currentProjectDllPath, MethodInfo[] currentDllMethods)
+        {
+            int i = 0;
+            foreach (MethodInfo currentMethodInfo in currentDllMethods)
+            {
+                dgvMethods.Rows.Add(new DataGridViewRow());
+                dgvMethods.Rows[i].Cells[1].Value = currentMethodInfo.Name;
+                dgvMethods.Rows[i].Cells[2].Value = currentMethodInfo.DeclaringType.FullName;
+                dgvMethods.Rows[i].Cells[3].Value = ATACore.TestExecution.TestListGenerator.GenerateTestMethodId(currentMethodInfo, currentProjectDllPath);
+                i++;
+            }
+        }
+
+        private void RefreshInternal()
+        {
+            for (int i = 0; i < dgvProjects.Rows.Count; i++)
+            {
+                string currentProjectPath = String.Empty;
+                if (dgvProjects.Rows[i].Cells[0].Value != null)
+                {
+                    currentProjectPath = dgvProjects.Rows[i].Cells[0].Value.ToString();
+                }
+                AddMethodsForProjectInternal(currentProjectPath);
+            }
+        }
+
+        private void AddMethodsForProjectInternal(string currentProjectPath)
+        {
+            if (File.Exists(currentProjectPath))
+            {
+                ATACore.Project.ProjectBuilder.BuildProject(currentProjectPath);
+                string currentProjectDllPath = ATACore.Project.ProjectInfoCollector.GetAssemblyPathByProjectPath(currentProjectPath);
+                MethodInfo[] currentDllMethods = ATACore.Project.ProjectInfoCollector.GetProjectTestMethods(currentProjectDllPath);
+                AddMethodsToCheckBoxListInternal(currentProjectDllPath, currentDllMethods);
+                testIds.AddRange(ATACore.TestExecution.TestListGenerator.GenerateTestMethodIds(currentDllMethods, currentProjectDllPath));
+            }
+        }
+
+        private List<string> FilterCheckedTests()
+        {
+            List<string> filteredTestIds = new List<string>();
+            for (int i = 0; i < dgvMethods.Rows.Count; i++)
+            {
+                DataGridViewCheckBoxCell currentCheckBox = (DataGridViewCheckBoxCell)dgvMethods.Rows[i].Cells[0];
+                if (Convert.ToBoolean(currentCheckBox.Value))
+                {
+                    string currentChecked = dgvMethods.Rows[i].Cells[1].Value.ToString();
+                    int index = testIds.FindIndex(x => x.Equals(dgvMethods.Rows[i].Cells[3].Value.ToString()));
+                    if (index != -1)
+                    {
+                        filteredTestIds.Add(testIds[index]);
+                    }
+                }
+            }
+            return filteredTestIds;
+        }
+
+        private List<string> GetProjectPaths()
+        {
+            List<string> projectPaths = new List<string>();
+            for (int i = 0; i < dgvProjects.Rows.Count; i++)
+            {
+                string currentProjectPath = String.Empty;
+                if (dgvProjects.Rows[i].Cells[0].Value != null)
+                {
+                    currentProjectPath = dgvProjects.Rows[i].Cells[0].Value.ToString();
+                }
+                if (File.Exists(currentProjectPath))
+                {
+                    projectPaths.Add(currentProjectPath);
+                }
+            }
+
+            return projectPaths;
+        }     
+
+        private void DisplayClientMessage(string agentMessage)
+        {
+            rtbMain.Text += String.Concat(Environment.NewLine, Environment.NewLine, agentMessage);
+        }
+
+        private void DisplayMsBuildLogMessage(string agentMessage)
+        {
+            rtbMsBuild.Text += String.Concat(Environment.NewLine, Environment.NewLine, agentMessage);
+        }
+        #endregion       
+
+        private void CheckAllTests()
+        {
+            foreach (DataGridViewRow row in dgvMethods.Rows)
+            {
+                row.Cells[0].Value = true;
+            }
+        }
+
+        private void dgvProjects_CellValueChanged(object sender, DataGridViewCellEventArgs e)
+        {
+            RefreshInternal();
+            CheckAllTests();
+        }
+        
+    }
+}

@@ -1,0 +1,120 @@
+﻿<UserControl x:Class="AutomationTestAssistantDesktopApp.TestsExecutionView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:core="clr-namespace:System;assembly=mscorlib"
+             xmlns:local="clr-namespace:ATADataModel;assembly=ATADataModel"
+             mc:Ignorable="d" 
+             d:DesignHeight="1000" Width="Auto">
+    
+    <Grid Name="mainGrid">
+        <Grid.Resources>
+                <Style TargetType="TextBlock">
+                    <Setter Property="Margin" Value="10" />
+                    <Setter Property="FontSize" Value="12" />
+                    <Setter Property="Width" Value="100" />
+                    <Setter Property="Height" Value="25" />
+                    <Setter Property="VerticalAlignment" Value="Center" />
+                    <Setter Property="HorizontalAlignment" Value="Left" />
+                </Style>
+                <Style TargetType="TextBox">
+                    <Setter Property="Margin" Value="10" />
+                    <Setter Property="FontSize" Value="12" />
+                    <Setter Property="Width" Value="400" />
+                    <Setter Property="Height" Value="25" />
+                    <Setter Property="VerticalAlignment" Value="Center" />
+                    <Setter Property="HorizontalAlignment" Value="Left" />
+                </Style>
+                <Style TargetType="Button">
+                    <Setter Property="Margin" Value="20" />
+                    <Setter Property="FontSize" Value="15" />
+                    <Setter Property="Height" Value="30" />
+                    <Setter Property="Width" Value="120" />
+                    <Setter Property="VerticalAlignment" Value="Top" />
+                </Style>
+
+            <DataTemplate x:Key="ProjectsTemplate">
+                <StackPanel Orientation="Horizontal">                 
+                    <Expander IsExpanded="True" >
+                        <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="1.5*"/>
+                                    <RowDefinition Height="*"/>
+                                </Grid.RowDefinitions>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="3*"/>
+                                </Grid.ColumnDefinitions>
+                              
+                            <StackPanel Orientation="Vertical">
+                                <StackPanel Orientation="Horizontal">
+                                        <DataGrid ItemsSource="{Binding Path=ObservableTests}" AutoGenerateColumns="False">
+                                            <DataGrid.Columns>
+                                            <DataGridCheckBoxColumn Header="Execute" Binding="{Binding IsSelected, Mode=TwoWay, ValidatesOnDataErrors=true, UpdateSourceTrigger=PropertyChanged}" />
+                                                <DataGridTextColumn Header="Name" Binding="{Binding Name}" Width="300" />
+                                                <DataGridTextColumn Header="FullName" Binding="{Binding FullName}" Width="200"/>
+                                            </DataGrid.Columns>
+                                        </DataGrid>
+                                </StackPanel>                                 
+                            </StackPanel>                          
+                        </Grid>
+                    </Expander>
+                    <StackPanel Orientation="Horizontal">
+                        <CheckBox Name="currentCheckbox" IsChecked="{Binding IsSelected, Mode=TwoWay, ValidatesOnDataErrors=true, UpdateSourceTrigger=PropertyChanged}"/>
+                        <TextBlock Text="{Binding Path=Name}" FontSize="15"/>
+                       
+                    </StackPanel>
+                    
+                </StackPanel>
+            </DataTemplate>
+
+            <DataTemplate x:Key="ProjectsMachinesTemplate">
+        
+            </DataTemplate>
+
+            <HierarchicalDataTemplate x:Key="TeamTemplate" ItemsSource="{Binding Path=ObservableProjects}" ItemTemplate="{StaticResource ProjectsTemplate}">
+                <Grid>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="{Binding Path=Name}"/>                    
+                    </StackPanel>
+                </Grid>
+            </HierarchicalDataTemplate>
+
+            <HierarchicalDataTemplate x:Key="TeamMachineTemplate" ItemsSource="{Binding Path=ObservableMachines}" ItemTemplate="{StaticResource ProjectsTemplate}">
+                <Grid>
+                    <DataGrid ItemsSource="{Binding Path=ObservableAgentMachines}" AutoGenerateColumns="False">
+                        <DataGrid.Columns>
+                            <DataGridCheckBoxColumn Header="Selected" Binding="{Binding IsSelected}" />
+                            <DataGridTextColumn Header="Name" Binding="{Binding Name}" />
+                            <DataGridTextColumn Header="Ip" Binding="{Binding Ip}" />
+                        </DataGrid.Columns>
+                    </DataGrid>     
+                </Grid>
+            </HierarchicalDataTemplate>
+            
+            
+        </Grid.Resources>
+        <StackPanel Orientation="Horizontal">
+            <StackPanel Orientation="Vertical" Grid.Column="0">
+                <Grid>
+                    <TreeView Height="800" Name="projectSettingsTreeView" ItemTemplate="{StaticResource TeamTemplate}" ItemsSource="{Binding Path=.}" >
+                        <TreeView.ItemContainerStyle>
+                            <Style TargetType="{x:Type TreeViewItem}">
+                                <Setter Property="IsExpanded" Value="True" />
+                            </Style>
+                        </TreeView.ItemContainerStyle>
+                    </TreeView>                    
+                </Grid>
+             
+            </StackPanel>
+            <StackPanel Orientation="Vertical" Grid.Column="2">
+                <TreeView Height="800"  ItemTemplate="{StaticResource TeamMachineTemplate}" ItemsSource="{Binding Path=.}"/>
+            </StackPanel>
+            <StackPanel Orientation="Vertical" VerticalAlignment="Bottom">
+                <Button Name="btnExecute" Content="Execute" Height="40" Width="150"  Margin="20" FontSize="20" HorizontalAlignment="Right"/>                
+            </StackPanel>
+        </StackPanel>
+    </Grid>
+</UserControl>
+ 

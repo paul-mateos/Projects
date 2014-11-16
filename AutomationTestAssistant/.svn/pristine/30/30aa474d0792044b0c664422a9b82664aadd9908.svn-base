@@ -1,0 +1,30 @@
+﻿<Project DefaultTargets="CreateWorkspace" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <!-- Default properties -->
+  <PropertyGroup>
+    <RootPath>E:\TestProfessional\</RootPath>
+    <WorkspaceName>TestProfessionalE</WorkspaceName>
+    <Tf>tf</Tf>
+  </PropertyGroup>
+  <!-- Define your mappings here -->
+  <ItemGroup>
+    <WorkspaceMapping Include="$/TestProfessional">
+      <LocalPath>$(RootPath)</LocalPath>
+    </WorkspaceMapping>
+  </ItemGroup>
+  <Target Name="CreateWorkspace">
+    <!-- Checking input parameters -->
+    <Error Condition="$(WorkspaceName) == ''" Text="Please specify WorkspaceName property"/>
+    <Error Condition="$(RootPath) == ''" Text="Please specify RootPath property"/>
+    <Error Condition="!HasTrailingSlash('$(RootPath)')" Text="Please make sure RootPath is slash terminated"/>
+    <!-- Create new workspace-->
+    <Exec Command="$(Tf) workspace /new /noprompt &quot;$(WorkspaceName)&quot;" />
+    <!-- Remove default mapping -->
+    <Exec Command="$(Tf) workfold /unmap /workspace:&quot;$(WorkspaceName)&quot; $/"/>
+    <!-- Create new mappings (uses MSBuild batching) -->
+    <Exec Command="$(Tf) workfold  /map &quot;%(WorkspaceMapping.Identity)&quot; &quot;%(WorkspaceMapping.LocalPath)&quot; /workspace:&quot;$(WorkspaceName)&quot;"/>
+    <!-- Great success! -->
+    <Message Text="Workspace '$(WorkspaceName)' created sucessfully"/>
+    <!-- List created mappings -->
+    <Exec Command="$(Tf) workfold /workspace:&quot;$(WorkspaceName)&quot;"/>
+  </Target>
+</Project>

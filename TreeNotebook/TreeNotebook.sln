@@ -1,0 +1,38 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2012
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TreeNotebook", "TreeNotebook\TreeNotebook.csproj", "{DE7A2F79-2C2B-401D-8D7B-D5CAD389D4E3}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TreeNotebookCore", "TreeNotebookCore\TreeNotebookCore.csproj", "{99B1C7C5-A64F-43F5-9F7B-242F88C1E92B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AntaresFramework.Core", "AntaresFramework.Core\AntaresFramework.Core.csproj", "{6FF5C39F-FCE5-417C-99B6-468FB219BBAB}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TreeNotebookDataModel", "TreeNotebookDataModel\TreeNotebookDataModel.csproj", "{3A038BC0-3DD7-44AB-B80A-98D1682FA96C}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{DE7A2F79-2C2B-401D-8D7B-D5CAD389D4E3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DE7A2F79-2C2B-401D-8D7B-D5CAD389D4E3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DE7A2F79-2C2B-401D-8D7B-D5CAD389D4E3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DE7A2F79-2C2B-401D-8D7B-D5CAD389D4E3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{99B1C7C5-A64F-43F5-9F7B-242F88C1E92B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{99B1C7C5-A64F-43F5-9F7B-242F88C1E92B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{99B1C7C5-A64F-43F5-9F7B-242F88C1E92B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{99B1C7C5-A64F-43F5-9F7B-242F88C1E92B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6FF5C39F-FCE5-417C-99B6-468FB219BBAB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6FF5C39F-FCE5-417C-99B6-468FB219BBAB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6FF5C39F-FCE5-417C-99B6-468FB219BBAB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6FF5C39F-FCE5-417C-99B6-468FB219BBAB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3A038BC0-3DD7-44AB-B80A-98D1682FA96C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3A038BC0-3DD7-44AB-B80A-98D1682FA96C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3A038BC0-3DD7-44AB-B80A-98D1682FA96C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3A038BC0-3DD7-44AB-B80A-98D1682FA96C}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

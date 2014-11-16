@@ -1,0 +1,21 @@
+﻿<mui:ModernWindow x:Class="MuiTest.MainWindowAfterLogin"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:mui="http://firstfloorsoftware.com/ModernUI"
+        xmlns:app="clr-namespace:AutomationTestAssistantDesktopApp"
+        Title="MainWindow" Height="600" Width="600"
+                  ContentSource="Login.xaml">
+    <mui:ModernWindow.TitleLinks>
+        <mui:Link DisplayName="Settings" Source="/AppereanceSettings.xaml" />
+    </mui:ModernWindow.TitleLinks>
+    
+    <mui:ModernWindow.MenuLinkGroups>
+
+        <mui:LinkGroup DisplayName="Page1" >
+            <mui:LinkGroup.Links>
+                <mui:Link DisplayName="Page1" Source="/Page1.xaml" />
+                <mui:Link DisplayName="Page3" Source="/Page3.xaml"/>
+            </mui:LinkGroup.Links>
+        </mui:LinkGroup>
+    </mui:ModernWindow.MenuLinkGroups>
+</mui:ModernWindow>

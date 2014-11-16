@@ -1,0 +1,35 @@
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace ATADataModel
+{
+    public partial class Member : IDataErrorInfo
+    {
+        private const string RequiredValueMessage = "Required value";
+
+        public string Error
+        {
+            get { return null; }
+        }
+
+        public string this[string columnName]
+        {
+            get
+            {
+                if (columnName == "UserName")
+                    return string.IsNullOrEmpty(this.UserName) ? RequiredValueMessage : null;
+                if (columnName == "Password")
+                    return string.IsNullOrEmpty(this.Password) ? RequiredValueMessage : null;
+                if (columnName == "Email")
+                    return string.IsNullOrEmpty(this.Email) ? RequiredValueMessage : null;
+                if (columnName == "TfsUserName")
+                    return string.IsNullOrEmpty(this.TfsUserName) ? RequiredValueMessage : null;
+                return null;
+            }
+        }
+    }
+}

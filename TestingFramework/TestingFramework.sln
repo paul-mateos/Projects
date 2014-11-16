@@ -1,0 +1,49 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2012
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "QA.TelerikAcademy.Tests", "TestingFramework.Tests\QA.TelerikAcademy.Tests.csproj", "{7039770B-C22C-434E-A065-634C0FC152F7}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "QA.UI.TestingFramework.Core", "UI.TestingFramework.Core\QA.UI.TestingFramework.Core.csproj", "{D3683C33-851D-4C3F-8883-D90A24E68D2B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "QA.TelerikAcademy.Core", "QA.TelerikAcademy.Core\QA.TelerikAcademy.Core.csproj", "{E6B6115C-6A79-4CB2-91E7-189A963B11CA}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "QA.Telerik.Core", "QA.Telerik.Core\QA.Telerik.Core.csproj", "{AEC0FDE5-46FA-4A96-9F0F-64C5AECA7329}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "QA.Telerik.Tests", "QA.Telerik.Tests\QA.Telerik.Tests.csproj", "{CED6213F-A24E-493A-AC74-23BF80795845}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Items", "Items", "{524A42D6-C663-40AE-84D0-BFE2FC2CFB62}"
+	ProjectSection(SolutionItems) = preProject
+		ProjectsStructure.dgml = ProjectsStructure.dgml
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{7039770B-C22C-434E-A065-634C0FC152F7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7039770B-C22C-434E-A065-634C0FC152F7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7039770B-C22C-434E-A065-634C0FC152F7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7039770B-C22C-434E-A065-634C0FC152F7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D3683C33-851D-4C3F-8883-D90A24E68D2B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D3683C33-851D-4C3F-8883-D90A24E68D2B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D3683C33-851D-4C3F-8883-D90A24E68D2B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D3683C33-851D-4C3F-8883-D90A24E68D2B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E6B6115C-6A79-4CB2-91E7-189A963B11CA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E6B6115C-6A79-4CB2-91E7-189A963B11CA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E6B6115C-6A79-4CB2-91E7-189A963B11CA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E6B6115C-6A79-4CB2-91E7-189A963B11CA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AEC0FDE5-46FA-4A96-9F0F-64C5AECA7329}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AEC0FDE5-46FA-4A96-9F0F-64C5AECA7329}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AEC0FDE5-46FA-4A96-9F0F-64C5AECA7329}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AEC0FDE5-46FA-4A96-9F0F-64C5AECA7329}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CED6213F-A24E-493A-AC74-23BF80795845}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CED6213F-A24E-493A-AC74-23BF80795845}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CED6213F-A24E-493A-AC74-23BF80795845}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CED6213F-A24E-493A-AC74-23BF80795845}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

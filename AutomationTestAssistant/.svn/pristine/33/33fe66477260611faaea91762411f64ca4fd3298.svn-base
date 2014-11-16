@@ -1,0 +1,60 @@
+﻿<UserControl x:Class="AutomationTestAssistantDesktopApp.AddProjectView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+    xmlns:local="clr-namespace:AutomationTestAssistantDesktopApp"             
+    xmlns:mui="http://firstfloorsoftware.com/ModernU"
+    mc:Ignorable="d" 
+    d:DesignHeight="850" d:DesignWidth="850" >
+
+    <Grid Name="mainGrid">     
+        <Grid.Resources>
+            <Style TargetType="TextBlock">
+                <Setter Property="Margin" Value="10" />
+                <Setter Property="FontSize" Value="12" />
+                <Setter Property="VerticalAlignment" Value="Center" />
+                <Setter Property="HorizontalAlignment" Value="Left" />
+            </Style>
+            <Style TargetType="TextBox">
+                <Setter Property="Width" Value="300" />
+                <Setter Property="Height" Value="20" />
+                <Setter Property="FontSize" Value="12" />
+                <Setter Property="HorizontalAlignment" Value="Left" />
+                <Setter Property="VerticalAlignment" Value="Center" />
+                <Setter Property="Margin" Value="0,6,0,10" />
+            </Style>
+        </Grid.Resources>
+        <StackPanel Orientation="Vertical">
+            <Grid HorizontalAlignment="Left">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="3*"/>
+                </Grid.ColumnDefinitions>
+                <StackPanel Orientation="Vertical" Grid.Column="0">
+                    <TextBlock Text="Name" />
+                    <TextBlock Text="TFS Path" />
+                    <TextBlock Text="TFS URL" />
+                </StackPanel>
+                <StackPanel Orientation="Vertical" Grid.Column="1" HorizontalAlignment="Left">
+                    <TextBox Name="tbProjectName" Text="{Binding Name, Mode=TwoWay, ValidatesOnDataErrors=true, UpdateSourceTrigger=LostFocus}"  />
+                    <TextBox Name="tbTfsPath" Text="{Binding TfsPath, Mode=TwoWay, ValidatesOnDataErrors=true, UpdateSourceTrigger=LostFocus}"  />
+                    <TextBox Name="tbTfsUrl" Text="{Binding TfsUrl, Mode=TwoWay, ValidatesOnDataErrors=true, UpdateSourceTrigger=LostFocus}"  />
+                </StackPanel>
+            </Grid>
+            <TextBlock Text="AdditionalPaths" FontSize="15" FontWeight="Bold" HorizontalAlignment="Left" Margin="10,10,0,0"/>
+            <Button Name="btnAddAdditionalPaths" Content="New" Height="25" Width="100" FontSize="12" HorizontalAlignment="Left" Margin="10,10,0,0" Click="btnAddAdditionalPaths_Click"/>
+            <ListBox Height="100"  Name="lbAdditionalPaths"  ItemsSource="{Binding Path=ObservableAdditionalPaths}" Margin="10,10,0,0">
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <CheckBox IsChecked="{Binding Path=Selected}" Content="{Binding Path=Description}" />
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>        
+        <StackPanel Orientation="Horizontal">
+            <Button Name="btnAdd" Content="Add" Height="40" Width="150"  Margin="10,0,40,0" FontSize="20"  IsDefault="True" Click="btnAdd_Click"/>
+            <Button Name="btnCancel" Content="Cancel" Height="40" Width="150" FontSize="20" IsCancel="True" Click="btnCancel_Click"/>
+        </StackPanel>
+        </StackPanel>  
+    </Grid>
+</UserControl>

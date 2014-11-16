@@ -1,0 +1,30 @@
+D:\\AutomationTestHelper\\TestResults\\aangelov_AANGELOV-PC 2013-02-20 21_57_31\\Out\\TestAutomationTestAssistantCore.dll
+
+
+GetAssemblyPathsByProjectPaths
+GetAssemblyPathByProjectPath
+GetProjectTestLinksMultipleAssemblies
+GetProjectTestMethodsMultipleAssemblies
+
+
+TestProductsAndPrices.ProductTest.TestPriceChange
+9e1d2257-dd53-c44e-9a50-8fba4d2d2ea5
+TestPriceChange
+D:\AutomationTestAssistant\TestAutomationTestAssistantCore\TestProductsAndPrices.dll
+
+
+The spill Canvas - All over you
+
+
+"C:\Program Files (x86)\Microsoft Visual Studio 10.0\Common7\IDE\MsTest.exe" /testmetadata:"D:\AutomationTestAssistant\AutomationTestAssistant.vsmdi" /resultsfile:"D:\AutomationTestAssistant\TestAgentTestResults\0222-23-20123-10-42-29.trx" /testlist:"TestListTemplate"
+
+
+
+
+"C:\Program Files (x86)\Microsoft Visual Studio 10.0\Common7\IDE\MsTest.exe" /p:TestListPath="D:\AutomationTestAssistant\AutomationTestAssistant.vsmdi" /p:ResultsFilePath="D:\AutomationTestAssistant\TestAgentTestResults\02-2224-2013-12-06-29.trx" /p:TestListName="TestListTemplate"
+
+"C:\Windows\Microsoft.NET\Framework\v4.0.30319\MsBuild.exe" "D:\AutomationTestAssistant\MsTest.proj" /p:TestListPath="D:\AutomationTestAssistant\AutomationTestAssistant.vsmdi" /p:ResultsFilePath="D:\AutomationTestAssistant\TestAgentTestResults\asdfgg.trx" /p:TestListName="TestListTemplate" /l:AutomationTestAssistantCore.MsBuildLogger.TcpIpLogger,D:\AutomationTestAssistant\AutomationTestAssistantCore.dll
+
+
+
+/l:AutomationTestAssistantCore.MsBuildLogger.TcpIpLogger,D:\AutomationTestAssistant\AutomationTestAssistantCore\bin\Release\AutomationTestAssistantCore.dll

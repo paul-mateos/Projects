@@ -1,0 +1,93 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{E65F3105-6C2A-41E3-83ED-8094C452F5C2}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Grooveshark.SDK</RootNamespace>
+    <AssemblyName>Grooveshark.SDK</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <UseVSHostingProcess>false</UseVSHostingProcess>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="RestSharp">
+      <HintPath>..\packages\RestSharp.104.4.0\lib\net4\RestSharp.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Web.Helpers, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="BaseServiceRequestFactory.cs" />
+    <Compile Include="Data\AddUserFavoriteSong\ResponseRootObject.cs" />
+    <Compile Include="Data\AddUserFavoriteSong\Result.cs" />
+    <Compile Include="Data\Artist\Artist.cs" />
+    <Compile Include="Data\Authenticate\Result.cs" />
+    <Compile Include="Data\BaseResponseRootObject.cs" />
+    <Compile Include="Data\DoesExists\ResponseRootObject.cs" />
+    <Compile Include="Data\GetSongSearchResults\ResponseRootObject.cs" />
+    <Compile Include="Data\GetSongSearchResults\Result.cs" />
+    <Compile Include="Data\RateQuotaExceeded\Error.cs" />
+    <Compile Include="Data\RateQuotaExceeded\ResponseRootObject.cs" />
+    <Compile Include="Data\Song.cs" />
+    <Compile Include="Data\GetPlaylist\ResponseRootObject.cs" />
+    <Compile Include="Data\GetPlaylist\Result.cs" />
+    <Compile Include="Data\GetUserPlaylists\Playlist.cs" />
+    <Compile Include="Data\GetUserPlaylists\ResponseRootObject.cs" />
+    <Compile Include="Data\GetUserPlaylists\Result.cs" />
+    <Compile Include="Data\Header.cs" />
+    <Compile Include="Data\Artist\Pager.cs" />
+    <Compile Include="Data\Logout\ResponseRootObject.cs" />
+    <Compile Include="Data\Logout\Result.cs" />
+    <Compile Include="Data\RequestParameters.cs" />
+    <Compile Include="Data\ResponseParameters.cs" />
+    <Compile Include="Data\Artist\Result.cs" />
+    <Compile Include="Data\Artist\ResponseRootObject.cs" />
+    <Compile Include="Data\Authenticate\ResponseRootObject.cs" />
+    <Compile Include="Data\Session\ResponseRootObject.cs" />
+    <Compile Include="Data\Session\Result.cs" />
+    <Compile Include="GroovesharkService.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Utilities\Encryptor.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

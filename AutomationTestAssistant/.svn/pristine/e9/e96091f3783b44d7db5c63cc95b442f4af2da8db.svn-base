@@ -1,0 +1,73 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Net.Sockets;
+
+namespace AutomationTestAssistantCore
+{
+    public class TcpClientWrapper : BaseLogger
+    {
+        public  void SendMessageToClient(TcpClient tcpClient, string messageToSend)
+        {
+            NetworkStream ns = tcpClient.GetStream();
+            Byte[] bytesToSend = Encoding.ASCII.GetBytes(messageToSend);
+            int totalBytes = bytesToSend.Length;
+            int startIndex = 0;
+            do
+            {
+                int endIndex = (totalBytes - startIndex) > 1000 ? 1000 : totalBytes - startIndex;
+                ns.Write(bytesToSend, startIndex, endIndex);
+                ns.Flush();
+                startIndex += endIndex;
+            }
+            while (startIndex != totalBytes);
+            Log.InfoFormat("Sending >> ", messageToSend);
+        }
+
+        public string ReadClientMessage(TcpClient tcpClient)
+        {
+            string dataFromClient = String.Empty;
+            NetworkStream networkStream = tcpClient.GetStream();
+            string messageChunk = String.Empty;
+            int endIndexOfMsg = -1;
+            do
+            {
+                byte[]  bytesFrom = new byte[1000];
+                networkStream.Read(bytesFrom, 0, 1000);
+                bytesFrom = NullRemover(bytesFrom, 1000);
+                messageChunk = System.Text.Encoding.ASCII.GetString(bytesFrom);
+                endIndexOfMsg = messageChunk.IndexOf("$");
+                if (endIndexOfMsg == -1)
+                {
+                    dataFromClient += messageChunk;
+                }
+                else
+                {
+                    string lastPart = messageChunk.Substring(0, endIndexOfMsg);
+                    dataFromClient += lastPart;
+                }
+            }
+            while (endIndexOfMsg == -1);
+
+            return dataFromClient;
+        }
+
+        private byte[] NullRemover(byte[] DataStream, int receiveBufferSize)
+        {
+            int i;
+            byte[] temp = new byte[receiveBufferSize];
+            for (i = 0; i < receiveBufferSize; i++)
+            {
+                if (DataStream[i] == 0x00) break;
+                temp[i] = DataStream[i];
+            }
+            byte[] NullLessDataStream = new byte[i];
+            for (i = 0; i < NullLessDataStream.Length; i++)
+            {
+                NullLessDataStream[i] = temp[i];
+            }
+            return NullLessDataStream;
+        }
+    }
+}

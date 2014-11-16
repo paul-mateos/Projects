@@ -1,0 +1,122 @@
+﻿<Page x:Class="AutomationTestAssistantDesktopApp.Page1"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:mui="http://firstfloorsoftware.com/ModernUI"
+      mc:Ignorable="d" 
+      d:DesignHeight="650" d:DesignWidth="1550"
+	Title="Page1">
+    <Grid >       
+        <Grid.RowDefinitions>
+            <RowDefinition Height="0.5*"/>
+            <RowDefinition Height="8.5*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <StackPanel Orientation="Horizontal">
+            <TextBlock Text="Client IP"
+                 HorizontalAlignment="Right"
+                 VerticalAlignment="Bottom"
+                 Margin="5"
+               />
+            <TextBox Grid.Column="1"
+               Width="100"
+               Height="18"
+               Text="192.168.1.138:8888"
+               FontSize="11"
+               Name="tbClientIp"
+               HorizontalAlignment="Left"
+               VerticalAlignment="Bottom"
+               Margin="5" 
+              />
+
+            <TextBlock Text="Agent IP"
+                 HorizontalAlignment="Right"
+                 VerticalAlignment="Bottom"
+                 Margin="5"
+                />
+            <TextBox Grid.Column="2"
+                 Name="tbAgentIp"
+                 Width="100"
+                 Height="18"
+                 Text="192.168.1.120:8887"
+                 FontSize="11"
+                 HorizontalAlignment="Left"
+                 VerticalAlignment="Bottom"
+                 Margin="5" 
+                />
+
+            <TextBlock Text="MsBuildLog IP"
+                 HorizontalAlignment="Right"
+                 VerticalAlignment="Bottom"
+                 Margin="5"
+                />
+            <TextBox Grid.Column="3"
+                 Name="tbMsBuildLogIp"
+                 Width="100"
+                 Height="18"
+                 Text="192.168.1.120:8889"
+                 FontSize="11"
+                 HorizontalAlignment="Left"
+                 VerticalAlignment="Bottom"
+                 Margin="5" 
+                />
+
+            <TextBlock Text="Custom Command"
+                 HorizontalAlignment="Right"
+                 VerticalAlignment="Bottom"
+                 Margin="5"
+                />
+            <TextBox Grid.Column="5"
+                 Name="tbCustomCommand"
+                 Width="250"
+                 Height="18"
+                 FontSize="11"
+                 Text="KILL#"
+                 HorizontalAlignment="Left"
+                 VerticalAlignment="Bottom"
+                 Margin="5" 
+                />
+            <Button Grid.Column="6" Name="btnSendCustomCommand" Content="Send Custom Command" Height="20" />
+        </StackPanel>
+        <mui:ModernTab Grid.Row="1" SelectedSource="/Page2.xaml" Layout="List" Grid.Column="1">
+            <mui:ModernTab.Links>
+                <mui:Link DisplayName="Page2" Source="/Page2.xaml" />
+                <mui:Link DisplayName="Page3" Source="/Page3.xaml" />
+                
+            </mui:ModernTab.Links>
+        </mui:ModernTab>
+     
+        <StackPanel Grid.Row="2" Orientation="Horizontal">
+            <Button Name="btnExecute" Content="Execute" Width="150" FontSize="20" Margin="10,10,10,10" />
+            <Button Name="btnClose" Content="Close" Width="100" FontSize="15" Margin="10,10,10,10" />
+            <Button Name="btnConnect" Content="Connect" Width="100" FontSize="15" Margin="10,10,10,10" />
+            <Button Name="btnClean" Content="Clean" Width="100" FontSize="15" Margin="10,10,10,10" />
+            <Button Name="btnRefresh" Content="Refresh" Width="100" FontSize="15" Margin="10,10,180,10" />
+
+            <Button Name="btnCreateWorkspace" Content="Create Workspace" FontSize="15" Margin="10,10,10,10" />
+            <Button Name="btnDeleteWorkspace" Content="Delete Workspace" FontSize="15" Margin="10,10,10,10" />
+            <Button Name="btnGetLatest" Content="Get Latest" Width="100" FontSize="15" Margin="10,10,10,10" />
+        </StackPanel>
+        <StackPanel Grid.Row="3" Orientation="Horizontal">
+            <Button Name="btnPreviewCommand"  Height="20" Content="Preview Command" FontSize="13" Margin="10,10,10,10"/>
+            <TextBox Name="tbCommandPreview" Height="20" Text="MST#D:\AutomationTestHelper\MsTest.proj#D:\AutomationTestHelper\AutomationTestAssistant.vsmdi D:\AutomationTestHelper\aaa110111.trx" Margin="10,10,10,10"/>
+            <TextBlock Text="Test List Name"
+                                       HorizontalAlignment="Right"
+                                       VerticalAlignment="Center"
+                                       Margin="5"
+                            />
+            <TextBox 
+                             Name="tbTestListName"
+                             Text="TestListTemplate"
+                             Width="250"
+                             Height="20"
+                             HorizontalAlignment="Left"
+                             VerticalAlignment="Center"
+                             Margin="5" 
+                            />
+        </StackPanel>
+    </Grid>
+   
+</Page>

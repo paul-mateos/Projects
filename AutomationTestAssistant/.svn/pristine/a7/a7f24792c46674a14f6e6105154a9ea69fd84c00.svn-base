@@ -1,0 +1,75 @@
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Globalization;
+using System.Linq;
+using System.Runtime.CompilerServices;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows.Controls;
+using ATADataModel;
+using CustomControls;
+using FirstFloor.ModernUI.Presentation;
+
+namespace AutomationTestAssistantDesktopApp
+{
+    public class MemberRequiredValidation : Member, IDataErrorInfo, INotifyPropertyChanged
+    {
+        private const string RequiredValueMessage = "Required value";
+        private string userName;
+        private string password;
+
+        public string UserName
+        {
+            get { return this.userName; }
+            set
+            {
+                if (this.userName != value)
+                {
+                    this.userName = value;
+                    NotifyPropertyChanged("UserName");
+                }
+            }
+        }
+
+        public string Password
+        {
+            get { return this.password; }
+            set
+            {
+                if (this.password != value)
+                {
+                    this.password = value;
+                    NotifyPropertyChanged("Password");
+                }
+            }
+        }
+
+        public string Error
+        {
+            get { return null; }
+        }
+
+        public string this[string columnName]
+        {
+            get
+            {
+                if (columnName == "UserName")
+                    return string.IsNullOrEmpty(this.UserName) ? RequiredValueMessage : null;
+                if (columnName == "Password")
+                    return string.IsNullOrEmpty(this.Password) ? RequiredValueMessage : null;
+                return null;
+            }
+        }
+
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        private void NotifyPropertyChanged([CallerMemberName] String propertyName = "")
+        {
+            if (PropertyChanged != null)
+            {
+                PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+}

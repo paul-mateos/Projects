@@ -1,0 +1,215 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows.Media;
+
+namespace BookGame.ViewModels
+{
+    public class GameBoardViewModel
+    {
+        public Stone[][] Triangle { get; set; }
+        public Stone[,] LeftTurnPanel { get; set; }
+        public Stone[,] RightTurnPanel { get; set; }
+
+        public List<Point> SelectedStones { get; set; }
+        public List<string> StoneColors { get; set; }
+
+        public Dictionary<string, int> ColorSequence { get; set; }
+
+        public GameBoardViewModel()
+        {
+            //saving rainbow color sequence
+            ColorSequence = new Dictionary<string,int>();
+            ColorSequence.Add(Colors.Red, 0);
+            ColorSequence.Add(Colors.Orange, 1);
+            ColorSequence.Add(Colors.Yellow, 2);
+            ColorSequence.Add(Colors.Green, 3);
+            ColorSequence.Add(Colors.Blue, 4);
+            ColorSequence.Add(Colors.Purple, 5);
+
+            //creating triangle matrix
+            Triangle = new Stone[6][];
+            for (int i = 0; i < Triangle.GetLength(0); i++)
+			{
+			    Triangle[i] = new Stone[i+1];
+			}
+
+            //colors to attribute to stones
+            StoneColors = new List<string>() 
+            {
+                Colors.Red, Colors.Red, Colors.Red, Colors.Red, Colors.Red, Colors.Red,
+                Colors.Orange, Colors.Orange, Colors.Orange, Colors.Orange, Colors.Orange,
+                Colors.Yellow,  Colors.Yellow, Colors.Yellow, Colors.Yellow,
+                Colors.Green, Colors.Green, Colors.Green,
+                Colors.Blue, Colors.Blue,
+                Colors.Purple,
+            };
+            
+            //initializing turn panels
+            LeftTurnPanel = new Stone[11, 3];
+            RightTurnPanel = new Stone[11, 3];
+            InitializePanel(LeftTurnPanel);
+            InitializePanel(RightTurnPanel);
+
+            //creating stone lists
+            SelectedStones = new List<Point>();
+        }
+
+        //initializes panels with empty stones
+        public void InitializePanel(Stone[,] panel)
+        {
+            for (int i = 0; i < panel.GetLength(0); i++)
+            {
+                for (int j = 0; j < panel.GetLength(1); j++)
+                {
+                    panel[i,j] = new Stone(i, j);
+                }
+            }
+        }
+
+        //generates stone colors at the beginning of the game
+        public void GenerateColors()
+        {
+            Random rnd = new Random();
+
+            for (int i = 0; i < Triangle.GetLength(0); i++)
+			{
+			    for (int j = 0; j < Triangle[i].GetLength(0); j++)
+			    {
+			        int rand = rnd.Next(StoneColors.Count);
+                    Triangle[i][j].Fill = StoneColors[rand].ColorToBrush();
+                    Triangle[i][j].Visibility = System.Windows.Visibility.Visible;
+                    StoneColors.RemoveAt(rand);
+			    }
+			}
+        }
+
+        public void DetermineAvailableStones()
+        {
+            ClearAllAvailable();
+            if(SelectedStones.Count.Equals(0))
+            {
+                for (int i = 0; i < Triangle.GetLength(0); i++)
+                {
+                    for (int j = 0; j < Triangle[i].GetLength(0); j++)
+                    {
+                        MakeAvailable(Triangle[i][j]);
+                    }
+                }
+            }
+            else if (SelectedStones.Count.Equals(1))
+            {
+                for (int i = 0; i < Triangle.GetLength(0); i++)
+                {
+                    for (int j = 0; j < Triangle[i].GetLength(0); j++)
+                    {
+                        Stone selectedStone = Triangle[SelectedStones[0].Row][SelectedStones[0].Column];
+                        Stone currentStone = Triangle[i][j];
+
+                        AddStoneOfSameColorToAvailable(selectedStone, currentStone);
+                        AddStonesOfNeighboringColorsToAvailable(i, j, selectedStone, currentStone);
+                    }
+                }
+            }
+            else if (SelectedStones.Count.Equals(2))
+            {
+                for (int i = 0; i < Triangle.GetLength(0); i++)
+                {
+                    for (int j = 0; j < Triangle[i].GetLength(0); j++)
+                    {
+                        Stone currentStone = Triangle[i][j];
+
+                        Stone selectedStone = Triangle[SelectedStones[0].Row][SelectedStones[0].Column]; 
+                        AddStonesOfNeighboringColorsToAvailable(i, j, selectedStone, currentStone);
+
+                        selectedStone = Triangle[SelectedStones[1].Row][SelectedStones[1].Column];
+                        AddStonesOfNeighboringColorsToAvailable(i, j, selectedStone, currentStone);
+                    }
+                }
+            }
+        }
+
+        private void ClearAllAvailable()
+        {
+            for (int i = 0; i < Triangle.GetLength(0); i++)
+            {
+                for (int j = 0; j < Triangle[i].GetLength(0); j++)
+                {
+                    Triangle[i][j].IsAvailable = false;
+                }
+            }
+        }
+
+        private void AddStonesOfNeighboringColorsToAvailable(int i, int j, Stone selectedStone, Stone currentStone)
+        {
+            bool isNeighboring = IsANeighboringColor(selectedStone.Fill, currentStone.Fill);
+            bool sameRow = i == SelectedStones[0].Row;
+            bool sameColumn = j == SelectedStones[0].Column;
+            bool sameDiagonal = IsOnTheSameDiagonal(selectedStone, currentStone);
+            bool sameRowColumnOrDiagonal = sameRow || sameColumn || sameDiagonal;
+
+            if (sameRowColumnOrDiagonal && isNeighboring)
+            {
+                MakeAvailable(currentStone);
+            }
+        }
+
+        private static void AddStoneOfSameColorToAvailable(Stone selectedStone, Stone currentStone)
+        {
+            if (currentStone.Fill.Equals(selectedStone.Fill))
+            {
+                MakeAvailable(currentStone);
+            }
+        }
+
+        private static void MakeAvailable(Stone currentStone)
+        {
+            currentStone.IsAvailable = true;
+            currentStone.Stroke = Colors.StrokeYellow.ColorToBrush();
+            currentStone.StrokeThickness = 2.5;
+        }
+
+        private bool IsOnTheSameDiagonal(Stone selectedStone, Stone currentStone)
+        {
+            int differenceOnSelected = selectedStone.Location.Row - selectedStone.Location.Column;
+            int differenceOnCurrent = currentStone.Location.Row - selectedStone.Location.Column;
+
+            if (differenceOnSelected == differenceOnCurrent)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
+        public bool IsANeighboringColor(Brush selectedStoneFill, Brush currentStoneFill)
+        {
+            bool isNeighboring = false;
+
+            int indexDifference = ColorSequence[selectedStoneFill.ToString()] - ColorSequence[currentStoneFill.ToString()];
+
+            if ((indexDifference==1) || (indexDifference==-1))
+            {
+                isNeighboring = true;
+            }
+
+            return isNeighboring;
+        }
+
+        //public void MakeTriangleVisible()
+        //{
+        //    for (int i = 0; i < Triangle.GetLength(0); i++)
+        //    {
+        //        for (int j = 0; j < Triangle[i].GetLength(0); j++)
+        //        {
+        //            Triangle[i][j].Visibility = System.Windows.Visibility.Visible;
+        //        }
+        //    }
+        //}
+
+    }
+}

@@ -1,0 +1,85 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.Diagnostics;
+using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Documents;
+using ATADataModel;
+using AutomationTestAssistantCore;
+using AutomationTestAssistantCore.ExecutionEngine.Messages;
+using FirstFloor.ModernUI.Windows.Controls;
+
+namespace AutomationTestAssistantDesktopApp
+{
+    public partial class BeforeExecutionProjectSettingsView : UserControl
+    {
+
+
+
+
+
+
+        //TODO TRY TO SERIALIZE TO XML TO PASS TO THE NEXT CONTROL INVISIBLE FILE!!!!!
+        public AdminProjectSettingsViewModel AdminProjectSettingsViewModel { get; set; }
+
+        public BeforeExecutionProjectSettingsView()
+        {
+            InitializeComponent();
+            AdminProjectSettingsViewModel = new AdminProjectSettingsViewModel();
+            mainGrid.DataContext = AdminProjectSettingsViewModel.GetTeams();
+        }
+
+        private void btnGetFull_Click(object sender, RoutedEventArgs e)
+        {
+            string tfsProjectPath = @"D:\AutomationTestAssistant\TfsOperations.proj";
+            string currentUserName = ATACore.RegistryManager.GetUserName();
+            string currentTfsUserName = ATACore.Managers.MemberManager.GetTfsUserNameByUserName(ATACore.Managers.ContextManager.Context, currentUserName);
+            ATACore.Managers.ContextManager.Context.Dispose();
+            foreach (var cTeam in AdminProjectSettingsViewModel.Teams)
+            {
+                foreach (var cProject in cTeam.ObservableProjects)
+                {
+                    if (cProject.IsSelected)
+                    {
+                        string localPath = ATACore.RegistryManager.GetProjectLocalPath(currentUserName, cProject.TfsPath);
+                        IpAddressSettings msBuildLoggerIpSettings = new IpAddressSettings("127.0.0.1:8889");
+
+                        string workspaceName = ATACore.RegistryManager.GetWorkspaceName(currentUserName, localPath);
+                        //TODO: Create MSBuild Logger listner 127.0.0.1:8889?
+                        Process currentlyExecutedProcess;
+                        if (!String.IsNullOrEmpty(workspaceName))
+                        {
+                            MessageArgsWorkspaceDeletion tfsWorkspaceDeletionArgs = new MessageArgsWorkspaceDeletion(Command.TFSWD, tfsProjectPath, msBuildLoggerIpSettings, cProject.TfsUrl, workspaceName, currentTfsUserName);
+                            currentlyExecutedProcess = ATACore.CommandLine.CommandLineExecutor.ExecuteTfsDeleteWorkspace(tfsWorkspaceDeletionArgs);
+                            currentlyExecutedProcess.WaitForExit();
+                        }
+                        ATACore.Utilities.FilesDeleter.DeleteAllFilesAndFolders(localPath);
+
+                        string newWorkspaceName = Guid.NewGuid().ToString();
+                        //IF ALREADY EXISTS IS GOING TO UPDATE THE OLD VALUE SHOULD BE TESTED!
+                        MessageArgsWorkspaceCreation tfsWorkspaceCreationArgs = new MessageArgsWorkspaceCreation(Command.TFSWN, tfsProjectPath, cProject.TfsUrl, msBuildLoggerIpSettings, newWorkspaceName, cProject.TfsPath, cProject.LocalPath);
+                        currentlyExecutedProcess = ATACore.CommandLine.CommandLineExecutor.ExecuteTfsCreateNewWorkspace(tfsWorkspaceCreationArgs);
+                        currentlyExecutedProcess.WaitForExit();
+                        ATACore.RegistryManager.WriterWorkspaceNameToRegistry(currentUserName, cProject.LocalPath, newWorkspaceName);
+
+                        MessageArgsTfsGettingLatest tfsGetLatestArgs = new MessageArgsTfsGettingLatest(Command.TFGL, tfsProjectPath, msBuildLoggerIpSettings, cProject.LocalPath, currentTfsUserName);
+                        currentlyExecutedProcess= ATACore.CommandLine.CommandLineExecutor.ExecuteTfsGetLatest(tfsGetLatestArgs);
+                        currentlyExecutedProcess.WaitForExit();
+
+                        string currentProjectFullPath = String.Concat(cProject.LocalPath, "\\", cProject.Name, ".csproj");
+                        MessageArgsBuild buildArgs = new MessageArgsBuild(currentProjectFullPath, msBuildLoggerIpSettings);
+                        currentlyExecutedProcess = ATACore.CommandLine.CommandLineExecutor.ExecuteBuild(buildArgs);
+                        currentlyExecutedProcess.WaitForExit();
+                    }
+                }
+            }
+            //foreach (TreeViewItem currentTreeViewItem in projectSettingsTreeView.Items)
+            //{
+            //    ContentPresenter container = (ContentPresenter)projectSettingsTreeView.ItemContainerGenerator.ContainerFromItem(currentTreeViewItem);
+            //    CheckBox cb = (CheckBox)container.ContentTemplate.FindName("currentCheckbox", container);
+            //}
+          
+        }
+    }
+}

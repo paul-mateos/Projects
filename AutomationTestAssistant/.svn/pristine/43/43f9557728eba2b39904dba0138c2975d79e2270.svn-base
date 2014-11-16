@@ -1,0 +1,19 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using ATADataModel;
+
+namespace AutomationTestAssistantCore
+{
+    public class ProjectManager
+    {
+        public List<ATADataModel.Project> GetAllProjectsByTeamId(ATAEntities context, int teamId)
+        {
+            var team = context.Teams.Where(t => t.TeamId.Equals(teamId)).FirstOrDefault();
+            var projects = team.Projects;
+            return projects.ToList();
+        }
+    }
+}

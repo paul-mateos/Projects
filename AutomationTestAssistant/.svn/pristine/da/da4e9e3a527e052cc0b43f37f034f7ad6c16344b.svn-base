@@ -1,0 +1,51 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using ATADataModel;
+
+namespace AutomationTestAssistantCore
+{
+    public class ProjectManager
+    {
+        public List<ATADataModel.Project> GetAllProjectsByTeamId(ATAEntities context, int teamId)
+        {
+            var team = context.Teams.Where(t => t.TeamId.Equals(teamId)).FirstOrDefault();
+            var projects = team.Projects;
+            return projects.ToList();
+        }
+
+        public List<ATADataModel.Project> GetAll(ATAEntities context)
+        {
+            return context.Projects.ToList();
+        }
+
+        public ATADataModel.Project GetByName(ATAEntities context, string name)
+        {
+            return context.Projects.Where(p => p.Name.Equals(name)).FirstOrDefault();
+        }
+
+        public void AddNew(ATAEntities context, string projectName, string tfsPath, string tfsUrl, List<string> addiotionalPaths)
+        {
+            ATADataModel.Project project = new ATADataModel.Project()
+            {
+                Name = projectName,
+                TfsPath = tfsPath,
+                TfsUrl = tfsUrl
+            };
+            AddAdditionalPathsToNewProject(context, addiotionalPaths, project);
+            context.Projects.Add(project);
+            context.SaveChanges();
+        }
+
+        private static void AddAdditionalPathsToNewProject(ATAEntities context, List<string> addiotionalPaths, ATADataModel.Project project)
+        {
+            addiotionalPaths.ForEach(t =>
+            {
+                ATADataModel.AdditionalPath currentAdditionalPath = ATACore.Managers.AdditionalPathManager.GetByName(context, t);
+                project.AdditionalPaths.Add(currentAdditionalPath);
+            });
+        }
+    }
+}

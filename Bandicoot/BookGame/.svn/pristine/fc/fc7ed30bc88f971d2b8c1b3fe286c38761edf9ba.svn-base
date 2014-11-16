@@ -1,0 +1,41 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace BookGame.ViewModels
+{
+    public class GameBoardViewModel
+    {
+        public Dictionary<string, Stone> Triangle { get; set; }
+        public Stone[,] LeftTurnPanel { get; set; }
+        public Stone[,] RightTurnPanel { get; set; }
+        public List<string> SelectedStones { get; set; }
+
+        public GameBoardViewModel()
+        {
+            Triangle = new Dictionary<string, Stone>();
+
+            LeftTurnPanel = new Stone[11, 3];
+            RightTurnPanel = new Stone[11, 3];
+            InitializePanel(LeftTurnPanel);
+            InitializePanel(RightTurnPanel);
+
+            SelectedStones = new List<string>();
+        }
+
+        public void InitializePanel(Stone[,] panel)
+        {
+            for (int i = 0; i < panel.GetLength(0); i++)
+            {
+                for (int j = 0; j < panel.GetLength(1); j++)
+                {
+                    panel[i,j] = new Stone();
+                }
+            }
+        }
+
+
+    }
+}

@@ -1,0 +1,32 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2012
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "QA.UI.TestingFramework.Core", "QA.UI.TestingFramework.Core\QA.UI.TestingFramework.Core.csproj", "{81D8CEAC-523D-4CBE-A773-E2477E0A1CA5}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "QA.TelerikAcademy.Core", "QA.TelerikAcademy.Core\QA.TelerikAcademy.Core.csproj", "{A34B22BB-8D93-4AC9-A2D5-9BE5044D0DB5}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "QA.TelerikAcademy.Tests", "QA.TelerikAcademy.Tests\QA.TelerikAcademy.Tests.csproj", "{ADCCCE06-8EA4-49CF-9F92-61307DC477F7}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{81D8CEAC-523D-4CBE-A773-E2477E0A1CA5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{81D8CEAC-523D-4CBE-A773-E2477E0A1CA5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{81D8CEAC-523D-4CBE-A773-E2477E0A1CA5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{81D8CEAC-523D-4CBE-A773-E2477E0A1CA5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A34B22BB-8D93-4AC9-A2D5-9BE5044D0DB5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A34B22BB-8D93-4AC9-A2D5-9BE5044D0DB5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A34B22BB-8D93-4AC9-A2D5-9BE5044D0DB5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A34B22BB-8D93-4AC9-A2D5-9BE5044D0DB5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{ADCCCE06-8EA4-49CF-9F92-61307DC477F7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{ADCCCE06-8EA4-49CF-9F92-61307DC477F7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{ADCCCE06-8EA4-49CF-9F92-61307DC477F7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{ADCCCE06-8EA4-49CF-9F92-61307DC477F7}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

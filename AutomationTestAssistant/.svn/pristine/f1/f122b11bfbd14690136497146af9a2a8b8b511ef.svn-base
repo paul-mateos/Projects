@@ -1,0 +1,7 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<repositories>
+  <repository path="..\AutomationTestAssistantCore\packages.config" />
+  <repository path="..\ClientWpfApp\packages.config" />
+  <repository path="..\ServerAgent\packages.config" />
+  <repository path="..\WpfThemeAndChartTestApp\packages.config" />
+</repositories>

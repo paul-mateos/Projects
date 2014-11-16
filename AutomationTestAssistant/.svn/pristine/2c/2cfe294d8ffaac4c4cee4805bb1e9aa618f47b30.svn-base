@@ -1,0 +1,47 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Net.Sockets;
+using System.Threading;
+using System.Net;
+using AutomationTestAssistantCore;
+using System.Collections.Concurrent;
+using AutomationTestAssistantCore.ExecutionEngine.Messages;
+using AutomationTestAssistantCore.ExecutionEngine.Contracts;
+
+namespace AutomationTestAssistantCore
+{
+    public class TcpMsBuildLoggerProcessor : BaseLogger
+    {
+        public void ProcessMsBuildLoggerMessage(ConcurrentQueue<MessageArgsLogger> messagesToBeSend, IpAddressSettings settings)
+        {
+            TcpListener agentMsBuildListener = null;
+            TcpClient agentTcpMsbuildReader = null;
+            try
+            {
+                agentMsBuildListener = new TcpListener(settings.GetIPAddress(), settings.Port);
+                agentMsBuildListener.Server.SetSocketOption(SocketOptionLevel.Socket, SocketOptionName.ReuseAddress, 1);
+                agentTcpMsbuildReader = default(TcpClient);
+                agentMsBuildListener.Start();
+                  agentTcpMsbuildReader = agentMsBuildListener.AcceptTcpClient();
+                do
+                {
+                    string dataFromClient = ATACore.TcpWrapperProcessor.TcpClientWrapper.ReadClientMessage(agentTcpMsbuildReader);
+                    if (!String.IsNullOrEmpty(dataFromClient))
+                        ATACore.CommandExecutor.EnqueueNewMessage(dataFromClient, MessageSource.MsBuildLogger, messagesToBeSend);
+                    else if (dataFromClient == null)
+                        agentTcpMsbuildReader = agentMsBuildListener.AcceptTcpClient();
+                } while (true);
+            }
+            catch (Exception ex)
+            {
+                Log.Error("Exception in ProcessClientMessge", ex);
+            }
+            finally
+            {
+                ATACore.TcpWrapperProcessor.TcpListenerWrapper.CloseTcpMsLogger(agentMsBuildListener, agentTcpMsbuildReader);
+            }
+        }    
+    }
+}

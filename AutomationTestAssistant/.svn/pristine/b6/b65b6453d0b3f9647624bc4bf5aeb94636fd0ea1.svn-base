@@ -1,0 +1,27 @@
+﻿using FirstFloor.ModernUI.Windows.Controls;
+using FirstFloor.ModernUI.App.Content;
+using System.Threading.Tasks;
+using System.Collections.Concurrent;
+using AutomationTestAssistantCore;
+using AutomationTestAssistantCore.ExecutionEngine.Messages;
+
+namespace AutomationTestAssistantDesktopApp
+{
+    public partial class MainWindow : ModernWindow
+    {
+        public static Task MsBuildLogListnerThreadWorker { get; set; }
+        public static Task MessageLoggerThreadWorker { get; set; }
+        public static ConcurrentQueue<MessageArgsLogger> messagesToBeSend { get; set; }
+        public static IpAddressSettings msBuildLogSettings { get; set; }
+        public SettingsAppearanceViewModel SettingsAppearanceViewModel { get; set; }
+        public static AdminProjectSettingsViewModel AdminProjectSettingsViewModel { get; set; }
+
+        public MainWindow()
+        {
+            InitializeComponent();
+            SettingsAppearanceViewModel = new SettingsAppearanceViewModel();
+            messagesToBeSend = new ConcurrentQueue<MessageArgsLogger>();
+            msBuildLogSettings = new IpAddressSettings("127.0.0.1:8889");
+        }
+    }
+}

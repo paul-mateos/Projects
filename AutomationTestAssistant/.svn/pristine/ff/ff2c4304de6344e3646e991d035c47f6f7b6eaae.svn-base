@@ -1,0 +1,140 @@
+﻿using System;
+using System.Net.Sockets;
+using System.Threading;
+using System.Threading.Tasks;
+using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Threading;
+using ATADataModel;
+using AutomationTestAssistantCore;
+using AutomationTestAssistantCore.ExecutionEngine.Contracts;
+using AutomationTestAssistantCore.ExecutionEngine.Messages;
+using FirstFloor.ModernUI.App.Content;
+using FirstFloor.ModernUI.Presentation;
+using FirstFloor.ModernUI.Windows;
+using FirstFloor.ModernUI.Windows.Controls;
+
+namespace AutomationTestAssistantDesktopApp
+{
+    public partial class ExecutionView : UserControl, IContent
+    {
+        public CurrentExecutionViewModel CurrentExecutionViewModel { get; set; }
+        private TcpClient clientTcpWriter;
+        private TcpClient clientTcpListner;
+        private bool isConnected;
+        private delegate void UpdateProgress(string currentProgress);
+        private Task MessageListenerTask { get; set; }
+        private Task MessageDisplayerTask { get; set; }
+        private bool isLoaded;
+        private int currentExecutionViewModelIndex;
+
+        public ExecutionView()
+        {
+        }
+
+        private void ConnectToAgentMachine()
+        {
+            try
+            {
+                clientTcpWriter = new TcpClient();
+                clientTcpListner = new TcpClient();
+                clientTcpWriter.Connect(CurrentExecutionViewModel.CurrentAgentMachineExecutionIpSettings.IpString, CurrentExecutionViewModel.CurrentAgentMachineExecutionIpSettings.Port);
+                clientTcpListner.Connect(CurrentExecutionViewModel.CurrentAgentMachineExecutionIpSettings.IpString, CurrentExecutionViewModel.CurrentAgentMachineExecutionIpSettings.Port);
+                isConnected = true;
+            }
+            catch (Exception ex)
+            {
+                ModernDialog.ShowMessage(ex.Message + "  " + ex.StackTrace + "  " + ex.InnerException, "Exception!", MessageBoxButton.OK);
+            }
+        }
+
+        private void SendAllPreparedCommands()
+        {
+            foreach (var cCommand in CurrentExecutionViewModel.CommandsToBeExecuted)
+            {
+                ATACore.TcpWrapperProcessor.TcpClientWrapper.SendMessageToClient(clientTcpWriter, cCommand);
+                Thread.Sleep(2000);
+            }
+        }
+
+        private void DisplayExecutionMessage(string text)
+        {
+            rtbExecution.AppendText(String.Format("\n{0}\n", text));
+            rtbExecution.ScrollToEnd();
+        }
+
+        private void DisplayMsBuildMessage(string text)
+        {
+            rtbMsBuild.AppendText(String.Format("\n{0}\n", text));
+            rtbMsBuild.ScrollToEnd();
+        }
+
+        private void MessageListener(CurrentExecutionViewModel CurrentExecutionViewModel)
+        {
+            while (isConnected)
+            {
+                string messageStr = ATACore.TcpWrapperProcessor.TcpClientWrapper.ReadClientMessage(clientTcpListner);
+                messageStr = messageStr.CleanMessageEnd();
+
+                CurrentExecutionViewModel.MessagesToBeDisplayed.Enqueue(messageStr);
+            }
+        }
+
+        private void DisplayMessages(CurrentExecutionViewModel CurrentExecutionViewModel)
+        {
+            UpdateProgress uiUpdaterExecution = new UpdateProgress(DisplayExecutionMessage);
+            UpdateProgress uiUpdaterMsBuild = new UpdateProgress(DisplayMsBuildMessage);
+            string msgArgsStr;
+            MessageArgsLogger messageArgs;
+            while (true)
+            {
+                if (CurrentExecutionViewModel.MessagesToBeDisplayed.Count > 0)
+                {
+                    bool isDequeued = CurrentExecutionViewModel.MessagesToBeDisplayed.TryDequeue(out msgArgsStr);
+                    if (isDequeued)
+                    {
+                        messageArgs = (MessageArgsLogger)ATACore.CommandExecutor.MessageDeserializer(msgArgsStr, typeof(MessageArgsLogger));
+                        switch (messageArgs.MessageSource)
+                        {
+                            case MessageSource.MsBuildLogger:
+                                rtbMsBuild.Dispatcher.BeginInvoke(uiUpdaterMsBuild, DispatcherPriority.Normal, messageArgs.LogMessage);
+                                break;
+                            case MessageSource.EnqueueLogger:
+                            case MessageSource.DenqueueLogger:
+                            case MessageSource.ExecutionLogger:
+                                rtbExecution.Dispatcher.BeginInvoke(uiUpdaterExecution, DispatcherPriority.Normal, messageArgs.LogMessage);
+                                break;
+                        }
+                    }
+                }
+            }
+        }
+
+        private void UserControl_Loaded_1(object sender, RoutedEventArgs e)
+        {
+            ConnectToAgentMachine();
+            MessageListenerTask = Task.Factory.StartNew(() => MessageListener(CurrentExecutionViewModel));
+            MessageDisplayerTask = Task.Factory.StartNew(() => DisplayMessages(CurrentExecutionViewModel));            
+            Task.Factory.StartNew(() => SendAllPreparedCommands());
+        }
+
+        public void OnFragmentNavigation(FirstFloor.ModernUI.Windows.Navigation.FragmentNavigationEventArgs e)
+        {
+            FragmentManager fm = new FragmentManager(e.Fragment);
+            currentExecutionViewModelIndex = fm.Fragments["currentExecutionViewModelIndex"].ToInt();
+            CurrentExecutionViewModel = MainWindow.CurrentExecutionViews[currentExecutionViewModelIndex];
+        }
+
+        public void OnNavigatedFrom(FirstFloor.ModernUI.Windows.Navigation.NavigationEventArgs e)
+        {
+        }
+
+        public void OnNavigatedTo(FirstFloor.ModernUI.Windows.Navigation.NavigationEventArgs e)
+        {
+        }
+
+        public void OnNavigatingFrom(FirstFloor.ModernUI.Windows.Navigation.NavigatingCancelEventArgs e)
+        {
+        }
+    }
+}

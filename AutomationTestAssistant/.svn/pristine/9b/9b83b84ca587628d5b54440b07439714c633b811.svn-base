@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="9cdf86000ebf485791ccd9f8c453d354" Name="Diagram1">
+        <EntityTypeShape EntityType="ATADataModel.ActivationCode" Width="1.5" PointX="3.75" PointY="4" IsExpanded="true" />
+        <EntityTypeShape EntityType="ATADataModel.AdditionalPath" Width="1.5" PointX="1.5" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ATADataModel.AgentMachine" Width="1.5" PointX="6" PointY="3.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="ATADataModel.ExecutionMachine" Width="1.5" PointX="0.75" PointY="7.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="ATADataModel.ExecutionStatu" Width="1.5" PointX="6" PointY="11.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="ATADataModel.LocalPath" Width="1.5" PointX="3" PointY="7.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="ATADataModel.Member" Width="1.5" PointX="6" PointY="6.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="ATADataModel.MemberRole" Width="1.5" PointX="3.75" PointY="10.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ATADataModel.Project" Width="1.5" PointX="0.75" PointY="3.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="ATADataModel.Status" Width="1.5" PointX="3.75" PointY="13.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="ATADataModel.Suite" Width="1.5" PointX="8.25" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ATADataModel.SuiteResultRun" Width="1.5" PointX="8.25" PointY="7.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="ATADataModel.sysdiagram" Width="1.5" PointX="0.75" PointY="10.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="ATADataModel.Team" Width="1.5" PointX="8.25" PointY="4.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="ATADataModel.TeamSuiteTest" Width="1.5" PointX="10.5" PointY="3.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="ATADataModel.Test" Width="1.5" PointX="8.25" PointY="11.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="ATADataModel.TestResultRun" Width="1.5" PointX="11.25" PointY="7" IsExpanded="true" />
+        <AssociationConnector Association="ATADataModel.FK_LocalPath_ExecutionMachine" ManuallyRouted="false" />
+        <AssociationConnector Association="ATADataModel.FK_SuiteResultRun_ExecutionStatus" ManuallyRouted="false" />
+        <AssociationConnector Association="ATADataModel.FK_TestResultRun_ExecutionStatus" ManuallyRouted="false" />
+        <AssociationConnector Association="ATADataModel.FK_LocalPath_Member" ManuallyRouted="false" />
+        <AssociationConnector Association="ATADataModel.FK_LocalPath_Project" ManuallyRouted="false" />
+        <AssociationConnector Association="ATADataModel.FK_Member_MemberRole" ManuallyRouted="false" />
+        <AssociationConnector Association="ATADataModel.FK_Member_Status" ManuallyRouted="false" />
+        <AssociationConnector Association="ATADataModel.FK_SuiteResultRun_Member" ManuallyRouted="false" />
+        <AssociationConnector Association="ATADataModel.FK_TestResultRun_Member" ManuallyRouted="false" />
+        <AssociationConnector Association="ATADataModel.FK_TeamSuiteTest_Suite" ManuallyRouted="false" />
+        <AssociationConnector Association="ATADataModel.FK_TeamSuiteTest_Team" ManuallyRouted="false" />
+        <AssociationConnector Association="ATADataModel.FK_TeamSuiteTest_Test" ManuallyRouted="false" />
+        <AssociationConnector Association="ATADataModel.MemberActivationCode" ManuallyRouted="false" />
+        <AssociationConnector Association="ATADataModel.MemberExecutionMachine" ManuallyRouted="false" />
+        <AssociationConnector Association="ATADataModel.ProjectAdditionalPath" ManuallyRouted="false" />
+        <AssociationConnector Association="ATADataModel.TeamAgentMachine" ManuallyRouted="false" />
+        <AssociationConnector Association="ATADataModel.TeamMember" ManuallyRouted="false" />
+        <AssociationConnector Association="ATADataModel.TeamProject" ManuallyRouted="false" />
+        <AssociationConnector Association="ATADataModel.FK_Projects_ProjectId" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

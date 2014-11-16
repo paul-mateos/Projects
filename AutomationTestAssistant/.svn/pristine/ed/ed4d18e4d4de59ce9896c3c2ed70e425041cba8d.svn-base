@@ -1,0 +1,24 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using ATADataModel;
+
+namespace AutomationTestAssistantCore
+{
+    public class TeamManager
+    {
+        public Team GetTeamByName(ATAEntities context, string name)
+        {
+            Team currentTeam = context.Teams.Where(x => x.Name.Equals(name)).FirstOrDefault();
+            return currentTeam;
+        }
+
+        public List<Team> GetAllUserTeams(ATAEntities context, string userName)
+        {
+            Member member = ATACore.Managers.MemberManager.GetMemberByUserName(context, userName);
+            return member.Teams.ToList();
+        }
+    }
+}

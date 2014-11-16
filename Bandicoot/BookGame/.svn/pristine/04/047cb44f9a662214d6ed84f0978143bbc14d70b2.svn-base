@@ -1,0 +1,19 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace BookGame
+{
+    public class Colors
+    {
+        public const string Red = "#FF0000";
+        public const string Orange = "#FF9900";
+        public const string Yellow = "#FFFF00";
+        public const string Green = "#99FF00";
+        public const string Blue = "#66CCFF";
+        public const string Purple = "#9999FF";
+        public const string Grey = "#F0F0F0";
+    }
+}

@@ -1,0 +1,22 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using ATADataModel;
+
+namespace AutomationTestAssistantCore
+{
+    public class MemberRoleManager 
+    {
+        public MemberRole GetMemberRoleByName(string name)
+        {
+            MemberRole currentRole;
+            using (ATAEntities context = new ATAEntities())
+            {
+                currentRole = context.MemberRoles.Where(x => x.Role.Equals(name)).FirstOrDefault();
+            }
+            return currentRole;
+        }
+    }
+}

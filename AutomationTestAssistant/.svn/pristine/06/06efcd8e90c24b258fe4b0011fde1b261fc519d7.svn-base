@@ -1,0 +1,96 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Diagnostics;
+using AutomationTestAssistantCore.ExecutionEngine.Messages;
+
+namespace AutomationTestAssistantCore
+{
+    public class CommandLineExecutor
+    {
+        public const string MSBUILD_PATH = @"C:\Windows\Microsoft.NET\Framework\v4.0.30319\MsBuild.exe";
+
+        public Process ExecuteMsbuildProject(string msbuildProjPath, IpAddressSettings ipAddressSettings, string additionalArgs = "")
+        {
+            string currentAssemblyLocation = System.Reflection.Assembly.GetExecutingAssembly().Location;          
+            string currentAssemblyFullpath = String.Format(currentAssemblyLocation, "\\AutomationTestAssistantCore.dll");
+            string additionalArguments = BuildMsBuildAdditionalArguments(msbuildProjPath, ipAddressSettings, additionalArgs, currentAssemblyFullpath);
+            ProcessStartInfo procStartInfo = new ProcessStartInfo(MSBUILD_PATH, additionalArguments);
+            procStartInfo.RedirectStandardOutput = false;
+            //procStartInfo.UseShellExecute = true;
+            //procStartInfo.CreateNoWindow = false;
+            procStartInfo.UseShellExecute = false;
+            procStartInfo.CreateNoWindow = true;
+            Process proc = new Process();
+            proc.StartInfo = procStartInfo;
+            proc.Start();
+            return proc;
+        }
+
+        public Process ExecuteMsTest(MessageArgsMsTest messageArgs)
+        {
+            messageArgs.CreateTestList();
+            string additionalArgs = String.Concat("/p:TestListPath=\"", messageArgs.TestListPath, "/p:ResultsFilePath=", "\"", messageArgs.ResultsFilePath, "\"");
+            Process currentProcess = ExecuteMsbuildProject(messageArgs.ProjectPath, messageArgs.IpAddressSettings, additionalArgs);
+
+            return currentProcess;
+        }
+
+        public Process ExecuteMsTestSpecificList(MessageArgsMsTest messageArgs)
+        {
+            messageArgs.CreateTestList();
+            string uniqueTestResultName = ATACore.Utilities.TimeStampGenerator.GenerateTrxFilePath();
+            string additionalArgs = String.Concat("/p:TestListPath=\"", messageArgs.TestListPath, "\" /p:ResultsFilePath=", "\"", uniqueTestResultName, "\"", " /p:TestListName=", "\"", messageArgs.ListName, "\"");
+            Process currentProcess = ExecuteMsbuildProject(messageArgs.ProjectPath, messageArgs.IpAddressSettings, additionalArgs);
+
+            return currentProcess;
+        }
+
+        public Process ExecuteTfsCreateNewWorkspace(MessageArgsWorkspaceCreation messageArgs)
+        {
+            string additionalArgs = String.Concat("/t:CreateWorkspace /p:TfsServerUrl=\"", messageArgs.TfsServerUrl, "\" /p:WorkspaceName=\"", messageArgs.WorkspaceName, "\" /p:TfsPath=\"", messageArgs.TfsPath, "\" /p:LocalPath=\"", messageArgs.LocalPath, "\"");
+            Process currentProcess = ExecuteMsbuildProject(messageArgs.ProjectPath, messageArgs.IpAddressSettings, additionalArgs);
+
+            return currentProcess;
+        }
+
+        public Process ExecuteTfsDeleteWorkspace(MessageArgsWorkspaceDeletion messageArgs)
+        {
+            string additionalArgs = String.Concat("/t:DeleteWorkspace /p:TfsServerUrl=\"", messageArgs.TfsServerUrl, "\" /p:WorkspaceName=\"", messageArgs.WorkspaceName, "\" /p:UserName=", "\"", messageArgs.UserName, "\"");
+            Process currentProcess = ExecuteMsbuildProject(messageArgs.ProjectPath, messageArgs.IpAddressSettings, additionalArgs);
+
+            return currentProcess;
+        }
+
+        public Process ExecuteTfsGetLatest(MessageArgsTfsGettingLatest messageArgs)
+        {
+            string additionalArgs = String.Concat("/t:GetLatest /p:PathToGet=\"", messageArgs.PathToGet, "\"");
+            Process currentProcess = ExecuteMsbuildProject(messageArgs.ProjectPath, messageArgs.IpAddressSettings, additionalArgs);
+
+            return currentProcess;
+        }
+
+        public Process ExecuteBuild(MessageArgsBuild messageArgs)
+        {
+            string additionalArgs = "/t:Rebuild";
+            Process currentProcess = ExecuteMsbuildProject(messageArgs.ProjectPath, messageArgs.IpAddressSettings, additionalArgs);
+
+            return currentProcess;
+        }
+
+        public void WaitForProcessToFinish(int procId)
+        {
+            Process proc = Process.GetProcessById(procId);
+            proc.WaitForExit();
+        }
+
+        private string BuildMsBuildAdditionalArguments(string msbuildProjPath, IpAddressSettings ipAddressSettings, string additionalArgs, string currentAssemblyFullpath)
+        {
+            string additionalArguments = String.Concat(msbuildProjPath, " ", additionalArgs, " ", "/fileLoggerParameters:LogFile=MsBuildLog.txt;append=true;Verbosity=normal;Encoding=UTF-8 /l:AutomationTestAssistantCore.MsBuildLogger.TcpIpLogger,",
+                currentAssemblyFullpath, ";Ip=", ipAddressSettings.GetIPAddress(), ";Port=", ipAddressSettings.Port, ";");
+
+            return additionalArguments;
+        }
+    }
+}

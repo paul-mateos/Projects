@@ -1,0 +1,54 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using ATADataModel;
+
+namespace AutomationTestAssistantCore
+{
+    public class TeamManager
+    {
+        public Team GetTeamByName(ATAEntities context, string name)
+        {
+            Team currentTeam = context.Teams.Where(x => x.Name.Equals(name)).FirstOrDefault();
+            return currentTeam;
+        }
+
+        public List<Team> GetAllUserTeams(ATAEntities context, string userName)
+        {
+            Member member = ATACore.Managers.MemberManager.GetMemberByUserName(context, userName);
+            return member.Teams.ToList();
+        }
+
+        public void AddNew(ATAEntities context, string teamName, List<string> projectNames, List<string> agentMachines)
+        {
+            Team team = new Team()
+            {
+                Name = teamName
+            };
+            AddProjectsToNewTeam(context, projectNames, team);
+            AddAgentMachinesToNewTeam(context, agentMachines, team);
+            context.Teams.Add(team);
+            context.SaveChanges();
+        }
+
+        private static void AddProjectsToNewTeam(ATAEntities context, List<string> projects, Team team)
+        {
+            projects.ForEach(t =>
+            {
+                ATADataModel.Project currentProject = ATACore.Managers.ProjectManager.GetByName(context, t);
+                team.Projects.Add(currentProject);
+            });
+        }
+
+        private static void AddAgentMachinesToNewTeam(ATAEntities context, List<string> agentMachines, Team team)
+        {
+            agentMachines.ForEach(t =>
+            {
+                ATADataModel.AgentMachine currentAgentMachine = ATACore.Managers.AgentMachineManager.GetByName(context, t);
+                team.AgentMachines.Add(currentAgentMachine);
+            });
+        }
+    }
+}

@@ -1,0 +1,93 @@
+﻿<UserControl x:Class="YouTubeToGroovesharkImporter.UI.Views.YouTubeSongsImportView"
+           xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:mui="http://firstfloorsoftware.com/ModernU"
+      mc:Ignorable="d" 
+      d:DesignHeight="1000" d:DesignWidth="850" Loaded="UserControl_Loaded">
+    <Grid>
+      
+        <ProgressBar Name="progressBar" Minimum="0" Maximum="1" Height="16" IsIndeterminate="True" Margin="0,0,0,16" Visibility="Hidden" />
+        <Grid Name="mainGrid" Visibility="Visible">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+
+            <StackPanel Orientation="Vertical">
+                <TextBlock Text="Import YouTube Songs to Grooveshark" Margin="10,0,10,30" Height="Auto" Width="Auto" FontSize="26" FontWeight="Bold" HorizontalAlignment="Left"/>
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Text="YouTube User" Margin="10" Height="25" FontWeight="Bold" HorizontalAlignment="Left"  Width="200" />
+                    <TextBox Text="{Binding YouTubeUser, Mode=TwoWay,UpdateSourceTrigger=Default}" Margin="10" Height="25"  Width="300" />
+                    <Button Name="btnGetPlaylists" Margin="10" Height="25" Width="200" Content="_Get Playlists" VerticalAlignment="Center" Click="btnGetPlaylists_Click"/>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Text="YouTube Playlist ID" Margin="10" Height="25" Width="200" FontWeight="Bold" HorizontalAlignment="Left" />
+                    <!--<TextBox Text="{Binding YouTubePlaylisId, Mode=TwoWay,UpdateSourceTrigger=Default}" Margin="10" Height="25"  Width="300" />-->
+                    <ComboBox Height="25" Margin="10" Width="300" ItemsSource="{Binding ObservablePlaylists}" SelectedValue="{Binding Path=SelectedPlaylist, Mode=TwoWay}" DisplayMemberPath="Name" Name="cbPlaylists"  />
+                </StackPanel>
+               
+            </StackPanel>
+
+            <DataGrid ItemsSource="{Binding Path=ObservableSongs, Mode=TwoWay,UpdateSourceTrigger=Default}" AutoGenerateColumns="False" Name="dgSongs" Height="Auto" Grid.Row="1" Margin="0,0,0,30" 
+                       VirtualizingPanel.ScrollUnit="Pixel" Visibility="Hidden">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="YouTube Artist" Binding="{Binding YouTubeArtist}" Width="*">
+                        <DataGridTextColumn.HeaderStyle>
+                            <Style TargetType="DataGridColumnHeader" BasedOn="{StaticResource {x:Type DataGridColumnHeader}}">
+                                <Setter Property="HorizontalContentAlignment" Value="Left"/>
+                            </Style>
+                        </DataGridTextColumn.HeaderStyle>
+                    </DataGridTextColumn>
+                    <DataGridTextColumn Header="YouTube Song Title" Binding="{Binding YouTubeSongTitle}" Width="*">
+                        <DataGridTextColumn.HeaderStyle>
+                            <Style TargetType="DataGridColumnHeader" BasedOn="{StaticResource {x:Type DataGridColumnHeader}}">
+                                <Setter Property="HorizontalContentAlignment" Value="Left"/>
+                            </Style>
+                        </DataGridTextColumn.HeaderStyle>
+                    </DataGridTextColumn>
+                    <DataGridTextColumn Header="Grooveshark Artist" Binding="{Binding GroovesharkArtist}" Width="*">
+                        <DataGridTextColumn.HeaderStyle>
+                            <Style TargetType="DataGridColumnHeader" BasedOn="{StaticResource {x:Type DataGridColumnHeader}}">
+                                <Setter Property="HorizontalContentAlignment" Value="Left"/>
+                            </Style>
+                        </DataGridTextColumn.HeaderStyle>
+                    </DataGridTextColumn>
+                    <DataGridTextColumn Header="Grooveshark Song Title" Binding="{Binding GroovesharkSongTitle}" Width="*">
+                        <DataGridTextColumn.HeaderStyle>
+                            <Style TargetType="DataGridColumnHeader" BasedOn="{StaticResource {x:Type DataGridColumnHeader}}">
+                                <Setter Property="HorizontalContentAlignment" Value="Left"/>
+                            </Style>
+                        </DataGridTextColumn.HeaderStyle>
+                    </DataGridTextColumn>
+                    <DataGridTemplateColumn Width="0.5*">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <Button Click="btnRetry_Click">Retry</Button>
+                            </DataTemplate>
+                       </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn >
+                    <!--<DataGridTemplateColumn Width="0.8*">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <Button Click="btnCustomSearch_Click">Custom Search</Button>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>-->
+                </DataGrid.Columns>
+            </DataGrid>
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" Grid.Row="2">
+                <TextBlock Text="Songs Count:" Margin="0,10,10,0" Height="25" Width="Auto" FontWeight="Bold"/>
+                <TextBlock Name="tbSongsCount"  Text="{Binding SongsCount}" Margin="0,10,10,0" Height="25" Width="Auto" />
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" Grid.Row="3">
+                <Button Name="btnGetSongsYouTube" Margin="0,10,10,30" Height="30" Width="200" Content="_Get Songs YouTube" VerticalAlignment="Center" Click="btnGetSongsYouTube_Click"/>
+                <Button Name="btnMap" Margin="0,10,10,30" Height="30" Width="200" Content="_Map" VerticalAlignment="Center" Click="btnMap_Click" IsEnabled="False"/>
+                <Button Name="btnSynchronize" Margin="0,10,0,30" Height="30" Width="200" Content="_Synchronize" VerticalAlignment="Center" Click="btnSynchronize_Click" IsEnabled="False"/>
+            </StackPanel>
+        </Grid>
+    </Grid>
+</UserControl>

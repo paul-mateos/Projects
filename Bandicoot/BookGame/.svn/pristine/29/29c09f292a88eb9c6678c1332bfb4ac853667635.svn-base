@@ -1,0 +1,17 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows.Media;
+
+namespace BookGame
+{
+    public static class ColorExtensions
+    {
+        public static Brush GetBrush(this string colorStr)
+        {
+            return (Brush)(new BrushConverter().ConvertFrom(colorStr));
+        }
+    }
+}

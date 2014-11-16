@@ -1,0 +1,18 @@
+﻿using FirstFloor.ModernUI.Windows.Controls;
+using FirstFloor.ModernUI.App.Content;
+
+namespace AutomationTestAssistantDesktopApp
+{
+    /// <summary>
+    /// Interaction logic for MainWindow.xaml
+    /// </summary>
+    public partial class MainWindow : ModernWindow
+    {
+        public SettingsAppearanceViewModel SettingsAppearanceViewModel { get; set; }
+        public MainWindow()
+        {
+            InitializeComponent();
+            SettingsAppearanceViewModel = new SettingsAppearanceViewModel();
+        }
+    }
+}

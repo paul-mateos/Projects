@@ -1,0 +1,80 @@
+﻿<UserControl x:Class="PhantomTube.Views.YouTubePlaylistsEditView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:PhantomTube.Views"
+             xmlns:mui="http://firstfloorsoftware.com/ModernU"
+             mc:Ignorable="d" 
+             d:DesignHeight="1000" d:DesignWidth="850" Loaded="UserControl_Loaded">
+    <Grid>
+        <Grid.CommandBindings>
+            <CommandBinding Command="{x:Static local:YouTubePlaylistsEditView.MoveUpTestCasesCommand}" Executed="moveUp_Command"/>
+            <CommandBinding Command="{x:Static local:YouTubePlaylistsEditView.MoveDownTestCasesCommand}" Executed="moveDown_Command"/>
+        </Grid.CommandBindings>
+        <ProgressBar Name="progressBar" Minimum="0" Maximum="1" Height="16" IsIndeterminate="True" Margin="0,0,0,16" Visibility="Hidden" />
+        <Grid Name="mainGrid" Visibility="Visible">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="9*"/>
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <StackPanel Orientation="Vertical" Grid.ColumnSpan="2">
+                <TextBlock Text="Edit YouTube Playlists" Margin="10,0,10,30" Height="Auto" Width="Auto" FontSize="26" FontWeight="Bold" HorizontalAlignment="Left"/>
+            
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Text="YouTube Playlist ID" Margin="10" Height="25" Width="200" FontWeight="Bold" HorizontalAlignment="Left" />
+                    <ComboBox Height="25" Margin="10" Width="300" ItemsSource="{Binding ObservablePlaylists}" SelectedValue="{Binding Path=SelectedPlaylist, Mode=TwoWay}" DisplayMemberPath="Name" Name="cbPlaylists"  />
+                    <Button Name="btnDisplayPlaylistSongs" Margin="10" Height="30" Width="150" Content="Display" VerticalAlignment="Center" Click="btnDisplayPlaylistSongs_Click"/>
+                </StackPanel>
+
+            </StackPanel>
+
+            <DataGrid ItemsSource="{Binding Path=ObservableSongs, Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" AutoGenerateColumns="False" Name="dgSongs" Height="Auto" Grid.Row="1" Margin="0,0,0,30" 
+                      VirtualizingPanel.ScrollUnit="Pixel" Visibility="Hidden" Grid.Column="0">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="Artist" Binding="{Binding Artist}" Width="*">
+                        <DataGridTextColumn.HeaderStyle>
+                            <Style TargetType="DataGridColumnHeader" BasedOn="{StaticResource {x:Type DataGridColumnHeader}}">
+                                <Setter Property="HorizontalContentAlignment" Value="Left"/>
+                            </Style>
+                        </DataGridTextColumn.HeaderStyle>
+                    </DataGridTextColumn>
+                    <DataGridTextColumn Header="Title" Binding="{Binding Title}" Width="*">
+                        <DataGridTextColumn.HeaderStyle>
+                            <Style TargetType="DataGridColumnHeader" BasedOn="{StaticResource {x:Type DataGridColumnHeader}}">
+                                <Setter Property="HorizontalContentAlignment" Value="Left"/>
+                            </Style>
+                        </DataGridTextColumn.HeaderStyle>
+                    </DataGridTextColumn>                   
+                    <DataGridTemplateColumn Width="0.5*">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <Button Click="btnDelete_Click">Delete</Button>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn >
+                </DataGrid.Columns>
+            </DataGrid>
+            <StackPanel Orientation="Vertical" VerticalAlignment="Center" Grid.Row="1" Grid.Column="1">
+                <Button Content="_Up" Width="80" Height="30" Margin="5" VerticalAlignment="Center" Name="btnMoveUp"  Click="btnMoveUp_Click"/>
+                <Button Content="_Down" Width="80" Height="30" Margin="5" VerticalAlignment="Center" Name="btnMoveDown"  Click="btnMoveDown_Click"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" Grid.Row="2">
+                <TextBlock Text="Songs Count:" Margin="0,10,10,0" Height="25" Width="Auto" FontWeight="Bold"/>
+                <TextBlock Name="tbSongsCount"  Text="{Binding SongsCount}" Margin="0,10,10,0" Height="25" Width="Auto" />
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" Grid.Row="3">
+                <Button Name="btnSortByArtist" Margin="0,10,10,30" Height="30" Width="150" Content="Sort By Artist" VerticalAlignment="Center" Click="btnSortByArtist_Click"/>
+                <Button Name="btnSortByTitle" Margin="0,10,10,30" Height="30" Width="150" Content="Sort By Title" VerticalAlignment="Center" Click="btnSortByTitle_Click"/>
+                <Button Name="btnSave" Margin="0,10,0,30" Height="30" Width="150" Content="Save" VerticalAlignment="Center" Click="btnSave_Click"/>
+                <Button Name="btnExport" Margin="10,10,0,30" Height="30" Width="150" Content="Export" VerticalAlignment="Center" Click="btnExport_Click"/>
+            </StackPanel>
+        </Grid>
+    </Grid>
+</UserControl>

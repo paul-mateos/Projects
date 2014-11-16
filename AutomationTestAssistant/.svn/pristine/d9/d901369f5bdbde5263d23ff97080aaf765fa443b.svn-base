@@ -1,0 +1,21 @@
+﻿<mui:ModernWindow x:Class="MuiTest.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:mui="http://firstfloorsoftware.com/ModernUI"
+        xmlns:app="clr-namespace:AutomationTestAssistantDesktopApp"
+        Title="MainWindow" Height="1100" Width="750"
+                  ContentSource="Login.xaml">
+    <mui:ModernWindow.TitleLinks>
+        <mui:Link DisplayName="Settings" Source="/AppereanceSettings.xaml" />
+    </mui:ModernWindow.TitleLinks>
+    
+    <mui:ModernWindow.MenuLinkGroups>
+
+        <mui:LinkGroup DisplayName="Automation Test Assistant" >
+            <mui:LinkGroup.Links>
+                <mui:Link DisplayName="Login" Source="/Login.xaml" />
+                <mui:Link DisplayName="Registration" Source="/Registration.xaml"/>
+            </mui:LinkGroup.Links>
+        </mui:LinkGroup>
+    </mui:ModernWindow.MenuLinkGroups>
+</mui:ModernWindow>
