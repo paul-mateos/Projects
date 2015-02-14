@@ -3,7 +3,7 @@ using System;
 using System.IO;
 using System.Text;
 
-namespace TestEncryption
+namespace Test
 {
     [TestClass]
     public class EncryptorTest
@@ -189,8 +189,12 @@ namespace TestEncryption
             byte[] expected = { 1, 0, 3, 4, 0 };
             byte[] actual = Encryptor.ShiftByteArrayLeft(inputByteArray, size);
 
-            CollectionAssert.AreEqual(expected, actual,
-                                      "There was a problem in shifting bytes left!");
+            CollectionAssert.AreEqual(expected, actual, "There was a problem in shifting bytes left!");
+            Log.WriteStringLine();
+            Log.Write("There was a problem in shifting bytes left!");
+            Log.WriteLine();
+            Log.WriteFormat("Test args {0} and {1}", "#first#", "#second#");
+            Log.WriteLineFormat("Test args {0} and {1}", "#first#", "#second#");
         }
 
         private static string ReadTextFromFile(string fileName)
