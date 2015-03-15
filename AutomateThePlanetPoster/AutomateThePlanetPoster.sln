@@ -1,0 +1,48 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2013
+VisualStudioVersion = 12.0.21005.1
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AAngelov.Utilities", "..\AAngelov.Utilities\AAngelov.Utilities\AAngelov.Utilities.csproj", "{6649BE16-8E52-47CE-A870-6B2C9DE35BD8}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AAngelov.Utilities.UI", "..\AAngelov.Utilities\AAngelov.Utilities.UI\AAngelov.Utilities.UI.csproj", "{C547F875-DB0A-41B6-8C42-10FBC1EDF711}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AutomateThePlanetPoster", "AutomateThePlanetPoster\AutomateThePlanetPoster.csproj", "{91F1C62A-A1D5-48B8-BDDD-8FBB0C41B877}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+		VisualStudio_2012|Any CPU = VisualStudio_2012|Any CPU
+		VisualStudio_2013|Any CPU = VisualStudio_2013|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{6649BE16-8E52-47CE-A870-6B2C9DE35BD8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6649BE16-8E52-47CE-A870-6B2C9DE35BD8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6649BE16-8E52-47CE-A870-6B2C9DE35BD8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6649BE16-8E52-47CE-A870-6B2C9DE35BD8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6649BE16-8E52-47CE-A870-6B2C9DE35BD8}.VisualStudio_2012|Any CPU.ActiveCfg = VisualStudio_2012|Any CPU
+		{6649BE16-8E52-47CE-A870-6B2C9DE35BD8}.VisualStudio_2012|Any CPU.Build.0 = VisualStudio_2012|Any CPU
+		{6649BE16-8E52-47CE-A870-6B2C9DE35BD8}.VisualStudio_2013|Any CPU.ActiveCfg = VisualStudio_2013|Any CPU
+		{6649BE16-8E52-47CE-A870-6B2C9DE35BD8}.VisualStudio_2013|Any CPU.Build.0 = VisualStudio_2013|Any CPU
+		{C547F875-DB0A-41B6-8C42-10FBC1EDF711}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C547F875-DB0A-41B6-8C42-10FBC1EDF711}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C547F875-DB0A-41B6-8C42-10FBC1EDF711}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C547F875-DB0A-41B6-8C42-10FBC1EDF711}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C547F875-DB0A-41B6-8C42-10FBC1EDF711}.VisualStudio_2012|Any CPU.ActiveCfg = VisualStudio_2012|Any CPU
+		{C547F875-DB0A-41B6-8C42-10FBC1EDF711}.VisualStudio_2012|Any CPU.Build.0 = VisualStudio_2012|Any CPU
+		{C547F875-DB0A-41B6-8C42-10FBC1EDF711}.VisualStudio_2013|Any CPU.ActiveCfg = VisualStudio_2013|Any CPU
+		{C547F875-DB0A-41B6-8C42-10FBC1EDF711}.VisualStudio_2013|Any CPU.Build.0 = VisualStudio_2013|Any CPU
+		{91F1C62A-A1D5-48B8-BDDD-8FBB0C41B877}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{91F1C62A-A1D5-48B8-BDDD-8FBB0C41B877}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{91F1C62A-A1D5-48B8-BDDD-8FBB0C41B877}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{91F1C62A-A1D5-48B8-BDDD-8FBB0C41B877}.Release|Any CPU.Build.0 = Release|Any CPU
+		{91F1C62A-A1D5-48B8-BDDD-8FBB0C41B877}.VisualStudio_2012|Any CPU.ActiveCfg = Release|Any CPU
+		{91F1C62A-A1D5-48B8-BDDD-8FBB0C41B877}.VisualStudio_2012|Any CPU.Build.0 = Release|Any CPU
+		{91F1C62A-A1D5-48B8-BDDD-8FBB0C41B877}.VisualStudio_2013|Any CPU.ActiveCfg = Release|Any CPU
+		{91F1C62A-A1D5-48B8-BDDD-8FBB0C41B877}.VisualStudio_2013|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
