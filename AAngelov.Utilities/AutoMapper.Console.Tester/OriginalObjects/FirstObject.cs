@@ -1,23 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace AutoMapper.Console.Tester.OriginalObjects
 {
     public class FirstObject
     {
-        public string FirstName { get; set; }
-        public string SecondName { get; set; }
-        public string PoNumber { get; set; }
-        public decimal Price { get; set; }
-        public DateTime SkipDateTime { get; set; }
-        public SecondObject SecondObjectEntity { get; set; }
-        public List<SecondObject> SecondObjects { get; set; }
-        public List<int> IntCollection { get; set; }
-        public int[] IntArr { get; set; }
-        public SecondObject[] SecondObjectArr { get; set; }
+        public FirstObject()
+        {
+        }
 
         public FirstObject(string firstName, string secondName, string poNumber, decimal price, DateTime skipDateTime, SecondObject secondObjectEntity)
         {
@@ -44,8 +34,15 @@ namespace AutoMapper.Console.Tester.OriginalObjects
                 new SecondObject()
             };
         }
-        public FirstObject()
-        {
-        }
+        public string FirstName { get; set; }
+        public string SecondName { get; set; }
+        public string PoNumber { get; set; }
+        public decimal Price { get; set; }
+        public DateTime SkipDateTime { get; set; }
+        public SecondObject SecondObjectEntity { get; set; }
+        public List<SecondObject> SecondObjects { get; set; }
+        public List<int> IntCollection { get; set; }
+        public int[] IntArr { get; set; }
+        public SecondObject[] SecondObjectArr { get; set; }
     }
 }

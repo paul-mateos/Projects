@@ -67,33 +67,3 @@ namespace AAngelov.Utilities.Test.Validators
         }
     }
 }
-
-
-
-////using System;
-////using Microsoft.VisualStudio.TestTools.UnitTesting;
-////using Telerik.Website.DataSetup.Core.Invoices.DataContracts;
-////using WebDivision.Tests.Core.Utilities;
-
-////namespace WebDivision.UITests.Licensing.Core.ShoppingCart.Validators
-////{
-////    /// <summary>
-////    /// Contains methods that validate invoice client entities.
-////    /// </summary>
-////    public class InvoiceClientValidator : EntitiesValidator <InvoiceClientValidator , InvoiceClient >
-////    {
-////        /// <summary>
-////        /// Validates the specified expected invoice.
-////        /// </summary>
-////        /// <param name="expectedInvoiceClient"> The expected invoice client.</param>
-////        /// <param name="realInvoiceClient"> The real invoice client. </param>
-////        public void Validate( InvoiceClient expectedInvoiceClient, InvoiceClientrealInvoiceClient)
-////        {
-////            //// TODO: Anton(09.05.2014): Should be enabled when the required method in TDES is created.
-////            base.Validate(expectedInvoiceClient, realInvoiceClient, "CountryId" ,"InvoiceClientId" );
-////            Assert.IsNotNull(realInvoiceClient.CountryId);
-////            Assert.IsNotNull(realInvoiceClient.InvoiceClientId);        
-////        }
-////    }
-
-}

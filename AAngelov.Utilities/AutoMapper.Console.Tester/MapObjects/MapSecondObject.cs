@@ -24,6 +24,7 @@ namespace AutoMapper.Console.Tester.MapObjects
         public MapThirdObject ThirdObject4 { get; set; }
         public MapThirdObject ThirdObject5 { get; set; }
         public MapThirdObject ThirdObject6 { get; set; }
+
         public MapSecondObject(string firstNameS, string secondNameS, string poNumberS, decimal priceS)
         {
             this.FirstNameS = firstNameS;
@@ -37,6 +38,7 @@ namespace AutoMapper.Console.Tester.MapObjects
             ThirdObject5 = new MapThirdObject();
             ThirdObject6 = new MapThirdObject();
         }
+
         public MapSecondObject()
         {
         }

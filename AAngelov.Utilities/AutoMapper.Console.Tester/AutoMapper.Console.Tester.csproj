@@ -24,6 +24,7 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <Prefer32Bit>false</Prefer32Bit>
+    <UseVSHostingProcess>false</UseVSHostingProcess>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -56,13 +57,11 @@
     <Compile Include="MapObjects\MapFirstObject.cs" />
     <Compile Include="MapObjects\MapSecondObject.cs" />
     <Compile Include="MapObjects\MapThirdObject.cs" />
-    <Compile Include="OriginalObjects\ObjectToAssert.cs" />
     <Compile Include="OriginalObjects\FirstObject.cs" />
     <Compile Include="OriginalObjects\ThirdObject.cs" />
     <Compile Include="OriginalObjects\SecondObject.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Validators\ObjectToAssertValidator.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

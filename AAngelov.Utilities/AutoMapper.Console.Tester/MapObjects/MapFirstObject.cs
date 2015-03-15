@@ -18,12 +18,10 @@ namespace AutoMapper.Console.Tester.MapObjects
         public decimal Price { get; set; }
         [DataMember]
         public MapSecondObject SecondObjectEntity { get; set; }
-        [DataMember]
-        public List<MapSecondObject> SecondObjects { get; set; }
-        public List<int> IntCollection { get; set; }
-        public int[] IntArr { get; set; }
-        public MapSecondObject[] SecondObjectArr { get; set; }
 
+        public MapFirstObject()
+        {
+        }
 
         public MapFirstObject(string firstName, string secondName, string poNumber, decimal price, MapSecondObject secondObjectEntity)
         {
@@ -32,11 +30,8 @@ namespace AutoMapper.Console.Tester.MapObjects
             this.PoNumber = poNumber;
             this.Price = price;
             this.SecondObjectEntity = secondObjectEntity;
-            SecondObjects = new List<MapSecondObject>();
-            IntCollection = new List<int>();
-        }
-        public MapFirstObject()
-        {
+            ////SecondObjects = new List<MapSecondObject>();
+            ////IntCollection = new List<int>();
         }
     }
 }
