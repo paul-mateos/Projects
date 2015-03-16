@@ -46,7 +46,7 @@ namespace MSTest.Console.Extended.UnitTests.TestExecutionServiceTests
             Mock.Arrange(() => microsoftTestRunProvider.GetAllPassesTests(Arg.IsAny<TestRun>())).DoNothing();
             Mock.Arrange(() => microsoftTestRunProvider.UpdatePassedTests(Arg.IsAny<List<TestRunUnitTestResult>>(), Arg.IsAny<List<TestRunUnitTestResult>>())).DoNothing();
             Mock.Arrange(() => microsoftTestRunProvider.UpdateResultsSummary(Arg.IsAny<TestRun>())).DoNothing();
-            Mock.Arrange(() => microsoftTestRunProvider.GetAllFailedTests(Arg.IsAny<List<TestRunUnitTestResult>>())).Returns(new List<TestRunUnitTestResult>() { });
+            Mock.Arrange(() => microsoftTestRunProvider.GetAllNotPassedTests(Arg.IsAny<List<TestRunUnitTestResult>>())).Returns(new List<TestRunUnitTestResult>() { });
             Mock.Arrange(() => microsoftTestRunProvider.GenerateAdditionalArgumentsForFailedTestsRun(Arg.IsAny<List<TestRunUnitTestResult>>(), Arg.AnyString)).DoNothing();
           
             var engine = new TestExecutionService(
@@ -90,7 +90,7 @@ namespace MSTest.Console.Extended.UnitTests.TestExecutionServiceTests
             Mock.Arrange(() => microsoftTestRunProvider.GetAllPassesTests(Arg.IsAny<TestRun>())).DoNothing();
             Mock.Arrange(() => microsoftTestRunProvider.UpdatePassedTests(Arg.IsAny<List<TestRunUnitTestResult>>(), Arg.IsAny<List<TestRunUnitTestResult>>())).DoNothing();
             Mock.Arrange(() => microsoftTestRunProvider.UpdateResultsSummary(Arg.IsAny<TestRun>())).DoNothing();
-            Mock.Arrange(() => microsoftTestRunProvider.GetAllFailedTests(Arg.IsAny<List<TestRunUnitTestResult>>())).Returns(new List<TestRunUnitTestResult>() { new TestRunUnitTestResult(), new TestRunUnitTestResult() });
+            Mock.Arrange(() => microsoftTestRunProvider.GetAllNotPassedTests(Arg.IsAny<List<TestRunUnitTestResult>>())).Returns(new List<TestRunUnitTestResult>() { new TestRunUnitTestResult(), new TestRunUnitTestResult() });
             Mock.Arrange(() => microsoftTestRunProvider.GenerateAdditionalArgumentsForFailedTestsRun(Arg.IsAny<List<TestRunUnitTestResult>>(), Arg.AnyString)).DoNothing();
           
             var engine = new TestExecutionService(
@@ -138,7 +138,7 @@ namespace MSTest.Console.Extended.UnitTests.TestExecutionServiceTests
             Mock.Arrange(() => microsoftTestRunProvider.GetAllPassesTests(Arg.IsAny<TestRun>())).DoNothing();
             Mock.Arrange(() => microsoftTestRunProvider.UpdatePassedTests(Arg.IsAny<List<TestRunUnitTestResult>>(), Arg.IsAny<List<TestRunUnitTestResult>>())).DoNothing();
             Mock.Arrange(() => microsoftTestRunProvider.UpdateResultsSummary(Arg.IsAny<TestRun>())).DoNothing();
-            Mock.Arrange(() => microsoftTestRunProvider.GetAllFailedTests(Arg.IsAny<List<TestRunUnitTestResult>>())).Returns(new List<TestRunUnitTestResult>() { });
+            Mock.Arrange(() => microsoftTestRunProvider.GetAllNotPassedTests(Arg.IsAny<List<TestRunUnitTestResult>>())).Returns(new List<TestRunUnitTestResult>() { });
             Mock.Arrange(() => microsoftTestRunProvider.GenerateAdditionalArgumentsForFailedTestsRun(Arg.IsAny<List<TestRunUnitTestResult>>(), Arg.AnyString)).DoNothing();
           
             var engine = new TestExecutionService(
@@ -190,7 +190,7 @@ namespace MSTest.Console.Extended.UnitTests.TestExecutionServiceTests
             Mock.Arrange(() => microsoftTestRunProvider.GetAllPassesTests(Arg.IsAny<TestRun>())).DoNothing();
             Mock.Arrange(() => microsoftTestRunProvider.UpdatePassedTests(Arg.IsAny<List<TestRunUnitTestResult>>(), Arg.IsAny<List<TestRunUnitTestResult>>())).DoNothing();
             Mock.Arrange(() => microsoftTestRunProvider.UpdateResultsSummary(Arg.IsAny<TestRun>())).DoNothing();
-            Mock.Arrange(() => microsoftTestRunProvider.GetAllFailedTests(Arg.IsAny<List<TestRunUnitTestResult>>())).Returns(new List<TestRunUnitTestResult>() { new TestRunUnitTestResult(), new TestRunUnitTestResult() });
+            Mock.Arrange(() => microsoftTestRunProvider.GetAllNotPassedTests(Arg.IsAny<List<TestRunUnitTestResult>>())).Returns(new List<TestRunUnitTestResult>() { new TestRunUnitTestResult(), new TestRunUnitTestResult() });
             Mock.Arrange(() => microsoftTestRunProvider.GenerateAdditionalArgumentsForFailedTestsRun(Arg.IsAny<List<TestRunUnitTestResult>>(), Arg.AnyString)).DoNothing();
 
             var engine = new TestExecutionService(
@@ -242,7 +242,7 @@ namespace MSTest.Console.Extended.UnitTests.TestExecutionServiceTests
             Mock.Arrange(() => microsoftTestRunProvider.GetAllPassesTests(Arg.IsAny<TestRun>())).DoNothing();
             Mock.Arrange(() => microsoftTestRunProvider.UpdatePassedTests(Arg.IsAny<List<TestRunUnitTestResult>>(), Arg.IsAny<List<TestRunUnitTestResult>>())).DoNothing();
             Mock.Arrange(() => microsoftTestRunProvider.UpdateResultsSummary(Arg.IsAny<TestRun>())).DoNothing();
-            Mock.Arrange(() => microsoftTestRunProvider.GetAllFailedTests(Arg.IsAny<List<TestRunUnitTestResult>>())).Returns(new List<TestRunUnitTestResult>() { new TestRunUnitTestResult(), new TestRunUnitTestResult() });
+            Mock.Arrange(() => microsoftTestRunProvider.GetAllNotPassedTests(Arg.IsAny<List<TestRunUnitTestResult>>())).Returns(new List<TestRunUnitTestResult>() { new TestRunUnitTestResult(), new TestRunUnitTestResult() });
             Mock.Arrange(() => microsoftTestRunProvider.GenerateAdditionalArgumentsForFailedTestsRun(Arg.IsAny<List<TestRunUnitTestResult>>(), Arg.AnyString)).DoNothing();
             Mock.Arrange(() => microsoftTestRunProvider.CalculatedFailedTestsPercentage(Arg.IsAny<List<TestRunUnitTestResult>>(), Arg.IsAny<List<TestRunUnitTestResult>>())).Returns(100);
 
@@ -295,7 +295,7 @@ namespace MSTest.Console.Extended.UnitTests.TestExecutionServiceTests
             Mock.Arrange(() => microsoftTestRunProvider.GetAllPassesTests(Arg.IsAny<TestRun>())).DoNothing();
             Mock.Arrange(() => microsoftTestRunProvider.UpdatePassedTests(Arg.IsAny<List<TestRunUnitTestResult>>(), Arg.IsAny<List<TestRunUnitTestResult>>())).DoNothing();
             Mock.Arrange(() => microsoftTestRunProvider.UpdateResultsSummary(Arg.IsAny<TestRun>())).DoNothing();
-            Mock.Arrange(() => microsoftTestRunProvider.GetAllFailedTests(Arg.IsAny<List<TestRunUnitTestResult>>())).Returns(new List<TestRunUnitTestResult>() { new TestRunUnitTestResult(), new TestRunUnitTestResult() });
+            Mock.Arrange(() => microsoftTestRunProvider.GetAllNotPassedTests(Arg.IsAny<List<TestRunUnitTestResult>>())).Returns(new List<TestRunUnitTestResult>() { new TestRunUnitTestResult(), new TestRunUnitTestResult() });
             Mock.Arrange(() => microsoftTestRunProvider.GenerateAdditionalArgumentsForFailedTestsRun(Arg.IsAny<List<TestRunUnitTestResult>>(), Arg.AnyString)).DoNothing();
             Mock.Arrange(() => microsoftTestRunProvider.CalculatedFailedTestsPercentage(Arg.IsAny<List<TestRunUnitTestResult>>(), Arg.IsAny<List<TestRunUnitTestResult>>())).Returns(50);
 
@@ -348,7 +348,7 @@ namespace MSTest.Console.Extended.UnitTests.TestExecutionServiceTests
             Mock.Arrange(() => microsoftTestRunProvider.GetAllPassesTests(Arg.IsAny<TestRun>())).DoNothing();
             Mock.Arrange(() => microsoftTestRunProvider.UpdatePassedTests(Arg.IsAny<List<TestRunUnitTestResult>>(), Arg.IsAny<List<TestRunUnitTestResult>>())).DoNothing();
             Mock.Arrange(() => microsoftTestRunProvider.UpdateResultsSummary(Arg.IsAny<TestRun>())).DoNothing();
-            Mock.Arrange(() => microsoftTestRunProvider.GetAllFailedTests(Arg.IsAny<List<TestRunUnitTestResult>>())).Returns(new List<TestRunUnitTestResult>() { new TestRunUnitTestResult(), new TestRunUnitTestResult() });
+            Mock.Arrange(() => microsoftTestRunProvider.GetAllNotPassedTests(Arg.IsAny<List<TestRunUnitTestResult>>())).Returns(new List<TestRunUnitTestResult>() { new TestRunUnitTestResult(), new TestRunUnitTestResult() });
             Mock.Arrange(() => microsoftTestRunProvider.GenerateAdditionalArgumentsForFailedTestsRun(Arg.IsAny<List<TestRunUnitTestResult>>(), Arg.AnyString)).DoNothing();
 
             var engine = new TestExecutionService(
@@ -366,7 +366,7 @@ namespace MSTest.Console.Extended.UnitTests.TestExecutionServiceTests
             Mock.Assert(() => microsoftTestRunProvider.UpdatePassedTests(Arg.IsAny<List<TestRunUnitTestResult>>(), Arg.IsAny<List<TestRunUnitTestResult>>()), Occurs.Exactly(2));
             Mock.Assert(() => microsoftTestRunProvider.UpdateResultsSummary(Arg.IsAny<TestRun>()), Occurs.Exactly(2));
             Mock.Assert(() => fileSystemProvider.SerializeTestRun(Arg.IsAny<TestRun>()), Occurs.Exactly(1));
-            Assert.AreEqual<int>(0, result);
+            Assert.AreEqual<int>(1, result);
         }
 
         [TestMethod]
@@ -400,8 +400,8 @@ namespace MSTest.Console.Extended.UnitTests.TestExecutionServiceTests
             Mock.Arrange(() => microsoftTestRunProvider.GetAllPassesTests(Arg.IsAny<TestRun>())).DoNothing();
             Mock.Arrange(() => microsoftTestRunProvider.UpdatePassedTests(Arg.IsAny<List<TestRunUnitTestResult>>(), Arg.IsAny<List<TestRunUnitTestResult>>())).DoNothing();
             Mock.Arrange(() => microsoftTestRunProvider.UpdateResultsSummary(Arg.IsAny<TestRun>())).DoNothing();
-            Mock.Arrange(() => microsoftTestRunProvider.GetAllFailedTests(Arg.IsAny<List<TestRunUnitTestResult>>())).Returns(new List<TestRunUnitTestResult>() { new TestRunUnitTestResult(), new TestRunUnitTestResult() }).InSequence();
-            Mock.Arrange(() => microsoftTestRunProvider.GetAllFailedTests(Arg.IsAny<List<TestRunUnitTestResult>>())).Returns(new List<TestRunUnitTestResult>()).InSequence();
+            Mock.Arrange(() => microsoftTestRunProvider.GetAllNotPassedTests(Arg.IsAny<List<TestRunUnitTestResult>>())).Returns(new List<TestRunUnitTestResult>() { new TestRunUnitTestResult(), new TestRunUnitTestResult() }).InSequence();
+            Mock.Arrange(() => microsoftTestRunProvider.GetAllNotPassedTests(Arg.IsAny<List<TestRunUnitTestResult>>())).Returns(new List<TestRunUnitTestResult>()).InSequence();
             Mock.Arrange(() => microsoftTestRunProvider.GenerateAdditionalArgumentsForFailedTestsRun(Arg.IsAny<List<TestRunUnitTestResult>>(), Arg.AnyString)).DoNothing();
 
             var engine = new TestExecutionService(

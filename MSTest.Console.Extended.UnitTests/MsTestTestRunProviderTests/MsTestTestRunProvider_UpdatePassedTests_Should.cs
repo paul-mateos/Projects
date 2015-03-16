@@ -26,12 +26,12 @@ namespace MSTest.Console.Extended.UnitTests.MsTestTestRunProviderTests
             var microsoftTestTestRunProvider = new MsTestTestRunProvider(consoleArgumentsProvider, log);
 
             var passedTests = microsoftTestTestRunProvider.GetAllPassesTests(passedTestRun);
-            var failedTests = microsoftTestTestRunProvider.GetAllFailedTests(failedTestsRun.Results.ToList());
+            var failedTests = microsoftTestTestRunProvider.GetAllNotPassedTests(failedTestsRun.Results.ToList());
             passedTests.ForEach(x => x.testId = Guid.NewGuid().ToString());
 
             microsoftTestTestRunProvider.UpdatePassedTests(passedTests, failedTestsRun.Results.ToList());
 
-            var updatedFailedTests = microsoftTestTestRunProvider.GetAllFailedTests(failedTests);
+            var updatedFailedTests = microsoftTestTestRunProvider.GetAllNotPassedTests(failedTests);
             Assert.AreEqual<int>(1, updatedFailedTests.Count);
         }
 
@@ -47,11 +47,11 @@ namespace MSTest.Console.Extended.UnitTests.MsTestTestRunProviderTests
             var failedTestsRun = fileSystemProvider.DeserializeTestRun("Exceptions.trx");
             var microsoftTestTestRunProvider = new MsTestTestRunProvider(consoleArgumentsProvider, log);
 
-            var failedTests = microsoftTestTestRunProvider.GetAllFailedTests(failedTestsRun.Results.ToList());
+            var failedTests = microsoftTestTestRunProvider.GetAllNotPassedTests(failedTestsRun.Results.ToList());
             
             microsoftTestTestRunProvider.UpdatePassedTests(failedTests, failedTestsRun.Results.ToList());
 
-            var updatedFailedTests = microsoftTestTestRunProvider.GetAllFailedTests(failedTests);
+            var updatedFailedTests = microsoftTestTestRunProvider.GetAllNotPassedTests(failedTests);
             Assert.AreEqual<int>(0, updatedFailedTests.Count);
         }
     }

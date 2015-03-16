@@ -24,7 +24,7 @@ namespace MSTest.Console.Extended.UnitTests.MsTestTestRunProviderTests
             var testRun = fileSystemProvider.DeserializeTestRun("Exceptions.trx");
             
             var microsoftTestTestRunProvider = new MsTestTestRunProvider(consoleArgumentsProvider, log);
-            var failedTests = microsoftTestTestRunProvider.GetAllFailedTests(testRun.Results.ToList());
+            var failedTests = microsoftTestTestRunProvider.GetAllNotPassedTests(testRun.Results.ToList());
             string additionalArguments = microsoftTestTestRunProvider.GenerateAdditionalArgumentsForFailedTestsRun(failedTests, newTestResultsPath);
             Assert.AreEqual<string>(string.Format(@"/resultsfile:""{0}"" /test:TestConsoleExtended", newTestResultsPath), additionalArguments);
         }

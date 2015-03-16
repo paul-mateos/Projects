@@ -23,7 +23,7 @@ namespace MSTest.Console.Extended.UnitTests.MsTestTestRunProviderTests
             var failedTestsRun = fileSystemProvider.DeserializeTestRun("Exceptions.trx");
             var microsoftTestTestRunProvider = new MsTestTestRunProvider(consoleArgumentsProvider, log);
 
-            var failedTests = microsoftTestTestRunProvider.GetAllFailedTests(failedTestsRun.Results.ToList());
+            var failedTests = microsoftTestTestRunProvider.GetAllNotPassedTests(failedTestsRun.Results.ToList());
             
             microsoftTestTestRunProvider.UpdatePassedTests(failedTests, failedTestsRun.Results.ToList());
             microsoftTestTestRunProvider.UpdateResultsSummary(failedTestsRun);
@@ -60,7 +60,7 @@ namespace MSTest.Console.Extended.UnitTests.MsTestTestRunProviderTests
             var failedTestsRun = fileSystemProvider.DeserializeTestRun("Exceptions.trx");
             var microsoftTestTestRunProvider = new MsTestTestRunProvider(consoleArgumentsProvider, log);
 
-            var failedTests = microsoftTestTestRunProvider.GetAllFailedTests(failedTestsRun.Results.ToList());
+            var failedTests = microsoftTestTestRunProvider.GetAllNotPassedTests(failedTestsRun.Results.ToList());
             
             microsoftTestTestRunProvider.UpdatePassedTests(failedTests, failedTestsRun.Results.ToList());
             microsoftTestTestRunProvider.UpdateResultsSummary(failedTestsRun);
@@ -97,7 +97,7 @@ namespace MSTest.Console.Extended.UnitTests.MsTestTestRunProviderTests
             var failedTestsRun = fileSystemProvider.DeserializeTestRun("Exceptions.trx");
             var microsoftTestTestRunProvider = new MsTestTestRunProvider(consoleArgumentsProvider, log);
 
-            var failedTests = microsoftTestTestRunProvider.GetAllFailedTests(failedTestsRun.Results.ToList());
+            var failedTests = microsoftTestTestRunProvider.GetAllNotPassedTests(failedTestsRun.Results.ToList());
             
             microsoftTestTestRunProvider.UpdatePassedTests(failedTests, failedTestsRun.Results.ToList());
             microsoftTestTestRunProvider.UpdateResultsSummary(failedTestsRun);

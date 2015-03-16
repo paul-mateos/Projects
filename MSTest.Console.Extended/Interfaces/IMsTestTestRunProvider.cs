@@ -9,7 +9,7 @@ namespace MSTest.Console.Extended.Interfaces
 
         List<TestRunUnitTestResult> GetAllPassesTests(TestRun testRun);
 
-        List<TestRunUnitTestResult> GetAllFailedTests(List<TestRunUnitTestResult> allTests);
+        List<TestRunUnitTestResult> GetAllNotPassedTests(List<TestRunUnitTestResult> allTests);
 
         void UpdateResultsSummary(TestRun testRun);
 

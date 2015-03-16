@@ -38,9 +38,9 @@ namespace MSTest.Console.Extended.Services
             this.processExecutionProvider.ExecuteProcessWithAdditionalArguments();
             this.processExecutionProvider.CurrentProcessWaitForExit();
             var testRun = this.fileSystemProvider.DeserializeTestRun();
-            int areAllTestsGreen = 1;
+            int areAllTestsGreen = 0;
             var failedTests = new List<TestRunUnitTestResult>();
-            failedTests = this.microsoftTestTestRunProvider.GetAllFailedTests(testRun.Results.ToList());
+            failedTests = this.microsoftTestTestRunProvider.GetAllNotPassedTests(testRun.Results.ToList());
             int failedTestsPercentage = this.microsoftTestTestRunProvider.CalculatedFailedTestsPercentage(failedTests, testRun.Results.ToList());
             if (failedTestsPercentage < this.consoleArgumentsProvider.FailedTestsThreshold)
             {
@@ -57,20 +57,18 @@ namespace MSTest.Console.Extended.Services
                         var currentTestRun = this.fileSystemProvider.DeserializeTestRun(currentTestResultPath);
                         var passedTests = this.microsoftTestTestRunProvider.GetAllPassesTests(currentTestRun);
                         this.microsoftTestTestRunProvider.UpdatePassedTests(passedTests, testRun.Results.ToList());
-                        areAllTestsGreen = 1;
                         this.microsoftTestTestRunProvider.UpdateResultsSummary(testRun);
                     }
                     else
                     {
                         break;
                     }
-                    failedTests = this.microsoftTestTestRunProvider.GetAllFailedTests(testRun.Results.ToList());
+                    failedTests = this.microsoftTestTestRunProvider.GetAllNotPassedTests(testRun.Results.ToList());
                 }
             }
-           
-            if (testRun.ResultSummary.outcome == "Passed")
+            if (failedTests.Count > 0)
             {
-                areAllTestsGreen = 0;
+                areAllTestsGreen = 1;
             }
             this.fileSystemProvider.SerializeTestRun(testRun);
 

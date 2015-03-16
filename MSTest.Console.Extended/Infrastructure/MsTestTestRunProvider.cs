@@ -1,9 +1,9 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using log4net;
 using MSTest.Console.Extended.Data;
 using MSTest.Console.Extended.Interfaces;
-using log4net;
 
 namespace MSTest.Console.Extended.Infrastructure
 {
@@ -37,7 +37,7 @@ namespace MSTest.Console.Extended.Infrastructure
             }
         }
 
-        public List<TestRunUnitTestResult> GetAllFailedTests(List<TestRunUnitTestResult> allTests)
+        public List<TestRunUnitTestResult> GetAllNotPassedTests(List<TestRunUnitTestResult> allTests)
         {
             List<TestRunUnitTestResult> results = new List<TestRunUnitTestResult>();
             results = allTests.Where(x => !x.outcome.Equals("Passed")).ToList();
