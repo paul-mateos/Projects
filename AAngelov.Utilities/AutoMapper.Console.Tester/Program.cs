@@ -54,7 +54,34 @@ namespace AutoMapper.Console.Tester
 
             DateTime endTime = DateTime.Now;
             System.Console.WriteLine("Finish for {0}", endTime - startTime);
+                   
             System.Console.WriteLine();
+        }
+
+private void PeformAction(int x, int y, int z)
+{
+    this.DoSomething();
+    if ((x > 3 && y < 6) || z == 20)
+    {
+        this.DoSomethingElse();
+    }
+    else
+    {
+        System.Console.WriteLine(x + y);
+    }
+    this.DoSomething();
+}
+ 
+        private void DoSomethingElse()
+        {
+            // TODO: Implement this method
+            throw new NotImplementedException();
+        }
+ 
+        private void DoSomething()
+        {
+            // TODO: Implement this method
+            throw new NotImplementedException();
         }
     }
 }
