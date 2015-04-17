@@ -57,6 +57,15 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
+    <Compile Include="Advanced\BingMainPage\BingMainPage.cs" />
+    <Compile Include="Advanced\BingMainPage\BingMainPageElementMap.cs" />
+    <Compile Include="Advanced\BingMainPage\BingMainPageValidator.cs" />
+    <Compile Include="Advanced\Core\BrowserTypes.cs" />
+    <Compile Include="Advanced\Core\Driver.cs" />
+    <Compile Include="Advanced\Core\BasePage.cs" />
+    <Compile Include="Advanced\Core\BasePageElementMap.cs" />
+    <Compile Include="Advanced\Core\BasePageValidator.cs" />
+    <Compile Include="Beginners\AdvancedBingTests.cs" />
     <Compile Include="Beginners\Pages\BingMainPage\BingMainPage.cs" />
     <Compile Include="Beginners\Pages\BingMainPage\BingMainPageValidator.cs" />
     <Compile Include="Beginners\Pages\BingMainPage\BingMainPageElementMap.cs" />
