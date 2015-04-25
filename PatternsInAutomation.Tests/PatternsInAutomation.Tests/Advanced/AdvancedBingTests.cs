@@ -1,13 +1,12 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using PatternsInAutomation.Tests.Advanced.BingMainPage;
+using P = PatternsInAutomation.Tests.Advanced.BingMainPage;
 using PatternsInAutomation.Tests.Advanced.Core;
 
-namespace PatternsInAutomation.Tests.Beginners
+namespace PatternsInAutomation.Tests.Advanced
 {
     [TestClass]
     public class AdvancedBingTests
     {       
-
         [TestInitialize]
         public void SetupTest()
         {
@@ -23,7 +22,7 @@ namespace PatternsInAutomation.Tests.Beginners
         [TestMethod]
         public void SearchTextInBing_Advanced_PageObjectPattern()
         {
-            BingMainPage bingMainPage = new BingMainPage();
+            P.BingMainPage bingMainPage = new P.BingMainPage();
             bingMainPage.Navigate();
             bingMainPage.Search("Automate The Planet");
             bingMainPage.Validate().ResultsCount(",000 RESULTS");

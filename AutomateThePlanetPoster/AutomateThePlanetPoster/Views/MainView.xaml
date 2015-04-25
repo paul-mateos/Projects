@@ -51,9 +51,15 @@
                     <DataGridCheckBoxColumn Header="IsTrackBack" Width="Auto" Binding="{Binding IsTrackBack}" />
                 </DataGrid.Columns>
             </DataGrid>
-            <StackPanel Orientation="Horizontal">
-                <Button Name="btnSave" Margin="10" Height="50" Width="120" Content="Save" HorizontalAlignment="Left" VerticalAlignment="Center"  Grid.Row="3" Grid.Column="0" FontWeight="Bold" Click="btnSave_Click"/>
-                <Button x:Name="btnGenerate" Margin="10,10,0,10" Height="50" Width="120" Content="Generate" HorizontalAlignment="Left" VerticalAlignment="Center" FontWeight="Bold" Click="btnGenerate_Click"/>
+            <StackPanel Orientation="Vertical">
+                <StackPanel Orientation="Horizontal">
+                    <Label Content="Count: "  FontSize="18" FontWeight="Bold"/>
+                    <Label Content="{Binding ElementName=dgData, Path=Items.Count}" FontSize="18" FontWeight="Bold"/>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal">
+                    <Button Name="btnSave" Margin="10" Height="50" Width="120" Content="Save" HorizontalAlignment="Left" VerticalAlignment="Center"  Grid.Row="3" Grid.Column="0" FontWeight="Bold" Click="btnSave_Click"/>
+                    <Button x:Name="btnGenerate" Margin="10,10,0,10" Height="50" Width="120" Content="Generate" HorizontalAlignment="Left" VerticalAlignment="Center" FontWeight="Bold" Click="btnGenerate_Click"/>
+                </StackPanel>
             </StackPanel>
         </StackPanel>
        

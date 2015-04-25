@@ -10,6 +10,11 @@
             this.url = url;
         }
 
+        public BasePage()
+        {
+            this.url = null;
+        }
+
         protected M Map
         {
             get
@@ -18,9 +23,9 @@
             }
         }
 
-        public void Navigate()
+        public virtual void Navigate(string part = "")
         {
-            Driver.Browser.Navigate().GoToUrl(this.url);
+            Driver.Browser.Navigate().GoToUrl(string.Concat(url, part));
         }
     }
 
@@ -29,6 +34,10 @@
         where V : BasePageValidator<M>, new()
     {
         public BasePage(string url) : base(url)
+        {
+        }
+
+        public BasePage()
         {
         }
 

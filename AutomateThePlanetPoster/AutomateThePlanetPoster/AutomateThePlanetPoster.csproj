@@ -61,7 +61,7 @@
     </ApplicationDefinition>
     <Compile Include="Core\PostTypes.cs" />
     <Compile Include="Core\EnumHelper.cs" />
-    <Compile Include="Core\MainViewModel.cs" />
+    <Compile Include="Core\PostsService.cs" />
     <Compile Include="Core\Post.cs" />
     <Compile Include="Views\MainView.xaml.cs">
       <DependentUpon>MainView.xaml</DependentUpon>
@@ -114,6 +114,10 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\AAngelov.Utilities\AAngelov.Utilities.UI\AAngelov.Utilities.UI.csproj">
+      <Project>{C547F875-DB0A-41B6-8C42-10FBC1EDF711}</Project>
+      <Name>AAngelov.Utilities.UI</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\AAngelov.Utilities\AAngelov.Utilities\AAngelov.Utilities.csproj">
       <Project>{6649BE16-8E52-47CE-A870-6B2C9DE35BD8}</Project>
       <Name>AAngelov.Utilities</Name>

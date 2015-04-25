@@ -8,24 +8,24 @@ using System.Xml.Serialization;
 
 namespace AutomateThePlanetPoster.Core
 {
-    public class MainViewModel
+    public static class PostsService
     {
         private const string FileName = "postsDataBase.xml";
-        public List<Post> Posts { get; set; }
+        public static List<Post> Posts { get; set; }
 
-        public MainViewModel()
+        static PostsService()
         {
-            this.Posts = this.LoadPosts();
-            if (this.Posts == null)
+            Posts = LoadPosts();
+            if (Posts == null)
             {
-                this.Posts = new List<Post>();
+                Posts = new List<Post>();
             }
         }
 
-        public string GeneratePostsContent()
+        public static string GeneratePostsContent()
         {
             StringBuilder sb = new StringBuilder();
-            var sortedPosts = this.Posts.OrderBy(x => x.PostType);
+            var sortedPosts = Posts.OrderBy(x => x.PostType);
             foreach (Post currentPost in sortedPosts)
             {
                 string currentAuthorText = currentPost.Site != null ? string.Format("{0}({1})", currentPost.Author, currentPost.Site) : currentPost.Author;
@@ -37,10 +37,10 @@ namespace AutomateThePlanetPoster.Core
             return sb.ToString();
         }
 
-        public void WritePostsToDisc()
+        public static void WritePostsToDisc()
         {
             if 
-                (this.Posts == null) 
+                (Posts == null) 
             {
                 return;
             }
@@ -51,7 +51,7 @@ namespace AutomateThePlanetPoster.Core
                 XmlSerializer serializer = new XmlSerializer(typeof(List<Post>));
                 using (MemoryStream stream = new MemoryStream())
                 {
-                    serializer.Serialize(stream, this.Posts);
+                    serializer.Serialize(stream, Posts);
                     stream.Position = 0;
                     xmlDocument.Load(stream);
                     xmlDocument.Save(FileName);
@@ -64,7 +64,7 @@ namespace AutomateThePlanetPoster.Core
             }
         }
 
-        public List<Post> LoadPosts()
+        public static List<Post> LoadPosts()
         {
             if (string.IsNullOrEmpty(FileName)) 
             {

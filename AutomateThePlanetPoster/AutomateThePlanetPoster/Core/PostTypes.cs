@@ -8,7 +8,7 @@ namespace AutomateThePlanetPoster.Core
         QA,
         [Description("7a1f99")]
         Programming,
-         [Description("ff66cc")]
+        [Description("ff66cc")]
         Magazines
     }
 }

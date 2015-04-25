@@ -65,7 +65,23 @@
     <Compile Include="Advanced\Core\BasePage.cs" />
     <Compile Include="Advanced\Core\BasePageElementMap.cs" />
     <Compile Include="Advanced\Core\BasePageValidator.cs" />
-    <Compile Include="Beginners\AdvancedBingTests.cs" />
+    <Compile Include="Advanced\EbayPurchase_Without_PurchaseFaceade_Tests.cs" />
+    <Compile Include="Advanced\Ebay\Data\ClientInfo.cs" />
+    <Compile Include="Advanced\Ebay\Pages\CheckoutPage\CheckoutPage.cs" />
+    <Compile Include="Advanced\Ebay\Pages\CheckoutPage\CheckoutPageMap.cs" />
+    <Compile Include="Advanced\Ebay\Pages\CheckoutPage\CheckoutPageValidator.cs" />
+    <Compile Include="Advanced\Ebay\Pages\ShippingAddressPage\ShippingAddressPage.cs" />
+    <Compile Include="Advanced\Ebay\Pages\ShippingAddressPage\ShippingAddressPageMap.cs" />
+    <Compile Include="Advanced\Ebay\Pages\ShippingAddressPage\ShippingAddressPageValidator.cs" />
+    <Compile Include="Advanced\Ebay\Pages\SignInPage\SignInPage.cs" />
+    <Compile Include="Advanced\Ebay\Pages\SignInPage\SignInPageMap.cs" />
+    <Compile Include="Advanced\Ebay\Pages\SignInPage\SignInPageValidator.cs" />
+    <Compile Include="Advanced\Ebay\Pages\ItemPage\ItemPage.cs" />
+    <Compile Include="Advanced\Ebay\Pages\ItemPage\ItemPageMap.cs" />
+    <Compile Include="Advanced\Ebay\Pages\ItemPage\ItemPageValidator.cs" />
+    <Compile Include="Advanced\Ebay\PurchaseFacade.cs" />
+    <Compile Include="Advanced\EbayPurchase_PurchaseFaceade_Tests.cs" />
+    <Compile Include="Advanced\AdvancedBingTests.cs" />
     <Compile Include="Beginners\Pages\BingMainPage\BingMainPage.cs" />
     <Compile Include="Beginners\Pages\BingMainPage\BingMainPageValidator.cs" />
     <Compile Include="Beginners\Pages\BingMainPage\BingMainPageElementMap.cs" />
@@ -74,6 +90,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="ClassDiagram1.cd" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup />

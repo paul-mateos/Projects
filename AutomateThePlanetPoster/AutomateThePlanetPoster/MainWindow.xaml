@@ -1,7 +1,7 @@
 ﻿<Window x:Class="AutomateThePlanetPoster.MainWindow"
                   xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                   xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-                  Title="Automate The Planet Posts Generator"  Loaded="ModernWindow_Loaded" MinHeight="850" MinWidth="900" Height="850" Width="1800">
+                  Title="Automate The Planet Posts Generator" MinHeight="870" MinWidth="900" Height="850" Width="1800" Closing="Window_Closing">
     <Grid>
         <ContentControl x:Name="currentContent"/>
     </Grid>

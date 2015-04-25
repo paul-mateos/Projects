@@ -49,7 +49,6 @@ namespace PatternsInAutomation.Tests.Advanced.Core
             {
                 case BrowserTypes.Firefox:
                     Driver.Browser = new FirefoxDriver();
-                    
                     break;
                 case BrowserTypes.InternetExplorer:
                     break;
