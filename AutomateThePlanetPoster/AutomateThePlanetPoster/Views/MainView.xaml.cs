@@ -6,7 +6,7 @@ namespace AutomateThePlanetPoster.Views
 {
     public partial class MainView : UserControl
     {
-        public PostsService MainViewModel { get; set; }
+        ////public PostsService MainViewModel { get; set; }
         public MainView()
         {
             InitializeComponent();
@@ -14,18 +14,18 @@ namespace AutomateThePlanetPoster.Views
 
         private void UserControl_Loaded(object sender, RoutedEventArgs e)
         {
-            this.MainViewModel = new PostsService();
-            this.DataContext = this.MainViewModel;
+            ////this.MainViewModel = new PostsService();
+            this.DataContext = PostsService.Instance;
         }
 
         private void btnSave_Click(object sender, RoutedEventArgs e)
         {
-            PostsService.WritePostsToDisc();
+            PostsService.Instance.WritePostsToDisc();
         }
 
         private void btnGenerate_Click(object sender, RoutedEventArgs e)
         {
-            string generatedContent = PostsService.GeneratePostsContent();
+            string generatedContent = PostsService.Instance.GeneratePostsContent();
             Clipboard.SetText(generatedContent);
             MessageBox.Show("The content was copied to your clipboard.");
         }

@@ -14,7 +14,7 @@ namespace AutomateThePlanetPoster
 
         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
-            PostsService.WritePostsToDisc();
+            PostsService.Instance.WritePostsToDisc();
         }
     }
 }

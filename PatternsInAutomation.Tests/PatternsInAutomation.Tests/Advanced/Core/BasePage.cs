@@ -3,6 +3,8 @@
     public class BasePage<M>
         where M : BasePageElementMap, new()
     {
+        private static BasePage<M> instance;
+
         protected readonly string url;
 
         public BasePage(string url)
@@ -13,6 +15,19 @@
         public BasePage()
         {
             this.url = null;
+        }
+
+        public static BasePage<M> Instance
+        {
+            get
+            {
+                if (instance == null)
+                {
+                    instance = new BasePage<M>();
+                }
+
+                return instance;
+            }
         }
 
         protected M Map

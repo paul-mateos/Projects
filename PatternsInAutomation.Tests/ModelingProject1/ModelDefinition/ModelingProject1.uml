@@ -417,6 +417,688 @@
         </ownedOperationsInternal>
       </class>
     </packageHasNamedElement>
+    <packageHasNamedElement>
+      <class
+        Id="ae42dd90-f4a7-4b71-86b1-80837f876a43"
+        name="BingMainPage"
+        isAbstract="false"
+        isLeaf="false"
+        isActiveClass="false">
+        <targetEnds>
+          <association
+            Id="74b665da-8fae-4558-89c3-66e20c7a3710"
+            isDerived="false"
+            sourceEndRoleName="BingMainPage"
+            targetEndRoleName="BasePage&lt;S, M, V&gt;"
+            isLeaf="false"
+            isAbstract="false">
+            <classMoniker
+              Id="35c6e36e-d9c4-4a57-a24e-fe00661ee5d1"
+              LastKnownName="BasePage&lt;S, M, V&gt;"
+              LastKnownLocation="ModelingProject1.uml" />
+            <relationshipOwnedElementsInternal>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="529cb813-11c9-4956-b86d-5aa719669b0b"
+                  name="BingMainPage"
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="None"
+                  isComposite="false"
+                  isNavigableOwned="false" />
+              </associationHasOwnedEnds>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="fcfa0934-dd45-435d-8038-b741afbd8f5b"
+                  name="BasePage&lt;S, M, V&gt;"
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="None"
+                  isComposite="false" />
+              </associationHasOwnedEnds>
+            </relationshipOwnedElementsInternal>
+          </association>
+        </targetEnds>
+        <ownedOperationsInternal>
+          <operation
+            Id="bd4d7cf7-e6f7-427f-adf4-c2bc83aeba40"
+            name="Search"
+            isLeaf="false"
+            isStatic="false"
+            isAbstract="false"
+            concurrency="Sequential"
+            isQuery="false" />
+        </ownedOperationsInternal>
+      </class>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <class
+        Id="35c6e36e-d9c4-4a57-a24e-fe00661ee5d1"
+        name="BasePage&lt;S, M, V&gt;"
+        isAbstract="false"
+        isLeaf="false"
+        isActiveClass="false">
+        <targetEnds>
+          <association
+            Id="a034b26f-d0b5-4b47-bfcf-5f2bdb5a8645"
+            isDerived="false"
+            sourceEndRoleName="BasePage&lt;S, M, V&gt;"
+            targetEndRoleName="BasePage&lt;S, M&gt;"
+            isLeaf="false"
+            isAbstract="false">
+            <classMoniker
+              Id="0e048ce2-6119-445e-8412-ca7bd21a862d"
+              LastKnownName="BasePage&lt;S, M&gt;"
+              LastKnownLocation="ModelingProject1.uml" />
+            <relationshipOwnedElementsInternal>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="e8dd7cc1-2826-4297-8755-69c7acd3feb6"
+                  name="BasePage&lt;S, M, V&gt;"
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="None"
+                  isComposite="false"
+                  isNavigableOwned="false" />
+              </associationHasOwnedEnds>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="0a9c6924-8135-4a3b-95dd-875234b8b65c"
+                  name="BasePage&lt;S, M&gt;"
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="None"
+                  isComposite="false" />
+              </associationHasOwnedEnds>
+            </relationshipOwnedElementsInternal>
+          </association>
+        </targetEnds>
+        <ownedOperationsInternal>
+          <operation
+            Id="b41e31a8-d2b3-459e-ba0e-b06553f7c84b"
+            name="Validate"
+            isLeaf="false"
+            isStatic="false"
+            isAbstract="false"
+            concurrency="Sequential"
+            isQuery="false" />
+        </ownedOperationsInternal>
+      </class>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <class
+        Id="0e048ce2-6119-445e-8412-ca7bd21a862d"
+        name="BasePage&lt;S, M&gt;"
+        isAbstract="false"
+        isLeaf="false"
+        isActiveClass="false">
+        <targetEnds>
+          <association
+            Id="291ff868-af81-4a9a-bca9-dff27916e2e7"
+            isDerived="false"
+            sourceEndRoleName="BasePage&lt;S, M&gt;"
+            targetEndRoleName="BaseSingleton"
+            isLeaf="false"
+            isAbstract="false">
+            <classMoniker
+              Id="f220feaa-89d0-4ecc-9808-ba44304211c2"
+              LastKnownName="BaseSingleton"
+              LastKnownLocation="ModelingProject1.uml" />
+            <relationshipOwnedElementsInternal>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="b655bc21-7582-4f70-a25d-a2fe29267b4d"
+                  name="BasePage&lt;S, M&gt;"
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="None"
+                  isComposite="false"
+                  isNavigableOwned="false" />
+              </associationHasOwnedEnds>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="ea6775e6-da5e-497a-bc54-212e1bd6170f"
+                  name="BaseSingleton"
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="None"
+                  isComposite="false" />
+              </associationHasOwnedEnds>
+            </relationshipOwnedElementsInternal>
+          </association>
+        </targetEnds>
+        <ownedAttributesInternal>
+          <property
+            Id="82de204d-e807-442b-bdae-ff8d9bf656d7"
+            name="Map"
+            isLeaf="false"
+            isStatic="false"
+            isReadOnly="false"
+            isUnique="false"
+            isDerived="false"
+            isDerivedUnion="false"
+            aggregation="None"
+            isComposite="false" />
+          <property
+            Id="e053bb32-3482-4ca8-b23f-a3c972510a33"
+            name="Url"
+            isLeaf="false"
+            isStatic="false"
+            isReadOnly="false"
+            isUnique="false"
+            isDerived="false"
+            isDerivedUnion="false"
+            aggregation="None"
+            isComposite="false" />
+        </ownedAttributesInternal>
+        <ownedOperationsInternal>
+          <operation
+            Id="944310d3-6d55-4fff-bcd7-8cc528ca3b8d"
+            name="Navigate"
+            isLeaf="false"
+            isStatic="false"
+            isAbstract="false"
+            concurrency="Sequential"
+            isQuery="false" />
+        </ownedOperationsInternal>
+      </class>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <class
+        Id="f220feaa-89d0-4ecc-9808-ba44304211c2"
+        name="BaseSingleton"
+        isAbstract="false"
+        isLeaf="false"
+        isActiveClass="false">
+        <ownedAttributesInternal>
+          <property
+            Id="0b4db9e3-e883-48c9-907d-e7ce175dedf2"
+            name="Instance"
+            isLeaf="false"
+            isStatic="false"
+            isReadOnly="false"
+            isUnique="false"
+            isDerived="false"
+            isDerivedUnion="false"
+            aggregation="None"
+            isComposite="false" />
+        </ownedAttributesInternal>
+      </class>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <class
+        Id="6183d3d3-a2a9-46a7-b832-737e8fb36947"
+        name="BingMainPage"
+        isAbstract="false"
+        isLeaf="false"
+        isActiveClass="false">
+        <targetEnds>
+          <association
+            Id="c106f86f-454d-4f75-aa08-fc482f07d15a"
+            isDerived="false"
+            sourceEndRoleName="BingMainPage"
+            targetEndRoleName="BasePage&lt;S, M, V&gt;"
+            isLeaf="false"
+            isAbstract="false">
+            <classMoniker
+              Id="efc06a07-80a3-4878-bc8e-77a48d53c65c"
+              LastKnownName="BasePage&lt;S, M, V&gt;"
+              LastKnownLocation="ModelingProject1.uml" />
+            <relationshipOwnedElementsInternal>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="cd33bc71-d4a3-4ee0-90a7-cfa74a24a039"
+                  name="BingMainPage"
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="None"
+                  isComposite="false"
+                  isNavigableOwned="false" />
+              </associationHasOwnedEnds>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="ece02792-d05e-47d0-b48a-0a6d10db4d4c"
+                  name="BasePage&lt;S, M, V&gt;"
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="None"
+                  isComposite="false" />
+              </associationHasOwnedEnds>
+            </relationshipOwnedElementsInternal>
+          </association>
+        </targetEnds>
+        <ownedOperationsInternal>
+          <operation
+            Id="0ff36bbc-b0e9-4e4d-be6b-86f04a647fc6"
+            name="Search"
+            isLeaf="false"
+            isStatic="false"
+            isAbstract="false"
+            concurrency="Sequential"
+            isQuery="false" />
+        </ownedOperationsInternal>
+      </class>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <class
+        Id="efc06a07-80a3-4878-bc8e-77a48d53c65c"
+        name="BasePage&lt;S, M, V&gt;"
+        isAbstract="false"
+        isLeaf="false"
+        isActiveClass="false">
+        <targetEnds>
+          <association
+            Id="c6fe394c-d2ba-48f1-8616-bf3470edf422"
+            isDerived="false"
+            sourceEndRoleName="BasePage&lt;S, M, V&gt;"
+            targetEndRoleName="BasePage&lt;S, M&gt;"
+            isLeaf="false"
+            isAbstract="false">
+            <classMoniker
+              Id="8fe00145-93c2-47bc-baad-028ef8398fa5"
+              LastKnownName="BasePage&lt;S, M&gt;"
+              LastKnownLocation="ModelingProject1.uml" />
+            <relationshipOwnedElementsInternal>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="eaad8067-1ca1-4450-af3b-9cc331484d0f"
+                  name="BasePage&lt;S, M, V&gt;"
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="None"
+                  isComposite="false"
+                  isNavigableOwned="false" />
+              </associationHasOwnedEnds>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="1e6679c4-66dd-4d52-8145-acaea12bd8c3"
+                  name="BasePage&lt;S, M&gt;"
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="None"
+                  isComposite="false" />
+              </associationHasOwnedEnds>
+            </relationshipOwnedElementsInternal>
+          </association>
+        </targetEnds>
+        <ownedOperationsInternal>
+          <operation
+            Id="046160c1-71e7-4536-be10-b6a55673b215"
+            name="Validate"
+            isLeaf="false"
+            isStatic="false"
+            isAbstract="false"
+            concurrency="Sequential"
+            isQuery="false" />
+        </ownedOperationsInternal>
+      </class>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <class
+        Id="8fe00145-93c2-47bc-baad-028ef8398fa5"
+        name="BasePage&lt;S, M&gt;"
+        isAbstract="false"
+        isLeaf="false"
+        isActiveClass="false">
+        <targetEnds>
+          <association
+            Id="894f2b9f-96ba-4d43-839e-4458267c20b6"
+            isDerived="false"
+            sourceEndRoleName="BasePage&lt;S, M&gt;"
+            targetEndRoleName="BaseSingleton"
+            isLeaf="false"
+            isAbstract="false">
+            <classMoniker
+              Id="0a233fce-23af-4468-99eb-74ec4d27bd34"
+              LastKnownName="BaseSingleton"
+              LastKnownLocation="ModelingProject1.uml" />
+            <relationshipOwnedElementsInternal>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="1b737947-c8cd-4d38-b10e-787537397e74"
+                  name="BasePage&lt;S, M&gt;"
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="None"
+                  isComposite="false"
+                  isNavigableOwned="false" />
+              </associationHasOwnedEnds>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="d4fcd09e-aeac-4688-aed1-a307e524336d"
+                  name="BaseSingleton"
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="None"
+                  isComposite="false" />
+              </associationHasOwnedEnds>
+            </relationshipOwnedElementsInternal>
+          </association>
+        </targetEnds>
+        <ownedAttributesInternal>
+          <property
+            Id="c5d52614-2935-4a03-82a1-591a50157638"
+            name="Map"
+            isLeaf="false"
+            isStatic="false"
+            isReadOnly="false"
+            isUnique="false"
+            isDerived="false"
+            isDerivedUnion="false"
+            aggregation="None"
+            isComposite="false" />
+          <property
+            Id="05bfb5dd-436a-46cd-b3bc-be9dba076390"
+            name="Url"
+            isLeaf="false"
+            isStatic="false"
+            isReadOnly="false"
+            isUnique="false"
+            isDerived="false"
+            isDerivedUnion="false"
+            aggregation="None"
+            isComposite="false" />
+        </ownedAttributesInternal>
+        <ownedOperationsInternal>
+          <operation
+            Id="1cb097d9-8626-4c58-8fff-1afae8f729e0"
+            name="Navigate"
+            isLeaf="false"
+            isStatic="false"
+            isAbstract="false"
+            concurrency="Sequential"
+            isQuery="false" />
+        </ownedOperationsInternal>
+      </class>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <class
+        Id="0a233fce-23af-4468-99eb-74ec4d27bd34"
+        name="BaseSingleton"
+        isAbstract="false"
+        isLeaf="false"
+        isActiveClass="false">
+        <ownedAttributesInternal>
+          <property
+            Id="f9071a98-5376-4b22-8e06-1ea22f15f9de"
+            name="Instance"
+            isLeaf="false"
+            isStatic="false"
+            isReadOnly="false"
+            isUnique="false"
+            isDerived="false"
+            isDerivedUnion="false"
+            aggregation="None"
+            isComposite="false" />
+        </ownedAttributesInternal>
+      </class>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <class
+        Id="ba0bdafc-e46d-459e-9dd2-908e44cabb02"
+        name="BaseElementMap"
+        isAbstract="false"
+        isLeaf="false"
+        isActiveClass="false">
+        <ownedOperationsInternal>
+          <operation
+            Id="6ccddff5-4ce4-450c-9224-6ebbdff5de8b"
+            name="SwitchToDefault"
+            isLeaf="false"
+            isStatic="false"
+            isAbstract="false"
+            concurrency="Sequential"
+            isQuery="false" />
+        </ownedOperationsInternal>
+      </class>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <class
+        Id="5b0d4697-849c-4fab-b8d7-71b283fa9c53"
+        name="BingMainPageMap"
+        isAbstract="false"
+        isLeaf="false"
+        isActiveClass="false">
+        <targetEnds>
+          <association
+            Id="8ad56ee5-2c06-4d3d-9760-368ae1381cf4"
+            isDerived="false"
+            sourceEndRoleName="BingMainPageMap"
+            targetEndRoleName="BaseElementMap"
+            isLeaf="false"
+            isAbstract="false">
+            <classMoniker
+              Id="ba0bdafc-e46d-459e-9dd2-908e44cabb02"
+              LastKnownName="BaseElementMap"
+              LastKnownLocation="ModelingProject1.uml" />
+            <relationshipOwnedElementsInternal>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="93b013cd-57ba-4c73-8371-0036499c91eb"
+                  name="BingMainPageMap"
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="None"
+                  isComposite="false"
+                  isNavigableOwned="false" />
+              </associationHasOwnedEnds>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="5add46eb-0d96-47c5-97f9-e2d465b6c121"
+                  name="BaseElementMap"
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="None"
+                  isComposite="false" />
+              </associationHasOwnedEnds>
+            </relationshipOwnedElementsInternal>
+          </association>
+          <association
+            Id="66128975-1644-4b26-aa23-a4ccd090b1b0"
+            isDerived="false"
+            sourceEndRoleName="BingMainPageMap"
+            targetEndRoleName="BingMainPage"
+            isLeaf="false"
+            isAbstract="false">
+            <classMoniker
+              Id="6183d3d3-a2a9-46a7-b832-737e8fb36947"
+              LastKnownName="BingMainPage"
+              LastKnownLocation="ModelingProject1.uml" />
+            <relationshipOwnedElementsInternal>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="6f7b6417-0eb7-4ec6-8c0e-8ee178b12513"
+                  name="BingMainPageMap"
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="Composite"
+                  isComposite="false"
+                  isNavigableOwned="false" />
+              </associationHasOwnedEnds>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="022851e2-cd32-446a-9bbd-9389041c4e63"
+                  name="BingMainPage"
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="None"
+                  isComposite="true" />
+              </associationHasOwnedEnds>
+            </relationshipOwnedElementsInternal>
+          </association>
+        </targetEnds>
+      </class>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <class
+        Id="ea480557-a697-4000-89ac-85def9e852d1"
+        name="BingMainPageValidator"
+        isAbstract="false"
+        isLeaf="false"
+        isActiveClass="false">
+        <targetEnds>
+          <association
+            Id="018d6440-b1de-46fa-8116-ef59186729a9"
+            isDerived="false"
+            sourceEndRoleName="BingMainPageValidator"
+            targetEndRoleName="BasePageValidator&lt;S, M, V&gt;"
+            isLeaf="false"
+            isAbstract="false">
+            <classMoniker
+              Id="db1f2ff0-6349-4731-9e0e-54a2f41f5dde"
+              LastKnownName="BasePageValidator&lt;S, M, V&gt;"
+              LastKnownLocation="ModelingProject1.uml" />
+            <relationshipOwnedElementsInternal>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="1477af22-5be5-4b3f-85e9-414e93fd1887"
+                  name="BingMainPageValidator"
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="None"
+                  isComposite="false"
+                  isNavigableOwned="false" />
+              </associationHasOwnedEnds>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="431fa70e-488e-4a75-ac74-d43a353d493f"
+                  name="BasePageValidator&lt;S, M, V&gt;"
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="None"
+                  isComposite="false" />
+              </associationHasOwnedEnds>
+            </relationshipOwnedElementsInternal>
+          </association>
+          <association
+            Id="749e66e8-1cc3-4f3d-a405-75bf5bca86d0"
+            isDerived="false"
+            sourceEndRoleName="BingMainPageValidator"
+            targetEndRoleName="BingMainPage"
+            isLeaf="false"
+            isAbstract="false">
+            <classMoniker
+              Id="6183d3d3-a2a9-46a7-b832-737e8fb36947"
+              LastKnownName="BingMainPage"
+              LastKnownLocation="ModelingProject1.uml" />
+            <relationshipOwnedElementsInternal>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="2a61db98-681d-4f3e-8e50-6671171116f4"
+                  name="BingMainPageValidator"
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="Composite"
+                  isComposite="false"
+                  isNavigableOwned="false" />
+              </associationHasOwnedEnds>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="5980e8ff-7116-4fdd-af05-ee3b0238895e"
+                  name="BingMainPage"
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="None"
+                  isComposite="true" />
+              </associationHasOwnedEnds>
+            </relationshipOwnedElementsInternal>
+          </association>
+        </targetEnds>
+      </class>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <class
+        Id="db1f2ff0-6349-4731-9e0e-54a2f41f5dde"
+        name="BasePageValidator&lt;S, M, V&gt;"
+        isAbstract="false"
+        isLeaf="false"
+        isActiveClass="false">
+        <ownedAttributesInternal>
+          <property
+            Id="f1daa231-f369-491d-94a2-5dac0952a060"
+            name="Map"
+            isLeaf="false"
+            isStatic="false"
+            isReadOnly="false"
+            isUnique="false"
+            isDerived="false"
+            isDerivedUnion="false"
+            aggregation="None"
+            isComposite="false" />
+          <property
+            Id="9ceeed9d-8bd0-44a6-b4f5-72b2b807c605"
+            name="PageInstance"
+            isLeaf="false"
+            isStatic="false"
+            isReadOnly="false"
+            isUnique="false"
+            isDerived="false"
+            isDerivedUnion="false"
+            aggregation="None"
+            isComposite="false" />
+        </ownedAttributesInternal>
+      </class>
+    </packageHasNamedElement>
   </packagedElements>
   <primitiveType
     Id="220a3521-e091-4221-bae9-3ef9018e845c"

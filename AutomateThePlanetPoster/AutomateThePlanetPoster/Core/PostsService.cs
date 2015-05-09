@@ -8,21 +8,30 @@ using System.Xml.Serialization;
 
 namespace AutomateThePlanetPoster.Core
 {
-    public static class PostsService
+    public class PostsService
     {
+        private static PostsService instance;
         private const string FileName = "postsDataBase.xml";
-        public static List<Post> Posts { get; set; }
+        public List<Post> Posts { get; set; }
 
-        static PostsService()
+        public static PostsService Instance
         {
-            Posts = LoadPosts();
-            if (Posts == null)
-            {
-                Posts = new List<Post>();
+            get
+            { 
+                if (instance == null)
+                {
+                    instance = new PostsService();
+                    instance.Posts = instance.LoadPosts();
+                    if (instance.Posts == null)
+                    {
+                        instance.Posts = new List<Post>();
+                    }
+                }
+                return instance;
             }
         }
 
-        public static string GeneratePostsContent()
+        public string GeneratePostsContent()
         {
             StringBuilder sb = new StringBuilder();
             var sortedPosts = Posts.OrderBy(x => x.PostType);
@@ -37,7 +46,7 @@ namespace AutomateThePlanetPoster.Core
             return sb.ToString();
         }
 
-        public static void WritePostsToDisc()
+        public void WritePostsToDisc()
         {
             if 
                 (Posts == null) 
@@ -64,7 +73,7 @@ namespace AutomateThePlanetPoster.Core
             }
         }
 
-        public static List<Post> LoadPosts()
+        public List<Post> LoadPosts()
         {
             if (string.IsNullOrEmpty(FileName)) 
             {
