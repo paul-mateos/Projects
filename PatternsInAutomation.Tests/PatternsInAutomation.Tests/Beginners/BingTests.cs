@@ -44,5 +44,25 @@ namespace PatternsInAutomation.Tests.Beginners
             bingMainPage.Search("Automate The Planet");
             bingMainPage.Validate().ResultsCount("264,000 RESULTS");
         }
+
+        [TestMethod]
+        public void ClickEveryHrefMenu()
+        {
+            this.Driver.Navigate().GoToUrl(@"http://www.telerik.com/");
+            // get the menu div
+            var menuList = this.Driver.FindElement(By.Id("GeneralContent_T73A12E0A142_Col01"));
+            // get all links from the menu div
+            var menuHrefs = menuList.FindElements(By.ClassName("Bar-menu-link"));
+
+            // Now start clicking and navigating back
+            foreach (var currentHref in menuHrefs)
+            {
+                this.Driver.Navigate().GoToUrl(@"http://www.telerik.com/");
+                currentHref.Click();
+                string currentElementHref = currentHref.GetAttribute("href");
+                Assert.IsTrue(this.Driver.Url.Contains(currentElementHref));
+                // Now the same will happen for the next href
+            }
+        }
     }
 }

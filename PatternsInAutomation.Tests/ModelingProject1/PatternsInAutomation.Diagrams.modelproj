@@ -36,6 +36,13 @@
       <SubType>Content</SubType>
       <DependentUpon>FluentPageObjectPattern.classdiagram</DependentUpon>
     </Content>
+    <Content Include="IocPageObjectPattern.classdiagram">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="IocPageObjectPattern.classdiagram.layout">
+      <SubType>Content</SubType>
+      <DependentUpon>IocPageObjectPattern.classdiagram</DependentUpon>
+    </Content>
     <Content Include="SingletonDesignPattern.classdiagram">
       <SubType>Content</SubType>
     </Content>
