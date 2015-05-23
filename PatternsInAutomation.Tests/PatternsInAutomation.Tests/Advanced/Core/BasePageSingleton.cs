@@ -2,11 +2,11 @@
 
 namespace PatternsInAutomation.Tests.Advanced.Core
 {
-    public abstract class BasePageSingletonDerived<S, M> : ThreadSafeNestedContructorsBaseSingleton<S>
+    public abstract class BasePageSingleton<S, M> : ThreadSafeLazyBaseSingleton<S>
         where M : BasePageElementMap, new()
-        where S : BasePageSingletonDerived<S, M>
+        where S : BasePageSingleton<S, M>, new()
     {
-        public BasePageSingletonDerived()
+        public BasePageSingleton()
         {
         }
 
@@ -24,10 +24,10 @@ namespace PatternsInAutomation.Tests.Advanced.Core
         }
     }
 
-    public abstract class BasePageSingletonDerived<S, M, V> : BasePageSingletonDerived<S, M>
+    public abstract class BasePageSingleton<S, M, V> : BasePageSingleton<S, M>
         where M : BasePageElementMap, new()
         where V : BasePageValidator<M>, new()
-        where S : BasePageSingletonDerived<S, M, V>
+        where S : BasePageSingleton<S, M, V>, new()
     {
         public V Validate()
         {
