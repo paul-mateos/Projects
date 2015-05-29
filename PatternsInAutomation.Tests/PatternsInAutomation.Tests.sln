@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PatternsInAutomation.Tests"
 EndProject
 Project("{F088123C-0E9E-452A-89E6-6BA2F21D5CAC}") = "PatternsInAutomation.Diagrams", "ModelingProject1\PatternsInAutomation.Diagrams.modelproj", "{FCA718C0-DE23-40B4-832B-4F67C176ECD6}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestingTechniques.UnitTests", "TestingTechniques.UnitTests\TestingTechniques.UnitTests.csproj", "{A477E221-5D51-4E88-BC3F-273E022F73A0}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{FCA718C0-DE23-40B4-832B-4F67C176ECD6}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FCA718C0-DE23-40B4-832B-4F67C176ECD6}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{FCA718C0-DE23-40B4-832B-4F67C176ECD6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A477E221-5D51-4E88-BC3F-273E022F73A0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A477E221-5D51-4E88-BC3F-273E022F73A0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A477E221-5D51-4E88-BC3F-273E022F73A0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A477E221-5D51-4E88-BC3F-273E022F73A0}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
