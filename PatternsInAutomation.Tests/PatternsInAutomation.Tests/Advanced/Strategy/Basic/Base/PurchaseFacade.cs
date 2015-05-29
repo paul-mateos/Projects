@@ -6,7 +6,7 @@ using PatternsInAutomation.Tests.Advanced.Strategy.Pages.ShippingAddressPage;
 using PatternsInAutomation.Tests.Advanced.Strategy.Pages.ShippingPaymentPage;
 using PatternsInAutomation.Tests.Advanced.Strategy.Pages.SignInPage;
 
-namespace PatternsInAutomation.Tests.Advanced.Strategy.Base
+namespace PatternsInAutomation.Tests.Advanced.Strategy.Basic.Base
 {
     public class PurchaseFacade
     {

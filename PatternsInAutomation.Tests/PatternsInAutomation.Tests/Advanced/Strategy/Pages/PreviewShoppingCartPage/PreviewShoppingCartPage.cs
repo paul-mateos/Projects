@@ -8,5 +8,10 @@ namespace PatternsInAutomation.Tests.Advanced.Strategy.Pages.PreviewShoppingCart
         {
             this.Map.ProceedToCheckoutButton.Click();
         }
+
+        public void CheckOrderContainsGift()
+        {
+            this.Map.ThisOrderContainsGiftCheckbox.Click();
+        }
     }
 }

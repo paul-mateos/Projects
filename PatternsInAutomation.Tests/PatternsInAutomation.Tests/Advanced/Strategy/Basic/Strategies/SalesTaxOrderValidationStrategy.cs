@@ -1,11 +1,11 @@
 ﻿using System;
-using PatternsInAutomation.Tests.Advanced.Strategy.Base;
+using PatternsInAutomation.Tests.Advanced.Strategy.Basic.Base;
 using PatternsInAutomation.Tests.Advanced.Strategy.Data;
 using PatternsInAutomation.Tests.Advanced.Strategy.Enums;
 using PatternsInAutomation.Tests.Advanced.Strategy.Pages.PlaceOrderPage;
 using PatternsInAutomation.Tests.Advanced.Strategy.Services;
 
-namespace PatternsInAutomation.Tests.Advanced.Strategy.Strategies
+namespace PatternsInAutomation.Tests.Basic.Strategy.Basic.Strategies
 {
     public class SalesTaxOrderValidationStrategy : IOrderValidationStrategy
     {
@@ -18,9 +18,9 @@ namespace PatternsInAutomation.Tests.Advanced.Strategy.Strategies
 
         public void ValidateOrderSummary(string itemsPrice, ClientPurchaseInfo clientPurchaseInfo)
         {
-            States currentState = (States)Enum.Parse(typeof(States), clientPurchaseInfo.State);
+            States currentState = (States)Enum.Parse(typeof(States), clientPurchaseInfo.ShippingInfo.State);
             decimal currentItemPrice = decimal.Parse(itemsPrice);
-            decimal salesTax = this.SalesTaxCalculationService.Calculate(currentItemPrice, currentState, clientPurchaseInfo.Zip);
+            decimal salesTax = this.SalesTaxCalculationService.Calculate(currentItemPrice, currentState, clientPurchaseInfo.ShippingInfo.Zip);
 
             PlaceOrderPage.Instance.Validate().EstimatedTaxPrice(salesTax.ToString());
         }

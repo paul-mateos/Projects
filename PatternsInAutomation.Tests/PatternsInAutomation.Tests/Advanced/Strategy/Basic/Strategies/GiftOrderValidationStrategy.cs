@@ -1,9 +1,9 @@
-﻿using PatternsInAutomation.Tests.Advanced.Strategy.Base;
+﻿using PatternsInAutomation.Tests.Advanced.Strategy.Basic.Base;
 using PatternsInAutomation.Tests.Advanced.Strategy.Data;
 using PatternsInAutomation.Tests.Advanced.Strategy.Pages.PlaceOrderPage;
 using PatternsInAutomation.Tests.Advanced.Strategy.Services;
 
-namespace PatternsInAutomation.Tests.Advanced.Strategy.Strategies
+namespace PatternsInAutomation.Tests.Basic.Strategy.Basic.Strategies
 {
     public class GiftOrderValidationStrategy : IOrderValidationStrategy
     {

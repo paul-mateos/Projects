@@ -1,14 +1,14 @@
 ﻿using System;
-using PatternsInAutomation.Tests.Advanced.Strategy.Base;
+using PatternsInAutomation.Tests.Advanced.Strategy.Advanced.Base;
 using PatternsInAutomation.Tests.Advanced.Strategy.Data;
 using PatternsInAutomation.Tests.Advanced.Strategy.Enums;
 using PatternsInAutomation.Tests.Advanced.Strategy.Pages.PlaceOrderPage;
 
-namespace PatternsInAutomation.Tests.Advanced.Strategy.Strategies
+namespace PatternsInAutomation.Tests.Advanced.Strategy.Advanced.Strategies
 {
-    public class VatTaxOrderValidationStrategy : IOrderValidationStrategy
+    public class VatTaxOrderPurchaseStrategy : IOrderPurchaseStrategy
     {
-        public VatTaxOrderValidationStrategy()
+        public VatTaxOrderPurchaseStrategy()
         {
             this.VatTaxCalculationService = new VatTaxCalculationService();
         }
@@ -17,11 +17,20 @@ namespace PatternsInAutomation.Tests.Advanced.Strategy.Strategies
 
         public void ValidateOrderSummary(string itemsPrice, ClientPurchaseInfo clientPurchaseInfo)
         {
-            Countries currentCountry = (Countries)Enum.Parse(typeof(Countries), clientPurchaseInfo.Country);
+            Countries currentCountry = (Countries)Enum.Parse(typeof(Countries), clientPurchaseInfo.BillingInfo.Country);
             decimal currentItemPrice = decimal.Parse(itemsPrice);
             decimal vatTax = this.VatTaxCalculationService.Calculate(currentItemPrice, currentCountry);
 
             PlaceOrderPage.Instance.Validate().EstimatedTaxPrice(vatTax.ToString());
+        }
+        public void ValidateClientPurchaseInfo(ClientPurchaseInfo clientPurchaseInfo)
+        {
+           // Throw a new Argument exection if the country is not part of the EU Union.
+        }
+
+        public void PerformActionsPreviewShoppingCartPage(ClientPurchaseInfo clientPurchaseInfo)
+        {
+            // Perform actions on the payment page.
         }
     }
 }

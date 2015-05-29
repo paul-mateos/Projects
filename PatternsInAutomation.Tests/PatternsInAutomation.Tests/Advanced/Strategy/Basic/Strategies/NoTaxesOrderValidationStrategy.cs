@@ -1,8 +1,8 @@
-﻿using PatternsInAutomation.Tests.Advanced.Strategy.Base;
+﻿using PatternsInAutomation.Tests.Advanced.Strategy.Basic.Base;
 using PatternsInAutomation.Tests.Advanced.Strategy.Data;
 using PatternsInAutomation.Tests.Advanced.Strategy.Pages.PlaceOrderPage;
 
-namespace PatternsInAutomation.Tests.Advanced.Strategy.Strategies
+namespace PatternsInAutomation.Tests.Basic.Strategy.Basic.Strategies
 {
     class NoTaxesOrderValidationStrategy : IOrderValidationStrategy
     {

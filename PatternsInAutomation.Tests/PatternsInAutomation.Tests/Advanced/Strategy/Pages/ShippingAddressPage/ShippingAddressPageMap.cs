@@ -79,5 +79,13 @@ namespace PatternsInAutomation.Tests.Advanced.Strategy.Pages.ShippingAddressPage
                 return this.browser.FindElement(By.CssSelector("input.a-button-text"));
             }
         }
+
+        public IWebElement DifferemtFromBillingCheckbox
+        {
+            get
+            {
+                return this.browser.FindElement(By.Id("isBillingAddress"));
+            }
+        }
     }
 }

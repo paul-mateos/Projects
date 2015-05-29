@@ -12,12 +12,33 @@ namespace PatternsInAutomation.Tests.Advanced.Strategy.Pages.ShippingAddressPage
 
         public void FillShippingInfo(ClientPurchaseInfo clientInfo)
         {
-            this.Map.CountryDropDown.SelectByText(clientInfo.Country);
-            this.Map.FullNameInput.SendKeys(clientInfo.FullName);
-            this.Map.Address1Input.SendKeys(clientInfo.Address1);
-            this.Map.CityInput.SendKeys(clientInfo.City);
-            this.Map.ZipInput.SendKeys(clientInfo.Zip);
-            this.Map.PhoneInput.SendKeys(clientInfo.Phone);
+            this.FillAddressInfoInternal(clientInfo);
+        }
+
+        public void ClickDifferentBillingCheckBox(ClientPurchaseInfo clientInfo)
+        {
+            if (clientInfo.BillingInfo != null)
+            {
+                this.Map.DifferemtFromBillingCheckbox.Click();
+            }            
+        }
+
+        public void FillBillingInfo(ClientPurchaseInfo clientInfo)
+        {
+            if (clientInfo.BillingInfo != null)
+            {
+                this.FillAddressInfoInternal(clientInfo);
+            }             
+        }
+
+        private void FillAddressInfoInternal(ClientPurchaseInfo clientInfo)
+        {
+            this.Map.CountryDropDown.SelectByText(clientInfo.ShippingInfo.Country);
+            this.Map.FullNameInput.SendKeys(clientInfo.ShippingInfo.FullName);
+            this.Map.Address1Input.SendKeys(clientInfo.ShippingInfo.Address1);
+            this.Map.CityInput.SendKeys(clientInfo.ShippingInfo.City);
+            this.Map.ZipInput.SendKeys(clientInfo.ShippingInfo.Zip);
+            this.Map.PhoneInput.SendKeys(clientInfo.ShippingInfo.Phone);
             this.Map.ShipToThisAddress.Click();
         }
     }

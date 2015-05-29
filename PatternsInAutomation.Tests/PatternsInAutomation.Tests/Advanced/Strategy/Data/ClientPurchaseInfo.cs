@@ -4,21 +4,21 @@ namespace PatternsInAutomation.Tests.Advanced.Strategy.Data
 {
     public class ClientPurchaseInfo
     {
-        public string FullName { get; set; }
+        public ClientPurchaseInfo(ClientAddressInfo addressInfo)
+        {
+            this.BillingInfo = addressInfo;
+            this.ShippingInfo = addressInfo;
+        }
 
-        public string Country { get; set; }
+        public ClientPurchaseInfo(ClientAddressInfo billingInfo, ClientAddressInfo shippingInfo)
+        {
+            this.BillingInfo = billingInfo;
+            this.ShippingInfo = shippingInfo;
+        }
 
-        public string Address1 { get; set; }
+        public ClientAddressInfo BillingInfo { get; set; }
 
-        public string City { get; set; }
-
-        public string Phone { get; set; }
-
-        public string Zip { get; set; }
-
-        public string Email { get; set; }
-
-        public string State { get; set; }
+        public ClientAddressInfo ShippingInfo { get; set; }
 
         public string DeliveryType { get; set; }
 

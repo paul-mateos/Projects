@@ -20,5 +20,13 @@ namespace PatternsInAutomation.Tests.Advanced.Strategy.Pages.PreviewShoppingCart
                 return this.browser.FindElement(By.Id("a-autoid-0-announce"));
             }
         }
+
+        public IWebElement ThisOrderContainsGiftCheckbox
+        {
+            get
+            {
+                return this.browser.FindElement(By.Id("sc-buy-box-gift-checkbox"));
+            }
+        }
     }
 }

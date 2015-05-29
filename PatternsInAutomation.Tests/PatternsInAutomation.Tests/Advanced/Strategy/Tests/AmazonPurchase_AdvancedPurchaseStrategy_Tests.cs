@@ -1,12 +1,13 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using PatternsInAutomation.Tests.Advanced.Core;
 using PatternsInAutomation.Tests.Advanced.Strategy.Advanced.Base;
+using PatternsInAutomation.Tests.Advanced.Strategy.Advanced.Strategies;
 using PatternsInAutomation.Tests.Advanced.Strategy.Data;
 
 namespace PatternsInAutomation.Tests.Advanced.Strategy.Tests
 {
     [TestClass]
-    public class AmazonPurchase_PurchaseStrategy_Tests
+    public class AmazonPurchase_AdvancedPurchaseStrategy_Tests
     { 
         [TestInitialize]
         public void SetupTest()
@@ -25,8 +26,7 @@ namespace PatternsInAutomation.Tests.Advanced.Strategy.Tests
         {
             string itemUrl = "/Selenium-Testing-Cookbook-Gundecha-Unmesh/dp/1849515743";
             string itemPrice = "40.49";
-            ClientPurchaseInfo clientPurchaseInfo = new ClientPurchaseInfo(
-            new ClientAddressInfo()
+            var shippingInfo = new ClientAddressInfo()
             {
                 FullName = "John Smith",
                 Country = "United States",
@@ -35,9 +35,19 @@ namespace PatternsInAutomation.Tests.Advanced.Strategy.Tests
                 City = "New York City",
                 Zip = "10001-2121",
                 Phone = "00164644885569"
-            })
+            };
+            var billingInfo = new ClientAddressInfo()
             {
-                GiftWrapping = Enums.GiftWrappingStyles.None
+                FullName = "Anton Angelov",
+                Country = "Bulgaria",
+                Address1 = "950 Avenue of the Americas",
+                City = "Sofia",
+                Zip = "1672",
+                Phone = "0894464647"
+            };
+            ClientPurchaseInfo clientPurchaseInfo = new ClientPurchaseInfo(billingInfo, shippingInfo)
+            {
+                GiftWrapping = Enums.GiftWrappingStyles.Fancy
             };
             ClientLoginInfo clientLoginInfo = new ClientLoginInfo()
             {
@@ -45,7 +55,8 @@ namespace PatternsInAutomation.Tests.Advanced.Strategy.Tests
                 Password = "ASDFG_12345"
             };
 
-            new PurchaseContext(new PatternsInAutomation.Tests.Advanced.Strategy.Advanced.Strategies.SalesTaxOrderPurchaseStrategy()).PurchaseItem(itemUrl, itemPrice, clientLoginInfo, clientPurchaseInfo);
+            new PurchaseContext(new SalesTaxOrderPurchaseStrategy(), new VatTaxOrderPurchaseStrategy())
+            .PurchaseItem(itemUrl, itemPrice, clientLoginInfo, clientPurchaseInfo);
         }
     }
 }

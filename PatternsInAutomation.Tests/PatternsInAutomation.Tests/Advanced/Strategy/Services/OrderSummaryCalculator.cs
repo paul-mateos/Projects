@@ -31,7 +31,7 @@ namespace PatternsInAutomation.Tests.Advanced.Strategy.Services
 
         public decimal CalculateShippingPrice(ClientPurchaseInfo clientPurchaseInfo)
         {
-            decimal shippingCosts = this.ShippingCostsCalculationService.Calculate(clientPurchaseInfo.Country, clientPurchaseInfo.State, clientPurchaseInfo.Address1, clientPurchaseInfo.Zip);
+            decimal shippingCosts = this.ShippingCostsCalculationService.Calculate(clientPurchaseInfo.ShippingInfo.Country, clientPurchaseInfo.ShippingInfo.State, clientPurchaseInfo.ShippingInfo.Address1, clientPurchaseInfo.ShippingInfo.Zip);
             return shippingCosts;
         }
     }
