@@ -27,10 +27,5 @@ namespace PatternsInAutomation.Tests.Advanced.Strategy.Advanced.Strategies
         {
            // Throw a new Argument exection if the country is not part of the EU Union.
         }
-
-        public void PerformActionsPreviewShoppingCartPage(ClientPurchaseInfo clientPurchaseInfo)
-        {
-            // Perform actions on the payment page.
-        }
     }
 }

@@ -30,10 +30,5 @@ namespace PatternsInAutomation.Tests.Advanced.Strategy.Advanced.Strategies
                 throw new ArgumentException("The gift wrapping style cannot be set to None if the GiftOrderPurchaseStrategy should be executed.");
             }
         }
-
-        public void PerformActionsPreviewShoppingCartPage(ClientPurchaseInfo clientPurchaseInfo)
-        {
-            PreviewShoppingCartPage.Instance.CheckOrderContainsGift();
-        }
     }
 }

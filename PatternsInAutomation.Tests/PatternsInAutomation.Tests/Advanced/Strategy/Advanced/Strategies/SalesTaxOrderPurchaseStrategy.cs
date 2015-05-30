@@ -32,10 +32,5 @@ namespace PatternsInAutomation.Tests.Advanced.Strategy.Advanced.Strategies
                 throw new ArgumentException("If the NoTaxesOrderPurchaseStrategy is used, the country should be set to United States because otherwise no sales tax is going to be applied.");
             }
         }
-
-        public void PerformActionsPreviewShoppingCartPage(ClientPurchaseInfo clientPurchaseInfo)
-        {
-            // Perform actions on the payment page.
-        }
     }
 }

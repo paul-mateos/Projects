@@ -7,7 +7,5 @@ namespace PatternsInAutomation.Tests.Advanced.Strategy.Advanced.Base
         void ValidateOrderSummary(string itemPrice, ClientPurchaseInfo clientPurchaseInfo);
 
         void ValidateClientPurchaseInfo(ClientPurchaseInfo clientPurchaseInfo);
-
-        void PerformActionsPreviewShoppingCartPage(ClientPurchaseInfo clientPurchaseInfo);
     }
 }

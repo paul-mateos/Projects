@@ -25,10 +25,5 @@ namespace PatternsInAutomation.Tests.Advanced.Strategy.Advanced.Strategies
             }
             // Add another validation for the EU contries because for them a VAT Tax is going to be applied if not VAT ID is set.
         }
-
-        public void PerformActionsPreviewShoppingCartPage(ClientPurchaseInfo clientPurchaseInfo)
-        {
-            // Perform some action on the preview shopping cart page.
-        }
     }
 }
