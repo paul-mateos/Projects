@@ -1,7 +1,8 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using PatternsInAutomation.Tests.Advanced.Core;
-using PatternsInAutomation.Tests.Advanced.Strategy.Advanced.Base;
+using PatternsInAutomation.Tests.Advanced.Strategy.Basic.Base;
 using PatternsInAutomation.Tests.Advanced.Strategy.Data;
+using PatternsInAutomation.Tests.Basic.Strategy.Basic.Strategies;
 
 namespace PatternsInAutomation.Tests.Advanced.Strategy.Tests
 {
@@ -45,7 +46,7 @@ namespace PatternsInAutomation.Tests.Advanced.Strategy.Tests
                 Password = "ASDFG_12345"
             };
 
-            new PurchaseContext(new PatternsInAutomation.Tests.Advanced.Strategy.Advanced.Strategies.SalesTaxOrderPurchaseStrategy()).PurchaseItem(itemUrl, itemPrice, clientLoginInfo, clientPurchaseInfo);
+            new PurchaseContext(new SalesTaxOrderValidationStrategy()).PurchaseItem(itemUrl, itemPrice, clientLoginInfo, clientPurchaseInfo);
         }
     }
 }

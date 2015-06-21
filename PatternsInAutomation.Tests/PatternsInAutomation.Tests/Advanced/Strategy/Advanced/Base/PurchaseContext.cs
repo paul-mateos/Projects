@@ -22,7 +22,6 @@ namespace PatternsInAutomation.Tests.Advanced.Strategy.Advanced.Base
 
             ItemPage.Instance.Navigate(itemUrl);
             ItemPage.Instance.ClickBuyNowButton();
-            this.PerformActionsPreviewShoppingCartPage(clientPurchaseInfo);
             PreviewShoppingCartPage.Instance.ClickProceedToCheckoutButton();
             SignInPage.Instance.Login(clientLoginInfo.Email, clientLoginInfo.Password);
             ShippingAddressPage.Instance.FillShippingInfo(clientPurchaseInfo);
@@ -34,14 +33,6 @@ namespace PatternsInAutomation.Tests.Advanced.Strategy.Advanced.Base
             ShippingPaymentPage.Instance.ClickTopContinueButton();
 
             this.ValidateOrderSummary(itemPrice, clientPurchaseInfo);
-        }
-
-        public void PerformActionsPreviewShoppingCartPage(ClientPurchaseInfo clientPurchaseInfo)
-        {
-            foreach (var currentStrategy in orderpurchaseStrategies)
-            {
-                currentStrategy.PerformActionsPreviewShoppingCartPage(clientPurchaseInfo);
-            }
         }
 
         public void ValidateClientPurchaseInfo(ClientPurchaseInfo clientPurchaseInfo)

@@ -55,7 +55,7 @@ namespace PatternsInAutomation.Tests.Advanced.Strategy.Tests
                 Password = "ASDFG_12345"
             };
 
-            new PurchaseContext(new SalesTaxOrderPurchaseStrategy(), new VatTaxOrderPurchaseStrategy())
+            new PurchaseContext(new SalesTaxOrderPurchaseStrategy(), new VatTaxOrderPurchaseStrategy(), new GiftOrderPurchaseStrategy())
             .PurchaseItem(itemUrl, itemPrice, clientLoginInfo, clientPurchaseInfo);
         }
     }
