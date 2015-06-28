@@ -43,6 +43,13 @@
       <SubType>Content</SubType>
       <DependentUpon>IocPageObjectPattern.classdiagram</DependentUpon>
     </Content>
+    <Content Include="ObserverDesignPattern.classdiagram">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ObserverDesignPattern.classdiagram.layout">
+      <SubType>Content</SubType>
+      <DependentUpon>ObserverDesignPattern.classdiagram</DependentUpon>
+    </Content>
     <Content Include="SingletonDesignPattern.classdiagram">
       <SubType>Content</SubType>
     </Content>

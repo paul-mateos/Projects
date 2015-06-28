@@ -4,6 +4,7 @@
     {
         Firefox,
         InternetExplorer,
-        Chrome
+        Chrome, 
+        NotSet
     }
 }

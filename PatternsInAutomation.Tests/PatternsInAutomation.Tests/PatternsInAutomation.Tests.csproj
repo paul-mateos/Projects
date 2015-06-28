@@ -48,13 +48,13 @@
     <Reference Include="System" />
     <Reference Include="System.Configuration" />
     <Reference Include="System.Drawing" />
-    <Reference Include="WebDriver, Version=2.45.0.0, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="WebDriver, Version=2.46.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\Selenium.WebDriver.2.45.0\lib\net40\WebDriver.dll</HintPath>
+      <HintPath>..\packages\Selenium.WebDriver.2.46.0\lib\net40\WebDriver.dll</HintPath>
     </Reference>
-    <Reference Include="WebDriver.Support, Version=2.45.0.0, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="WebDriver.Support, Version=2.46.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\Selenium.Support.2.45.0\lib\net40\WebDriver.Support.dll</HintPath>
+      <HintPath>..\packages\Selenium.Support.2.46.0\lib\net40\WebDriver.Support.dll</HintPath>
     </Reference>
   </ItemGroup>
   <Choose>
@@ -75,6 +75,17 @@
     <Compile Include="Advanced\Core\Fluent\BaseFluentPageSingleton.cs" />
     <Compile Include="Advanced\Core\Fluent\BasePageElementMap.cs" />
     <Compile Include="Advanced\Core\Fluent\BasePageValidator.cs" />
+    <Compile Include="Advanced\Observer\Classic\Attributes\ExecutionBrowserAttribute.cs" />
+    <Compile Include="Advanced\Observer\Classic\Attributes\KnownIssueAttribute.cs" />
+    <Compile Include="Advanced\Observer\Classic\BaseTestBehaviorObserver.cs" />
+    <Compile Include="Advanced\Observer\Classic\Behaviors\OwnerTestBehaviorObserver.cs" />
+    <Compile Include="Advanced\Observer\Classic\Behaviors\AssociatedBugTestBehaviorObserver.cs" />
+    <Compile Include="Advanced\Observer\Classic\Behaviors\BrowserLaunchTestBehaviorObserver.cs" />
+    <Compile Include="Advanced\Observer\Classic\BingTestsClassicObserver.cs" />
+    <Compile Include="Advanced\Observer\Classic\ITestExecutionSubject.cs" />
+    <Compile Include="Advanced\Observer\Classic\MSTestExecutionSubject.cs" />
+    <Compile Include="Advanced\Observer\Classic\BaseTest.cs" />
+    <Compile Include="Advanced\Observer\Classic\ITestBehaviorObserver.cs" />
     <Compile Include="Advanced\Strategy\Advanced\Base\IOrderPurchaseStrategy.cs" />
     <Compile Include="Advanced\Strategy\Advanced\Base\PurchaseContext.cs" />
     <Compile Include="Advanced\Strategy\Advanced\Base\PurchaseFacade.cs" />
