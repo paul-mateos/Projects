@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace PatternsInAutomation.Tests.Advanced.Observer.Classic.Attributes
+namespace PatternsInAutomation.Tests.Advanced.Observer.Attributes
 {
     [AttributeUsage(AttributeTargets.Method, Inherited = true, AllowMultiple = false)]
     public class KnownIssueAttribute : Attribute

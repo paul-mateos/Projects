@@ -4,15 +4,10 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using PatternsInAutomation.Tests.Advanced.Core;
 using PatternsInAutomation.Tests.Advanced.Observer.Attributes;
 
-namespace PatternsInAutomation.Tests.Advanced.Observer.Classic.Behaviors
+namespace PatternsInAutomation.Tests.Advanced.Observer.Advanced.ObservableObserver.Behaviors
 {
     public class BrowserLaunchTestBehaviorObserver : BaseTestBehaviorObserver
     {
-        public BrowserLaunchTestBehaviorObserver(ITestExecutionSubject testExecutionSubject)
-            : base(testExecutionSubject)
-        {
-        }
-
         public override void PreTestInit(TestContext context, MemberInfo memberInfo)
         {
             var browserType = this.GetExecutionBrowser(memberInfo);

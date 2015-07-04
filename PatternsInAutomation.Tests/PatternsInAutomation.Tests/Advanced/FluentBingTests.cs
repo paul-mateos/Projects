@@ -1,8 +1,7 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using P = PatternsInAutomation.Tests.Advanced.Fluent.BingMainPage;
 using PatternsInAutomation.Tests.Advanced.Core;
 using PatternsInAutomation.Tests.Advanced.Fluent.Enums;
+using P = PatternsInAutomation.Tests.Advanced.Fluent.BingMainPage;
 
 namespace PatternsInAutomation.Tests.Advanced
 {

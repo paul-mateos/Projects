@@ -3,11 +3,11 @@ using PatternsInAutomation.Tests.Advanced.Core;
 using PatternsInAutomation.Tests.Advanced.Observer.Attributes;
 using B = PatternsInAutomation.Tests.Beginners.Selenium.Bing.Pages;
 
-namespace PatternsInAutomation.Tests.Advanced.Observer.Classic
+namespace PatternsInAutomation.Tests.Advanced.Observer.Advanced.DotNetEvents
 {
     [TestClass]
     [ExecutionBrowser(BrowserTypes.Chrome)]
-    public class BingTestsClassicObserver : BaseTest
+    public class BingTestsDotNetEvents : BaseTest
     {
         [TestMethod]
         [ExecutionBrowser(BrowserTypes.Firefox)]

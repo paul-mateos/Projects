@@ -1,25 +1,19 @@
 ﻿using System;
 using System.Reflection;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
 using PatternsInAutomation.Tests.Advanced.Core;
 using PatternsInAutomation.Tests.Advanced.Observer.Attributes;
 
-namespace PatternsInAutomation.Tests.Advanced.Observer.Classic.Behaviors
+namespace PatternsInAutomation.Tests.Advanced.Observer.Advanced.DotNetEvents.Behaviors
 {
     public class BrowserLaunchTestBehaviorObserver : BaseTestBehaviorObserver
     {
-        public BrowserLaunchTestBehaviorObserver(ITestExecutionSubject testExecutionSubject)
-            : base(testExecutionSubject)
+        protected override void PreTestInit(object sender, TestExecutionEventArgs e)
         {
-        }
-
-        public override void PreTestInit(TestContext context, MemberInfo memberInfo)
-        {
-            var browserType = this.GetExecutionBrowser(memberInfo);
+            var browserType = this.GetExecutionBrowser(e.MemberInfo);
             Driver.StartBrowser(browserType);
         }
 
-        public override void PostTestCleanup(TestContext context, MemberInfo memberInfo)
+        protected override void PostTestCleanup(object sender, TestExecutionEventArgs e)
         {
             Driver.StopBrowser();
         }

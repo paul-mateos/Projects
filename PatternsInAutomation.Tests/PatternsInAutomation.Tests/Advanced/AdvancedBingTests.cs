@@ -1,7 +1,6 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using P = PatternsInAutomation.Tests.Advanced.BingMainPage;
 using PatternsInAutomation.Tests.Advanced.Core;
+using P = PatternsInAutomation.Tests.Advanced.BingMainPage;
 
 namespace PatternsInAutomation.Tests.Advanced
 {
