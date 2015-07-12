@@ -7,7 +7,7 @@ namespace PatternsInAutomation.Tests.Advanced.Observer.Advanced.ObservableObserv
 {
     public class AssociatedBugTestBehaviorObserver : BaseTestBehaviorObserver
     {
-        public override void PostTestCleanup(TestContext context, MemberInfo memberInfo)
+        protected override void PostTestCleanup(TestContext context, MemberInfo memberInfo)
         {
             int? bugId = this.TryGetBugId(memberInfo);
             if (bugId.HasValue)

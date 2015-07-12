@@ -8,13 +8,13 @@ namespace PatternsInAutomation.Tests.Advanced.Observer.Advanced.ObservableObserv
 {
     public class BrowserLaunchTestBehaviorObserver : BaseTestBehaviorObserver
     {
-        public override void PreTestInit(TestContext context, MemberInfo memberInfo)
+        protected override void PreTestInit(TestContext context, MemberInfo memberInfo)
         {
             var browserType = this.GetExecutionBrowser(memberInfo);
             Driver.StartBrowser(browserType);
         }
 
-        public override void PostTestCleanup(TestContext context, MemberInfo memberInfo)
+        protected override void PostTestCleanup(TestContext context, MemberInfo memberInfo)
         {
             Driver.StopBrowser();
         }

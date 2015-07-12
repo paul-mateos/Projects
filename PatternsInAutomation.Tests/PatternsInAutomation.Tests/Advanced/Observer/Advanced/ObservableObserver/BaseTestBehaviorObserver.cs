@@ -6,7 +6,7 @@ using PatternsInAutomation.Tests.Advanced.Observer.Classic;
 
 namespace PatternsInAutomation.Tests.Advanced.Observer.Advanced.ObservableObserver
 {
-    public class BaseTestBehaviorObserver : ITestBehaviorObserver, IObserver<ExecutionStatus>
+    public class BaseTestBehaviorObserver : IObserver<ExecutionStatus>
     {
         private IDisposable cancellation;
 
@@ -53,23 +53,23 @@ namespace PatternsInAutomation.Tests.Advanced.Observer.Advanced.ObservableObserv
         {
         }
 
-        public virtual void PreTestInit(TestContext context, MemberInfo memberInfo)
+        protected virtual void PreTestInit(TestContext context, MemberInfo memberInfo)
         {
         }
 
-        public virtual void PostTestInit(TestContext context, MemberInfo memberInfo)
+        protected virtual void PostTestInit(TestContext context, MemberInfo memberInfo)
         {
         }
 
-        public virtual void PreTestCleanup(TestContext context, MemberInfo memberInfo)
+        protected virtual void PreTestCleanup(TestContext context, MemberInfo memberInfo)
         {
         }
 
-        public virtual void PostTestCleanup(TestContext context, MemberInfo memberInfo)
+        protected virtual void PostTestCleanup(TestContext context, MemberInfo memberInfo)
         {
         }
 
-        public virtual void TestInstantiated(MemberInfo memberInfo)
+        protected virtual void TestInstantiated(MemberInfo memberInfo)
         {
         }
     }

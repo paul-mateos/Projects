@@ -6,7 +6,7 @@ namespace PatternsInAutomation.Tests.Advanced.Observer.Advanced.ObservableObserv
 {
     public class OwnerTestBehaviorObserver : BaseTestBehaviorObserver
     {
-        public override void PreTestInit(TestContext context, MemberInfo memberInfo)
+        protected override void PreTestInit(TestContext context, MemberInfo memberInfo)
         {
             this.ThrowExceptionIfOwnerAttributeNotSet(memberInfo);
         }

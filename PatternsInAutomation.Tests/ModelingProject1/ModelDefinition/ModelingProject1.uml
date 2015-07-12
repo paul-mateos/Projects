@@ -2807,6 +2807,556 @@
         </ownedAttributesInternal>
       </class>
     </packageHasNamedElement>
+    <packageHasNamedElement>
+      <class
+        Id="152be9ff-60f6-4973-902f-fb3187617dc4"
+        name="BaseTest"
+        isAbstract="false"
+        isLeaf="false"
+        isActiveClass="false">
+        <targetEnds>
+          <association
+            Id="5f4739aa-14cf-4588-b66b-ec3e887b4d99"
+            isDerived="false"
+            sourceEndRoleName="BaseTest"
+            targetEndRoleName="MSTestExecutionProvider"
+            isLeaf="false"
+            isAbstract="false">
+            <classMoniker
+              Id="2c80cfdd-f49b-486d-99cb-e48a807283e0"
+              LastKnownName="MSTestExecutionProvider"
+              LastKnownLocation="ModelingProject1.uml" />
+            <relationshipOwnedElementsInternal>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="0d97f1ec-0b84-4bf9-8efc-b62a58f09975"
+                  name="BaseTest"
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="None"
+                  isComposite="false"
+                  isNavigableOwned="false" />
+              </associationHasOwnedEnds>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="0a833497-32a2-47f0-a52a-604b43663c3f"
+                  name="MSTestExecutionProvider"
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="None"
+                  isComposite="false" />
+              </associationHasOwnedEnds>
+            </relationshipOwnedElementsInternal>
+          </association>
+        </targetEnds>
+        <ownedAttributesInternal>
+          <property
+            Id="acdebece-ba17-4c87-a3fd-b3708bc7b475"
+            name="currentTestExecutionProvider"
+            isLeaf="false"
+            isStatic="false"
+            isReadOnly="false"
+            isUnique="false"
+            isDerived="false"
+            isDerivedUnion="false"
+            aggregation="None"
+            isComposite="false" />
+        </ownedAttributesInternal>
+        <ownedOperationsInternal>
+          <operation
+            Id="2a2a35e4-ccab-4c1e-83e1-37fd6546d6a3"
+            name="CoreTestCleanup"
+            isLeaf="false"
+            isStatic="false"
+            isAbstract="false"
+            concurrency="Sequential"
+            isQuery="false" />
+          <operation
+            Id="cd214b90-6710-44f6-bf77-f272c9ad359f"
+            name="CoreTestInit"
+            isLeaf="false"
+            isStatic="false"
+            isAbstract="false"
+            concurrency="Sequential"
+            isQuery="false" />
+          <operation
+            Id="fb6e4756-a7a2-405f-a997-a77888ee7985"
+            name="TestInit"
+            isLeaf="false"
+            isStatic="false"
+            isAbstract="false"
+            concurrency="Sequential"
+            isQuery="false" />
+          <operation
+            Id="2580fdb5-c943-4db3-8879-47163532fd51"
+            name="TestCleanup"
+            isLeaf="false"
+            isStatic="false"
+            isAbstract="false"
+            concurrency="Sequential"
+            isQuery="false" />
+        </ownedOperationsInternal>
+      </class>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <class
+        Id="2c80cfdd-f49b-486d-99cb-e48a807283e0"
+        name="MSTestExecutionProvider"
+        isAbstract="false"
+        isLeaf="false"
+        isActiveClass="false">
+        <suppliersInternal>
+          <dependency
+            Id="f42036b0-eca0-4b35-9564-59ea70d64732">
+            <classMoniker
+              Id="143453b3-cb67-4255-8238-f447e37cf669"
+              LastKnownName="Unsubscriber"
+              LastKnownLocation="ModelingProject1.uml" />
+          </dependency>
+          <dependency
+            Id="ffd031d9-b47c-42aa-a3ea-541e41e041c0">
+            <classMoniker
+              Id="f1f628d7-fcc1-46d0-877d-8c253683f6c9"
+              LastKnownName="ExecutionStatus"
+              LastKnownLocation="ModelingProject1.uml" />
+          </dependency>
+        </suppliersInternal>
+        <ownedAttributesInternal>
+          <property
+            Id="d8672db4-bf9b-4e9b-b544-ad86d18abbfd"
+            name="testBehaviorObservers"
+            isLeaf="false"
+            isStatic="false"
+            isReadOnly="false"
+            isUnique="false"
+            isDerived="false"
+            isDerivedUnion="false"
+            aggregation="None"
+            isComposite="false" />
+        </ownedAttributesInternal>
+        <ownedOperationsInternal>
+          <operation
+            Id="a191b9b6-7cbc-40d0-82f4-317e3d33d6ac"
+            name="PreTestInit"
+            isLeaf="false"
+            isStatic="false"
+            isAbstract="false"
+            concurrency="Sequential"
+            isQuery="false" />
+          <operation
+            Id="e4f35652-51fd-4b87-990d-53d53fce1414"
+            name="PostTestInit"
+            isLeaf="false"
+            isStatic="false"
+            isAbstract="false"
+            concurrency="Sequential"
+            isQuery="false" />
+          <operation
+            Id="78733a5c-691a-4143-b431-854e09b32a05"
+            name="PreTestCleanup"
+            isLeaf="false"
+            isStatic="false"
+            isAbstract="false"
+            concurrency="Sequential"
+            isQuery="false" />
+          <operation
+            Id="3426b2eb-1aff-4798-9b1d-803c5310bf21"
+            name="PostTestCleanup"
+            isLeaf="false"
+            isStatic="false"
+            isAbstract="false"
+            concurrency="Sequential"
+            isQuery="false" />
+          <operation
+            Id="1bf517ed-bbda-4caa-a806-982e916484ba"
+            name="TestInstantiated"
+            isLeaf="false"
+            isStatic="false"
+            isAbstract="false"
+            concurrency="Sequential"
+            isQuery="false" />
+          <operation
+            Id="e3dbc4b4-217c-4593-bf17-6f73c62ad261"
+            name="Subscribe"
+            isLeaf="false"
+            isStatic="false"
+            isAbstract="false"
+            concurrency="Sequential"
+            isQuery="false" />
+        </ownedOperationsInternal>
+      </class>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <Interface
+        Id="7457a9f7-c6d0-4f05-b0c2-b73ccd01f7de"
+        name="ITestExecutionProvider"
+        isAbstract="false"
+        isLeaf="false">
+        <suppliersInternal>
+          <dependency
+            Id="6a175a30-b87b-4241-804f-c2497d8cfa94">
+            <classMoniker
+              Id="2c80cfdd-f49b-486d-99cb-e48a807283e0"
+              LastKnownName="MSTestExecutionProvider"
+              LastKnownLocation="ModelingProject1.uml" />
+          </dependency>
+          <dependency
+            Id="f5709de5-f5b0-425b-99b2-aea2f2a4d1df">
+            <classMoniker
+              Id="f1f628d7-fcc1-46d0-877d-8c253683f6c9"
+              LastKnownName="ExecutionStatus"
+              LastKnownLocation="ModelingProject1.uml" />
+          </dependency>
+        </suppliersInternal>
+        <ownedOperations>
+          <operation
+            Id="e7ebe4ad-b3c1-4631-819a-765d4f8c9947"
+            name="PreTestInit"
+            isLeaf="false"
+            isStatic="false"
+            isAbstract="true"
+            concurrency="Sequential"
+            isQuery="false" />
+          <operation
+            Id="4934f39e-326f-4cf4-993f-742c4f78ef0b"
+            name="PostTestInit"
+            isLeaf="false"
+            isStatic="false"
+            isAbstract="true"
+            concurrency="Sequential"
+            isQuery="false" />
+          <operation
+            Id="5784c1dc-7536-44cd-9542-d5b1ff3a5c8a"
+            name="PreTestCleanup"
+            isLeaf="false"
+            isStatic="false"
+            isAbstract="true"
+            concurrency="Sequential"
+            isQuery="false" />
+          <operation
+            Id="06fc5681-c9c3-4375-b2bf-2ab39a67112f"
+            name="PostTestCleanup"
+            isLeaf="false"
+            isStatic="false"
+            isAbstract="true"
+            concurrency="Sequential"
+            isQuery="false" />
+          <operation
+            Id="7812551a-8164-4c4f-8499-109bd843f592"
+            name="TestInstantiated"
+            isLeaf="false"
+            isStatic="false"
+            isAbstract="true"
+            concurrency="Sequential"
+            isQuery="false" />
+        </ownedOperations>
+      </Interface>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <class
+        Id="143453b3-cb67-4255-8238-f447e37cf669"
+        name="Unsubscriber"
+        isAbstract="false"
+        isLeaf="false"
+        isActiveClass="false">
+        <ownedOperationsInternal>
+          <operation
+            Id="2c047b1a-5701-4750-a1fe-50a7b8cfde82"
+            name="Dispose"
+            isLeaf="false"
+            isStatic="false"
+            isAbstract="false"
+            concurrency="Sequential"
+            isQuery="false" />
+        </ownedOperationsInternal>
+      </class>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <class
+        Id="f1f628d7-fcc1-46d0-877d-8c253683f6c9"
+        name="ExecutionStatus"
+        isAbstract="false"
+        isLeaf="false"
+        isActiveClass="false">
+        <ownedAttributesInternal>
+          <property
+            Id="3a806f0f-5190-427c-b681-f35276439ced"
+            name="TestContext"
+            isLeaf="false"
+            isStatic="false"
+            isReadOnly="false"
+            isUnique="false"
+            isDerived="false"
+            isDerivedUnion="false"
+            aggregation="None"
+            isComposite="false" />
+          <property
+            Id="1db2df86-d3ca-4100-a6c8-5b238de1c097"
+            name="MemberInfo"
+            isLeaf="false"
+            isStatic="false"
+            isReadOnly="false"
+            isUnique="false"
+            isDerived="false"
+            isDerivedUnion="false"
+            aggregation="None"
+            isComposite="false" />
+          <property
+            Id="64ddc231-2afd-48ee-9ae9-c98f176edfbb"
+            name="ExecutionPhase"
+            isLeaf="false"
+            isStatic="false"
+            isReadOnly="false"
+            isUnique="false"
+            isDerived="false"
+            isDerivedUnion="false"
+            aggregation="None"
+            isComposite="false" />
+        </ownedAttributesInternal>
+      </class>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <class
+        Id="3ab56635-7a01-4834-8b49-ced85caa06bd"
+        name="BaseTestBehaviorObserver"
+        isAbstract="false"
+        isLeaf="false"
+        isActiveClass="false">
+        <suppliersInternal>
+          <dependency
+            Id="96d41b49-acd9-457a-a5e8-7ce5a82b0952">
+            <classMoniker
+              Id="f1f628d7-fcc1-46d0-877d-8c253683f6c9"
+              LastKnownName="ExecutionStatus"
+              LastKnownLocation="ModelingProject1.uml" />
+          </dependency>
+        </suppliersInternal>
+        <targetEnds>
+          <association
+            Id="4be5dcd2-1bcc-41e8-8acb-8088c3e8f9ef"
+            isDerived="false"
+            sourceEndRoleName="BaseTestBehaviorObserver"
+            targetEndRoleName="MSTestExecutionProvider"
+            isLeaf="false"
+            isAbstract="false">
+            <classMoniker
+              Id="2c80cfdd-f49b-486d-99cb-e48a807283e0"
+              LastKnownName="MSTestExecutionProvider"
+              LastKnownLocation="ModelingProject1.uml" />
+            <relationshipOwnedElementsInternal>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="040b7e1a-6184-4f3d-a9ca-d45a36bd4cc8"
+                  name="BaseTestBehaviorObserver"
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="Composite"
+                  isComposite="false"
+                  isNavigableOwned="false" />
+              </associationHasOwnedEnds>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="d557f96d-6eb8-449e-98b6-42b2116aae89"
+                  name="MSTestExecutionProvider"
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="None"
+                  isComposite="true" />
+              </associationHasOwnedEnds>
+            </relationshipOwnedElementsInternal>
+          </association>
+        </targetEnds>
+        <ownedOperationsInternal>
+          <operation
+            Id="9a5f3d3b-4357-4d2e-ab59-874815aa3b5f"
+            name="Subscribe"
+            isLeaf="false"
+            isStatic="false"
+            isAbstract="false"
+            concurrency="Sequential"
+            isQuery="false" />
+          <operation
+            Id="b00cb0cf-94a4-4395-90be-5ad3b3649454"
+            name="Unsubscribe"
+            isLeaf="false"
+            isStatic="false"
+            isAbstract="false"
+            concurrency="Sequential"
+            isQuery="false" />
+          <operation
+            Id="011da13f-0366-4a88-8c65-66fae455f65d"
+            name="OnNext"
+            isLeaf="false"
+            isStatic="false"
+            isAbstract="false"
+            concurrency="Sequential"
+            isQuery="false" />
+          <operation
+            Id="fdefa09e-bbcf-46ae-9583-cbeba4305765"
+            name="OnError"
+            isLeaf="false"
+            isStatic="false"
+            isAbstract="false"
+            concurrency="Sequential"
+            isQuery="false" />
+          <operation
+            Id="71f57fdc-71a9-4f4e-b434-d6195a3e30bb"
+            name="OnCompleted"
+            isLeaf="false"
+            isStatic="false"
+            isAbstract="false"
+            concurrency="Sequential"
+            isQuery="false" />
+          <operation
+            Id="21b50730-552f-4a9f-b63e-24394d249688"
+            name="PreTestInit"
+            isLeaf="false"
+            isStatic="false"
+            isAbstract="false"
+            concurrency="Sequential"
+            isQuery="false" />
+          <operation
+            Id="b5dbc522-e657-4470-b0e8-19e0b91458e6"
+            name="PostTestInit"
+            isLeaf="false"
+            isStatic="false"
+            isAbstract="false"
+            concurrency="Sequential"
+            isQuery="false" />
+          <operation
+            Id="09d0ab1c-5f3a-4d4c-a09a-ba2a28a0264c"
+            name="PreTestCleanup"
+            isLeaf="false"
+            isStatic="false"
+            isAbstract="false"
+            concurrency="Sequential"
+            isQuery="false" />
+          <operation
+            Id="a1f2b7e1-dbb5-4aa1-ac54-436af58b8776"
+            name="PostTestCleanup"
+            isLeaf="false"
+            isStatic="false"
+            isAbstract="false"
+            concurrency="Sequential"
+            isQuery="false" />
+          <operation
+            Id="17442786-036a-4085-b282-458dc5e7f65e"
+            name="TestInstantiated"
+            isLeaf="false"
+            isStatic="false"
+            isAbstract="false"
+            concurrency="Sequential"
+            isQuery="false" />
+        </ownedOperationsInternal>
+      </class>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <class
+        Id="e4a54d2a-621f-4e25-8968-74aca8e5eb5e"
+        name="OwnerBehaviorObserver"
+        isAbstract="false"
+        isLeaf="false"
+        isActiveClass="false">
+        <generalsInternal>
+          <generalization
+            Id="3ddb2688-e9be-45f9-9376-921ff1af18e9"
+            isSubstitutable="false">
+            <classMoniker
+              Id="3ab56635-7a01-4834-8b49-ced85caa06bd"
+              LastKnownName="BaseTestBehaviorObserver"
+              LastKnownLocation="ModelingProject1.uml" />
+          </generalization>
+        </generalsInternal>
+        <ownedOperationsInternal>
+          <operation
+            Id="ff659f7d-8ce0-4db0-8d45-6b3cb38895a2"
+            name="PostTestCleanup"
+            isLeaf="false"
+            isStatic="false"
+            isAbstract="false"
+            concurrency="Sequential"
+            isQuery="false" />
+          <operation
+            Id="d3ed684f-f66d-4b16-9870-292ec9deef8a"
+            name="PreTestInit"
+            isLeaf="false"
+            isStatic="false"
+            isAbstract="false"
+            concurrency="Sequential"
+            isQuery="false" />
+        </ownedOperationsInternal>
+      </class>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <class
+        Id="89f659f8-0b12-450a-9333-bd37c2b7b114"
+        name="AssociatedBugTestBehaviorObserver"
+        isAbstract="false"
+        isLeaf="false"
+        isActiveClass="false">
+        <generalsInternal>
+          <generalization
+            Id="2080cbb8-a576-4aa8-801f-0e69a2bfe6e7"
+            isSubstitutable="false">
+            <classMoniker
+              Id="3ab56635-7a01-4834-8b49-ced85caa06bd"
+              LastKnownName="BaseTestBehaviorObserver"
+              LastKnownLocation="ModelingProject1.uml" />
+          </generalization>
+        </generalsInternal>
+        <ownedOperationsInternal>
+          <operation
+            Id="ace3072d-d1a2-434c-a323-8b0e7900c92a"
+            name="PostTestCleanup"
+            isLeaf="false"
+            isStatic="false"
+            isAbstract="false"
+            concurrency="Sequential"
+            isQuery="false" />
+        </ownedOperationsInternal>
+      </class>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <class
+        Id="2dd61847-e953-43c3-89ae-a630810ad947"
+        name="BrowserLaunchTestBehaviorObserver"
+        isAbstract="false"
+        isLeaf="false"
+        isActiveClass="false">
+        <generalsInternal>
+          <generalization
+            Id="508ad1b1-78e7-4a1a-9b9d-2a42205b925c"
+            isSubstitutable="false">
+            <classMoniker
+              Id="3ab56635-7a01-4834-8b49-ced85caa06bd"
+              LastKnownName="BaseTestBehaviorObserver"
+              LastKnownLocation="ModelingProject1.uml" />
+          </generalization>
+        </generalsInternal>
+        <ownedOperationsInternal>
+          <operation
+            Id="df744d40-d025-4abb-b939-e105737931d5"
+            name="PreTestInit"
+            isLeaf="false"
+            isStatic="false"
+            isAbstract="false"
+            concurrency="Sequential"
+            isQuery="false" />
+        </ownedOperationsInternal>
+      </class>
+    </packageHasNamedElement>
   </packagedElements>
   <primitiveType
     Id="220a3521-e091-4221-bae9-3ef9018e845c"

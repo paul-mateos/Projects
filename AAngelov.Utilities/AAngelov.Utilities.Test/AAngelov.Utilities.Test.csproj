@@ -43,6 +43,7 @@
     <Compile Include="ReducedAutoMapper.cs" />
     <Compile Include="ReducedAutoMapperExtended.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Validators\Improved\DateTimeAssert.cs" />
     <Compile Include="Validators\DateTimeAssert.cs" />
     <Compile Include="Validators\PropertiesValidator.cs" />
     <Compile Include="Validators\Enums\DateTimeDeltaType.cs" />

@@ -57,6 +57,13 @@
       <SubType>Content</SubType>
       <DependentUpon>ObserverDesignPatternEventsDelegates.classdiagram</DependentUpon>
     </Content>
+    <Content Include="ObserverDesignPatternIObserverInterfaces.classdiagram">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ObserverDesignPatternIObserverInterfaces.classdiagram.layout">
+      <SubType>Content</SubType>
+      <DependentUpon>ObserverDesignPatternIObserverInterfaces.classdiagram</DependentUpon>
+    </Content>
     <Content Include="SingletonDesignPattern.classdiagram">
       <SubType>Content</SubType>
     </Content>

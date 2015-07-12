@@ -6,7 +6,7 @@ using PatternsInAutomation.Tests.Advanced.Observer.Advanced.ObservableObserver.E
 
 namespace PatternsInAutomation.Tests.Advanced.Observer.Advanced.ObservableObserver
 {
-    public class MSTestExecutionProvider : ITestExecutionProvider, IObservable<ExecutionStatus>, IDisposable
+    public class MSTestExecutionProvider : IObservable<ExecutionStatus>, IDisposable, ITestExecutionProvider
     {
         private readonly List<IObserver<ExecutionStatus>> testBehaviorObservers;
 
@@ -42,7 +42,6 @@ namespace PatternsInAutomation.Tests.Advanced.Observer.Advanced.ObservableObserv
 
         public IDisposable Subscribe(IObserver<ExecutionStatus> observer)
         {
-            // Check whether observer is already registered. If not, add it 
             if (!testBehaviorObservers.Contains(observer))
             {
                 testBehaviorObservers.Add(observer);
