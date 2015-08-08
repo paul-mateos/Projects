@@ -59,11 +59,15 @@
   <ItemGroup>
     <Compile Include="EdgeTests\Pages\HealthyDietGeneratorPage.cs" />
     <Compile Include="HealthyDietMenuGeneratorTestsEdge.cs" />
+    <Compile Include="RamDiskTests.cs" />
     <Compile Include="HealthyDietMenuGeneratorTestsFirefox.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Drivers\IEDriverServer.exe" />
   </ItemGroup>
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">

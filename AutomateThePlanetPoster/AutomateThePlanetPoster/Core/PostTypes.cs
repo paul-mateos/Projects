@@ -15,6 +15,8 @@ namespace AutomateThePlanetPoster.Core
         [Description("ff66cc")]
         Magazines,       
         [Description("ACF200")]
-        Books
+        Books,
+        [Description("9900CC")]
+        SoftSkills
     }
 }
