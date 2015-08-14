@@ -1,12 +1,10 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using PatternsInAutomation.Tests.Advanced.Core;
 using PatternsInAutomation.Tests.Advanced.Decorator.Advanced.Base;
-using PatternsInAutomation.Tests.Advanced.Decorator.Advanced.Strategies;
-using PatternsInAutomation.Tests.Advanced.Decorator.Basic.Strategies;
 using PatternsInAutomation.Tests.Advanced.Decorator.Data;
-using PatternsInAutomation.Tests.Advanced.Decorator.Enums;
+using PatternsInAutomation.Tests.Advanced.Decorator.Advanced.Strategies;
 
-namespace PatternsInAutomation.Tests.Advanced.Strategy.Tests
+namespace PatternsInAutomation.Tests.Advanced.Decorator.Tests
 {
     [TestClass]
     public class AmazonPurchase_PurchaseStrategy_Tests
@@ -40,7 +38,7 @@ namespace PatternsInAutomation.Tests.Advanced.Strategy.Tests
                 Phone = "00164644885569"
             })
             {
-                GiftWrapping = GiftWrappingStyles.None
+                GiftWrapping = Enums.GiftWrappingStyles.None
             };
             ClientLoginInfo clientLoginInfo = new ClientLoginInfo()
             {

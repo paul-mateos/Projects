@@ -3,6 +3,7 @@ using PatternsInAutomation.Tests.Advanced.Core;
 using PatternsInAutomation.Tests.Advanced.Strategy.Advanced.Base;
 using PatternsInAutomation.Tests.Advanced.Strategy.Advanced.Strategies;
 using PatternsInAutomation.Tests.Advanced.Strategy.Data;
+using PatternsInAutomation.Tests.Advanced.Strategy.Enums;
 
 namespace PatternsInAutomation.Tests.Advanced.Strategy.Tests
 {
@@ -47,7 +48,7 @@ namespace PatternsInAutomation.Tests.Advanced.Strategy.Tests
             };
             ClientPurchaseInfo clientPurchaseInfo = new ClientPurchaseInfo(billingInfo, shippingInfo)
             {
-                GiftWrapping = Enums.GiftWrappingStyles.Fancy
+                GiftWrapping = GiftWrappingStyles.Fancy
             };
             ClientLoginInfo clientLoginInfo = new ClientLoginInfo()
             {
