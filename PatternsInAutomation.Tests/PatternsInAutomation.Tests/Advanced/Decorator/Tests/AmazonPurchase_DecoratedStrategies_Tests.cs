@@ -8,7 +8,7 @@ using PatternsInAutomation.Tests.Advanced.Decorator.Enums;
 namespace PatternsInAutomation.Tests.Advanced.Decorator.Tests
 {
     [TestClass]
-    public class AmazonPurchase_AdvancedPurchaseStrategy_Tests
+    public class AmazonPurchase_DecoratedStrategies_Tests
     { 
         [TestInitialize]
         public void SetupTest()
@@ -23,18 +23,18 @@ namespace PatternsInAutomation.Tests.Advanced.Decorator.Tests
         }
 
         [TestMethod]
-        public void Purchase_SeleniumTestingToolsCookbook()
+        public void Purchase_SeleniumTestingToolsCookbook_DecoratedStrategies()
         {
             string itemUrl = "/Selenium-Testing-Cookbook-Gundecha-Unmesh/dp/1849515743";
-            string itemPrice = "40.49";
+            decimal itemPrice = 40.49m;
             var shippingInfo = new ClientAddressInfo()
             {
                 FullName = "John Smith",
                 Country = "United States",
                 Address1 = "950 Avenue of the Americas",
-                State = "New York",
-                City = "New York City",
-                Zip = "10001-2121",
+                State = "Texas",
+                City = "Houston",
+                Zip = "77001",
                 Phone = "00164644885569"
             };
             var billingInfo = new ClientAddressInfo()
@@ -55,10 +55,11 @@ namespace PatternsInAutomation.Tests.Advanced.Decorator.Tests
                 Email = "g3984159@trbvm.com",
                 Password = "ASDFG_12345"
             };
+            OrderPurchaseStrategy orderPurchaseStrategy = new TotalPriceOrderPurchaseStrategy(itemPrice);
+            orderPurchaseStrategy = new SalesTaxOrderPurchaseStrategy(orderPurchaseStrategy, itemPrice, clientPurchaseInfo);
+            orderPurchaseStrategy = new VatTaxOrderPurchaseStrategy(orderPurchaseStrategy, itemPrice, clientPurchaseInfo);
 
-            new PurchaseContext(
-                new SalesTaxOrderPurchaseStrategy(), new VatTaxOrderPurchaseStrategy(), new GiftOrderPurchaseStrategy())
-                                        .PurchaseItem(itemUrl, itemPrice, clientLoginInfo, clientPurchaseInfo);
+            new PurchaseContext(orderPurchaseStrategy).PurchaseItem(itemUrl, itemPrice.ToString(), clientLoginInfo, clientPurchaseInfo);
         }
     }
 }

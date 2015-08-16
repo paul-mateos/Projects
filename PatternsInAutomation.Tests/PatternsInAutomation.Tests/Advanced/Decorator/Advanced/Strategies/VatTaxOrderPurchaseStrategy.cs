@@ -1,32 +1,33 @@
 ﻿using System;
-using PatternsInAutomation.Tests.Advanced.Decorator.Advanced.Base;
+using PatternsInAutomation.Tests.Advanced.Decorator.Data;
 using PatternsInAutomation.Tests.Advanced.Decorator.Enums;
 using PatternsInAutomation.Tests.Advanced.Decorator.Pages.PlaceOrderPage;
 using PatternsInAutomation.Tests.Advanced.Decorator.Services;
 
 namespace PatternsInAutomation.Tests.Advanced.Decorator.Advanced.Strategies
 {
-    public class VatTaxOrderPurchaseStrategy : IOrderPurchaseStrategy
+    public class VatTaxOrderPurchaseStrategy : OrderPurchaseStrategyDecorator
     {
-        public VatTaxOrderPurchaseStrategy()
+        private readonly VatTaxCalculationService vatTaxCalculationService;
+        private decimal vatTax;     
+
+        public VatTaxOrderPurchaseStrategy(OrderPurchaseStrategy orderPurchaseStrategy, decimal itemsPrice, ClientPurchaseInfo clientPurchaseInfo) 
+            : base(orderPurchaseStrategy, itemsPrice, clientPurchaseInfo)
         {
-            this.VatTaxCalculationService = new VatTaxCalculationService();
+            this.vatTaxCalculationService = new VatTaxCalculationService();
         }
 
-        public VatTaxCalculationService VatTaxCalculationService { get; set; }
-
-        public void ValidateOrderSummary(string itemsPrice, PatternsInAutomation.Tests.Advanced.Decorator.Data.ClientPurchaseInfo clientPurchaseInfo)
+        public override decimal CalculateTotalPrice()
         {
             Countries currentCountry = (Countries)Enum.Parse(typeof(Countries), clientPurchaseInfo.BillingInfo.Country);
-            decimal currentItemPrice = decimal.Parse(itemsPrice);
-            decimal vatTax = this.VatTaxCalculationService.Calculate(currentItemPrice, currentCountry);
-
-            PlaceOrderPage.Instance.Validate().EstimatedTaxPrice(vatTax.ToString());
+            this.vatTax = this.vatTaxCalculationService.Calculate(this.itemsPrice, currentCountry);
+            return this.orderPurchaseStrategy.CalculateTotalPrice() + this.vatTax;
         }
 
-        public void ValidateClientPurchaseInfo(PatternsInAutomation.Tests.Advanced.Decorator.Data.ClientPurchaseInfo clientPurchaseInfo)
+        public override void ValidateOrderSummary(decimal totalPrice)
         {
-           // Throw a new Argument exection if the country is not part of the EU Union.
+            base.orderPurchaseStrategy.ValidateOrderSummary(totalPrice);
+            PlaceOrderPage.Instance.Validate().EstimatedTaxPrice(vatTax.ToString());
         }
     }
 }
