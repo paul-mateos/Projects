@@ -13,6 +13,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebDriver.Tools", "WebDrive
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebDriver.Series.Tests", "WebDriver.Series.Tests\WebDriver.Series.Tests.csproj", "{C63E8E59-BD61-4A41-9039-BB5C16422D23}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CSharp.Series.Tests", "CSharp.Series.Tests\CSharp.Series.Tests.csproj", "{7BE94B9E-0595-4BB8-B644-1B2FE66F3FB9}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -39,6 +41,10 @@ Global
 		{C63E8E59-BD61-4A41-9039-BB5C16422D23}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C63E8E59-BD61-4A41-9039-BB5C16422D23}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C63E8E59-BD61-4A41-9039-BB5C16422D23}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7BE94B9E-0595-4BB8-B644-1B2FE66F3FB9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7BE94B9E-0595-4BB8-B644-1B2FE66F3FB9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7BE94B9E-0595-4BB8-B644-1B2FE66F3FB9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7BE94B9E-0595-4BB8-B644-1B2FE66F3FB9}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
