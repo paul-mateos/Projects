@@ -103,6 +103,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ArglistTest.cs" />
+    <Compile Include="CurrencyFormatter\CurrencyDelimiterFormatter.cs" />
+    <Compile Include="CurrencyFormatter\DigitsFormattingSettingsShifting.cs" />
+    <Compile Include="CurrencyFormatter\DigitsFormattingSettings.cs" />
     <Compile Include="CurryMethodExtensions.cs" />
     <Compile Include="DebuggerDisplayTest.cs" />
     <Compile Include="DebuggerBrowsableTest.cs" />

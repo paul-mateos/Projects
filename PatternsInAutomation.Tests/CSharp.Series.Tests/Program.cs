@@ -367,6 +367,13 @@ namespace CSharp.Series.Tests
             ////var compiledAssembly = CompileSourceRoslyn(sourceCode);
 
             ////ExecuteFromAssembly(compiledAssembly);
+
+            Console.WriteLine(1220.5.ToStringUsDigitsFormatting(DigitsFormattingSettings.PrefixDollar));
+            // Result- $1,220.50
+            Console.WriteLine(1220.5.ToStringUsDigitsFormatting(DigitsFormattingSettings.SufixDollar | DigitsFormattingSettings.NoComma));
+            // Result- 1220.50$
+            Console.WriteLine(1220.53645.ToStringUsDigitsFormatting(DigitsFormattingSettings.SufixDollar | DigitsFormattingSettings.NoComma | DigitsFormattingSettings.PrefixMinus, 4));
+            // Result- -1220.5365$
         }
 
         private static Assembly CompileSourceRoslyn(string sourceCode)
@@ -431,21 +438,21 @@ namespace CSharp.Series.Tests
             }
         }
 
-        private void StartPartyInAnotherDimension(object input)
-        {
-            Program currentDimensionInput = (Program)input;
-            Console.WriteLine("let the party begin");
-            while (currentDimensionInput.shouldPartyContinue)
-            {
-            }
-            Console.WriteLine("Party ends :(");
-        }
+        ////private void StartPartyInAnotherDimension(object input)
+        ////{
+        ////    Program currentDimensionInput = (Program)input;
+        ////    Console.WriteLine("let the party begin");
+        ////    while (currentDimensionInput.shouldPartyContinue)
+        ////    {
+        ////    }
+        ////    Console.WriteLine("Party ends :(");
+        ////}
 
-        [Conditional("LIVE")]
-        public static void StartBugsParty()
-        {
-            Console.WriteLine("Let the bugs free. Start the Party.");
-        }
+        ////[Conditional("LIVE")]
+        ////public static void StartBugsParty()
+        ////{
+        ////    Console.WriteLine("Let the bugs free. Start the Party.");
+        ////}
 
 
         ////private static string GetMacro(int macroId, int row, int endCol)
