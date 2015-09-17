@@ -1,6 +1,9 @@
-﻿using PatternsInAutomation.Tests.Advanced.Ebay.Data;
+﻿using PatternsInAutomation.Tests.Conference.Data;
+using PatternsInAutomation.Tests.Conference.Pages.Checkout;
+using PatternsInAutomation.Tests.Conference.Pages.ShippingAddress;
+using PatternsInAutomation.Tests.Conference.Pages.Item;
 
-namespace PatternsInAutomation.Tests.Conference
+namespace PatternsInAutomation.Tests.Conference.Base
 {
     public class ShoppingCart
     {
@@ -20,14 +23,14 @@ namespace PatternsInAutomation.Tests.Conference
             this.shippingAddressPage = shippingAddressPage;
         }
 
-        public void PurchaseItem(string item, string itemPrice, ClientInfo clientInfo)
+        public void PurchaseItem(string item, double itemPrice, ClientInfo clientInfo)
         {
-            this.itemPage.Navigate(item);
-            ////this.itemPage.AssertPrice(itemPrice);
+            this.itemPage.Open(item);
+            this.itemPage.AssertPrice(itemPrice);
             this.itemPage.ClickBuyNowButton();
             this.signInPage.ClickContinueAsGuestButton();
             this.shippingAddressPage.FillShippingInfo(clientInfo);
-            ////this.shippingAddressPage.AssertSubtotal(itemPrice);
+            this.shippingAddressPage.AssertSubtotalAmount(itemPrice);
             this.shippingAddressPage.ClickContinueButton();
             this.checkoutPage.AssertSubtotal(itemPrice);
         }

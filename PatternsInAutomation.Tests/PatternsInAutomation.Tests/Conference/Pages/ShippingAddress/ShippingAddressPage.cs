@@ -1,10 +1,25 @@
-﻿using PatternsInAutomation.Tests.Advanced.Core;
-using PatternsInAutomation.Tests.Advanced.Ebay.Data;
+﻿using System;
+using OpenQA.Selenium;
+using PatternsInAutomation.Tests.Conference.Base;
+using PatternsInAutomation.Tests.Conference.Data;
 
-namespace PatternsInAutomation.Tests.Advanced.Ebay.Pages.ShippingAddressPage
+namespace PatternsInAutomation.Tests.Conference.Pages.ShippingAddress
 {
-    public class ShippingAddressPage : BasePage<ShippingAddressPageMap, ShippingAddressPageValidator>
+    public class ShippingAddressPage : BasePage<ShippingAddressPageMap>, IShippingAddressPage
     {
+        public ShippingAddressPage(IWebDriver driver)
+            : base(driver, new ShippingAddressPageMap(driver))
+        {
+        }
+
+        public override string Url
+        {
+            get
+            {
+                return string.Empty;
+            }
+        }
+
         public void ClickContinueButton()
         {
             this.Map.ContinueButton.Click();
@@ -22,6 +37,11 @@ namespace PatternsInAutomation.Tests.Advanced.Ebay.Pages.ShippingAddressPage
             this.Map.Phone.SendKeys(clientInfo.Phone);
             this.Map.Email.SendKeys(clientInfo.Email);
             this.Map.SwitchToDefault();
+        }
+
+        public double GetSubtotalAmount()
+        {
+            throw new NotImplementedException();
         }
     }
 }

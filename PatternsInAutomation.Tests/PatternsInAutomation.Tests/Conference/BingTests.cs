@@ -1,7 +1,6 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Firefox;
-using PatternsInAutomation.Tests.Advanced.Core;
 using PatternsInAutomation.Tests.Conference.Pages.BingMain;
 
 namespace PatternsInAutomation.Tests.Conference
@@ -9,8 +8,6 @@ namespace PatternsInAutomation.Tests.Conference
     [TestClass]
     public class BingTests 
     {
-        private IFactory<ShoppingCart> shoppingCartFactory;
-        private ShoppingCart shoppingCart;
         private IBingMainPage bingMainPage;
         private IWebDriver driver;
 
@@ -18,7 +15,6 @@ namespace PatternsInAutomation.Tests.Conference
         public void SetupTest()
         {
             driver = new FirefoxDriver();
-            shoppingCartFactory = new PurchaseFacadeFactory(driver);
             bingMainPage = new BingMainPage(driver);
         }
 
@@ -29,22 +25,7 @@ namespace PatternsInAutomation.Tests.Conference
         }
 
         [TestMethod]
-        public void SearchTextInBing_First_Conference()
-        {
-            // the facade design pattern no facade in the name because you don't want to know that this class is hiding the complexity
-            // You can use the page objects directly. Because the page objects can be used easily in tests.
-            /*
-             *  hard instanciation to facade
-             *  no need to factory to the pages, 
-             *  you can change it.
-             *  pages are created easily
-             */
-            shoppingCart = shoppingCartFactory.Create();
-            shoppingCart.PurchaseItem("", "", null);
-        }
-
-        [TestMethod]
-        public void BingMainPageTest()
+        public void SearchForAutomateThePlanet()
         {
             this.bingMainPage.Open();
             this.bingMainPage.Search("Automate The Planet");

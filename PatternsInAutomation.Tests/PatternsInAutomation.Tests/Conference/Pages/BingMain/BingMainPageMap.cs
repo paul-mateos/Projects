@@ -1,10 +1,11 @@
 ﻿using OpenQA.Selenium;
+using PatternsInAutomation.Tests.Conference.Base;
 
 namespace PatternsInAutomation.Tests.Conference.Pages.BingMain
 {
-    public class BingMainPageElementMap : BasePageElementMap
+    public class BingMainPageMap : BaseElementMap
     {
-        public BingMainPageElementMap(IWebDriver driver) : base(driver)
+        public BingMainPageMap(IWebDriver driver) : base(driver)
         {
         }
 

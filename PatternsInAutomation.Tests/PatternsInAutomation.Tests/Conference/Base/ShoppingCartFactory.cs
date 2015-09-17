@@ -1,17 +1,16 @@
-﻿using System;
-using OpenQA.Selenium;
-using PatternsInAutomation.Tests.Advanced.Ebay.Pages.CheckoutPage;
-using PatternsInAutomation.Tests.Advanced.Ebay.Pages.ItemPage;
-using PatternsInAutomation.Tests.Advanced.Ebay.Pages.ShippingAddressPage;
-using PatternsInAutomation.Tests.Advanced.Ebay.Pages.SignInPage;
+﻿using OpenQA.Selenium;
+using PatternsInAutomation.Tests.Conference.Pages.Checkout;
+using PatternsInAutomation.Tests.Conference.Pages.Item;
+using PatternsInAutomation.Tests.Conference.Pages.ShippingAddress;
+using PatternsInAutomation.Tests.Conference.Pages.SignIn;
 
-namespace PatternsInAutomation.Tests.Conference
+namespace PatternsInAutomation.Tests.Conference.Base
 {
-    public class PurchaseFacadeFactory : IFactory<ShoppingCart>
+    public class ShoppingCartFactory : IFactory<ShoppingCart>
     {
         private readonly IWebDriver driver;
 
-        public PurchaseFacadeFactory(IWebDriver driver)
+        public ShoppingCartFactory(IWebDriver driver)
         {
             this.driver = driver;
         }

@@ -1,16 +1,17 @@
 ﻿using System;
 using OpenQA.Selenium;
+using PatternsInAutomation.Tests.Conference.Base;
 
 namespace PatternsInAutomation.Tests.Conference.Pages.BingMain
 {
-    public class BingMainPage : BasePage<BingMainPageElementMap>, IBingMainPage
+    public class BingMainPage : BasePage<BingMainPageMap>, IBingMainPage
     {
-        internal BingMainPage(IWebDriver driver)
-            : base(driver, new BingMainPageElementMap(driver))
+        public BingMainPage(IWebDriver driver)
+            : base(driver, new BingMainPageMap(driver))
         {
         }
 
-        internal override string Url
+        public override string Url
         {
             get
             {

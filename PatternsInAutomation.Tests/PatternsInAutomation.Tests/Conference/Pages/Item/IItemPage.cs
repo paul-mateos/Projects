@@ -1,9 +1,9 @@
 namespace PatternsInAutomation.Tests.Conference
 {
-    public interface IItemPage
+    public interface IItemPage : IPage
     {
-        void Navigate(string item);
-
         void ClickBuyNowButton();
+
+        double GetPrice();
     }
 }

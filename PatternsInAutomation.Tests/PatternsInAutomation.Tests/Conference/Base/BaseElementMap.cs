@@ -1,12 +1,12 @@
 ﻿using OpenQA.Selenium;
 
-namespace PatternsInAutomation.Tests.Conference
+namespace PatternsInAutomation.Tests.Conference.Base
 {
-    public abstract class BasePageElementMap
+    public abstract class BaseElementMap
     {
         protected IWebDriver driver;
 
-        public BasePageElementMap(IWebDriver driver)
+        public BaseElementMap(IWebDriver driver)
         {
             this.driver = driver;
         }
