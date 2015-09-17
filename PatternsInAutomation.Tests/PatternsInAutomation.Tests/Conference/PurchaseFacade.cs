@@ -10,13 +10,13 @@ namespace PatternsInAutomation.Tests.Conference
 {
     public class PurchaseFacade
     {
-        public ItemPage ItemPage { get; set; }
+        private ItemPage ItemPage { get; set; }
 
-        public SignInPage SignInPage { get; set; }
+        private SignInPage SignInPage { get; set; }
 
-        public CheckoutPage CheckoutPage { get; set; }
+        private CheckoutPage CheckoutPage { get; set; }
 
-        public ShippingAddressPage ShippingAddressPage { get; set; }
+        private ShippingAddressPage ShippingAddressPage { get; set; }
 
         public void PurchaseItem(string item, string itemPrice, ClientInfo clientInfo)
         {

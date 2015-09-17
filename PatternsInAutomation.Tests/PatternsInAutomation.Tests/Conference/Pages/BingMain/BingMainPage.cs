@@ -1,7 +1,6 @@
-﻿using System;
-using OpenQA.Selenium;
+﻿using OpenQA.Selenium;
 
-namespace PatternsInAutomation.Tests.Conference.BingMainPage
+namespace PatternsInAutomation.Tests.Conference.Pages.BingMain
 {
     public class BingMainPage : BasePage<BingMainPageElementMap>
     {

@@ -1,7 +1,6 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using PatternsInAutomation.Tests.Advanced.Core;
-using PatternsInAutomation.Tests.Conference.BingMainPage;
-using C = PatternsInAutomation.Tests.Conference.BingMainPage;
+using PatternsInAutomation.Tests.Conference.Pages.BingMain;
 
 namespace PatternsInAutomation.Tests.Conference
 {
@@ -23,7 +22,7 @@ namespace PatternsInAutomation.Tests.Conference
         [TestMethod]
         public void SearchTextInBing_First_Conference()
         {
-            var bingMainPage = PageFactory<C.BingMainPage>.Create();
+            var bingMainPage = Driver.Browser.CreatePage<BingMainPage>();
             bingMainPage.Navigate();
             bingMainPage.Search("Automate The Planet");
             bingMainPage.AssertResultsCountIsAsExpected("264,000 RESULTS");

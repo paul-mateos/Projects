@@ -258,9 +258,9 @@
     <Compile Include="Conference\BasePage.cs" />
     <Compile Include="Conference\BasePageElementMap.cs" />
     <Compile Include="Conference\BasePageAsserter.cs" />
-    <Compile Include="Conference\BingMainPage\BingMainPage.cs" />
-    <Compile Include="Conference\BingMainPage\BingMainPageElementMap.cs" />
-    <Compile Include="Conference\BingMainPage\BingMainPageAsserter.cs" />
+    <Compile Include="Conference\Pages\BingMain\BingMainPage.cs" />
+    <Compile Include="Conference\Pages\BingMain\BingMainPageElementMap.cs" />
+    <Compile Include="Conference\Pages\BingMain\BingMainPageAsserter.cs" />
     <Compile Include="Conference\BingTests.cs" />
     <Compile Include="Conference\IPage.cs" />
     <Compile Include="Conference\PageFactory.cs" />

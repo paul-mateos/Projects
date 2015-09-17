@@ -1,10 +1,10 @@
 ﻿using OpenQA.Selenium;
 
-namespace PatternsInAutomation.Tests.Conference.BingMainPage
+namespace PatternsInAutomation.Tests.Conference.Pages.BingMain
 {
     public class BingMainPageElementMap : BasePageElementMap
     {
-        public BingMainPageElementMap(IWebDriver browser) : base(browser)
+        public BingMainPageElementMap(IWebDriver driver) : base(driver)
         {
         }
 
@@ -12,7 +12,7 @@ namespace PatternsInAutomation.Tests.Conference.BingMainPage
         {
             get
             {
-                return this.browser.FindElement(By.Id("sb_form_q"));
+                return this.driver.FindElement(By.Id("sb_form_q"));
             }
         }
 
@@ -20,7 +20,7 @@ namespace PatternsInAutomation.Tests.Conference.BingMainPage
         {
             get
             {
-                return this.browser.FindElement(By.Id("sb_form_go"));
+                return this.driver.FindElement(By.Id("sb_form_go"));
             }
         }
        
@@ -28,7 +28,7 @@ namespace PatternsInAutomation.Tests.Conference.BingMainPage
         {
             get
             {
-                return this.browser.FindElement(By.Id("b_tween"));
+                return this.driver.FindElement(By.Id("b_tween"));
             }
         }
     }
