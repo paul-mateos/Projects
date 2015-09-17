@@ -1,8 +1,10 @@
-﻿using PatternsInAutomation.Tests.Advanced.Core;
+﻿using System;
+using PatternsInAutomation.Tests.Advanced.Core;
+using PatternsInAutomation.Tests.Conference;
 
 namespace PatternsInAutomation.Tests.Advanced.Ebay.Pages.ItemPage
 {
-    public class ItemPage : BasePage<ItemPageMap, ItemPageValidator>
+    public class ItemPage : BasePage<ItemPageMap, ItemPageValidator>, IItemPage
     {
         public ItemPage()
             : base("http://www.ebay.com/itm/")

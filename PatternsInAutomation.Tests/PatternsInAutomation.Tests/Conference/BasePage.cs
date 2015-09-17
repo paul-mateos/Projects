@@ -6,37 +6,34 @@ namespace PatternsInAutomation.Tests.Conference
     public abstract class BasePage<TMap> : BasePage
         where TMap : BasePageElementMap
     {
-        private TMap map;
+        private readonly TMap map;
 
-        public BasePage(IWebDriver driver) : base(driver)
+        internal BasePage(IWebDriver driver, TMap map) : base(driver)
         {
+            this.map = map;
         }
 
-        internal TMap Map
+        internal TMap Map 
         {
             get
             {
-                if (map == null)
-                {
-                    map = (TMap)Activator.CreateInstance(typeof(TMap), driver);
-                }
-                return map;
+                return this.map;
             }
         }
     }
 
     public abstract class BasePage
     {
-        protected readonly IWebDriver driver;
+        protected IWebDriver driver;
 
-        public BasePage(IWebDriver driver)
+        public void Initialize(IWebDriver driver)
         {
             this.driver = driver;
         }
 
         internal abstract string Url { get; }
 
-        public virtual void Navigate(string part = "")
+        public virtual void Open(string part = "")
         {
             this.driver.Navigate().GoToUrl(string.Concat(this.Url, part));
         }

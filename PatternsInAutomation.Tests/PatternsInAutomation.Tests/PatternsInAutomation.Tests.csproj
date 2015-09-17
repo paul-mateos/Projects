@@ -258,13 +258,19 @@
     <Compile Include="Conference\BasePage.cs" />
     <Compile Include="Conference\BasePageElementMap.cs" />
     <Compile Include="Conference\BasePageAsserter.cs" />
+    <Compile Include="Advanced\Ebay\Pages\ICheckoutPage.cs" />
+    <Compile Include="Advanced\Ebay\Pages\IItemPage.cs" />
+    <Compile Include="Advanced\Ebay\Pages\IShippingAddressPage.cs" />
+    <Compile Include="Advanced\Ebay\Pages\ISignInPage.cs" />
     <Compile Include="Conference\Pages\BingMain\BingMainPage.cs" />
     <Compile Include="Conference\Pages\BingMain\BingMainPageElementMap.cs" />
     <Compile Include="Conference\Pages\BingMain\BingMainPageAsserter.cs" />
     <Compile Include="Conference\BingTests.cs" />
     <Compile Include="Conference\IPage.cs" />
     <Compile Include="Conference\PageFactory.cs" />
-    <Compile Include="Conference\PurchaseFacade.cs" />
+    <Compile Include="Conference\Pages\BingMain\IBingMainPage.cs" />
+    <Compile Include="Conference\ShoppingCart.cs" />
+    <Compile Include="IPageFactory.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

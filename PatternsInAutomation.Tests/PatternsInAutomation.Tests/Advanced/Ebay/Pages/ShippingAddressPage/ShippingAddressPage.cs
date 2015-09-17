@@ -1,9 +1,11 @@
-﻿using PatternsInAutomation.Tests.Advanced.Core;
+﻿using System;
+using PatternsInAutomation.Tests.Advanced.Core;
 using PatternsInAutomation.Tests.Advanced.Ebay.Data;
+using PatternsInAutomation.Tests.Conference;
 
 namespace PatternsInAutomation.Tests.Advanced.Ebay.Pages.ShippingAddressPage
 {
-    public class ShippingAddressPage : BasePage<ShippingAddressPageMap, ShippingAddressPageValidator>
+    public class ShippingAddressPage : BasePage<ShippingAddressPageMap, ShippingAddressPageValidator>, IShippingAddressPage
     {
         public void ClickContinueButton()
         {

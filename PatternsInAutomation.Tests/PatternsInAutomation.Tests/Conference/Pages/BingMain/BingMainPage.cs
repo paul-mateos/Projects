@@ -1,10 +1,12 @@
-﻿using OpenQA.Selenium;
+﻿using System;
+using OpenQA.Selenium;
 
 namespace PatternsInAutomation.Tests.Conference.Pages.BingMain
 {
-    public class BingMainPage : BasePage<BingMainPageElementMap>
+    public class BingMainPage : BasePage<BingMainPageElementMap>, IBingMainPage
     {
-        public BingMainPage(IWebDriver driver) : base(driver)
+        internal BingMainPage(IWebDriver driver)
+            : base(driver, new BingMainPageElementMap(driver))
         {
         }
 
@@ -21,6 +23,11 @@ namespace PatternsInAutomation.Tests.Conference.Pages.BingMain
             this.Map.SearchBox.Clear();
             this.Map.SearchBox.SendKeys(textToType);
             this.Map.GoButton.Click();
+        }
+        public int GetResultsCount()
+        {
+            // TODO: Implement this method
+            throw new NotImplementedException();
         }
     }
 }

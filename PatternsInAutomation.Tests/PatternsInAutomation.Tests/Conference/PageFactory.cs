@@ -1,33 +1,29 @@
 ﻿using System;
-using System.Collections.Generic;
 using OpenQA.Selenium;
+using PatternsInAutomation.Tests.Advanced.Ebay.Pages.CheckoutPage;
+using PatternsInAutomation.Tests.Advanced.Ebay.Pages.ItemPage;
+using PatternsInAutomation.Tests.Advanced.Ebay.Pages.ShippingAddressPage;
+using PatternsInAutomation.Tests.Advanced.Ebay.Pages.SignInPage;
 
 namespace PatternsInAutomation.Tests.Conference
 {
-    public static class PageFactory
+    public class PurchaseFacadeFactory : IFactory<ShoppingCart>
     {
-        private static readonly Dictionary<Type, BasePage> alreadyInitializedPages;
+        private readonly IWebDriver driver;
 
-        static PageFactory()
+        public PurchaseFacadeFactory(IWebDriver driver)
         {
-            alreadyInitializedPages = new Dictionary<Type, BasePage>();
+            this.driver = driver;
         }
 
-        public static TPage CreatePage<TPage> (this IWebDriver driver)
-            where TPage : BasePage
+        public ShoppingCart Create()
         {
-            TPage currentPageInstance = default(TPage);
-            if (!alreadyInitializedPages.ContainsKey(typeof(TPage)))
-            {
-                currentPageInstance = (TPage) Activator.CreateInstance(typeof(TPage), driver);
-                alreadyInitializedPages.Add(typeof(TPage), currentPageInstance);
-            }
-            else
-            {
-                currentPageInstance = (TPage) alreadyInitializedPages[typeof(BasePage)];
-            }
-
-            return currentPageInstance;
+            var itemPage = new ItemPage(this.driver);
+            var signInPage = new SignInPage(this.driver);
+            var checkoutPage = new CheckoutPage(this.driver);
+            var shippingAddressPage = new ShippingAddressPage(this.driver);
+            var purchaseFacade = new ShoppingCart(itemPage, signInPage, checkoutPage, shippingAddressPage);
+            return purchaseFacade;
         }
-    }
+    }    
 }

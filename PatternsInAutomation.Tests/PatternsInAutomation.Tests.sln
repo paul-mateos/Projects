@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2013
-VisualStudioVersion = 12.0.31101.0
+VisualStudioVersion = 12.0.40629.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PatternsInAutomation.Tests", "PatternsInAutomation.Tests\PatternsInAutomation.Tests.csproj", "{8E4E4E04-3409-4454-998A-38BCBE3779CF}"
 EndProject
@@ -14,6 +14,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebDriver.Series.Tests", "WebDriver.Series.Tests\WebDriver.Series.Tests.csproj", "{C63E8E59-BD61-4A41-9039-BB5C16422D23}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CSharp.Series.Tests", "CSharp.Series.Tests\CSharp.Series.Tests.csproj", "{7BE94B9E-0595-4BB8-B644-1B2FE66F3FB9}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IoCTest", "IoCTest\IoCTest.csproj", "{1C929BA9-F25A-41B0-AC81-657CA4FC1E65}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -45,6 +47,10 @@ Global
 		{7BE94B9E-0595-4BB8-B644-1B2FE66F3FB9}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7BE94B9E-0595-4BB8-B644-1B2FE66F3FB9}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7BE94B9E-0595-4BB8-B644-1B2FE66F3FB9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1C929BA9-F25A-41B0-AC81-657CA4FC1E65}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1C929BA9-F25A-41B0-AC81-657CA4FC1E65}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1C929BA9-F25A-41B0-AC81-657CA4FC1E65}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1C929BA9-F25A-41B0-AC81-657CA4FC1E65}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

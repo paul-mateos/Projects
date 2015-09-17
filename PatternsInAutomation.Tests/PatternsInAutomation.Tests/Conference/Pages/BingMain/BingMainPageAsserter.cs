@@ -4,11 +4,9 @@ namespace PatternsInAutomation.Tests.Conference.Pages.BingMain
 {
     public static class BingMainPageAsserter
     {
-        public static BingMainPage AssertResultsCountIsAsExpected(this BingMainPage page, string expectedCount)
+        public static void AssertResultsCountIsAsExpected(this IBingMainPage page, int expectedCount)
         {
-            Assert.IsTrue(page.Map.ResultsCountDiv.Text.Contains(expectedCount), "The results DIV doesn't contains the specified text.");
-
-            return page;
+            Assert.AreEqual(page.GetResultsCount(), expectedCount, "The results count is not as expected.");
         }
     }
 }
