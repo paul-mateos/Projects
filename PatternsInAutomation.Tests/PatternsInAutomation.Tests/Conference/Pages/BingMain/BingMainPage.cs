@@ -27,8 +27,9 @@ namespace PatternsInAutomation.Tests.Conference.Pages.BingMain
         }
         public int GetResultsCount()
         {
-            // TODO: Implement this method
-            throw new NotImplementedException();
+            int resultsCount = default(int);
+            resultsCount = int.Parse(this.Map.ResultsCountDiv.Text);
+            return resultsCount;
         }
     }
 }
