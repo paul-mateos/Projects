@@ -34,6 +34,5 @@ namespace PatternsInAutomation.Tests.Conference.Base
             this.shippingAddressPage.ClickContinueButton();
             this.checkoutPage.AssertSubtotal(itemPrice);
         }
-        // interfaces - change pages - different implementation
     }
 }

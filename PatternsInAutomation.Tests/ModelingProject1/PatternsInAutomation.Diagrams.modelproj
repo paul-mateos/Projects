@@ -85,6 +85,13 @@
       <SubType>Content</SubType>
       <DependentUpon>ObserverDesignPatternIObserverInterfaces.classdiagram</DependentUpon>
     </Content>
+    <Content Include="PageObjects.classdiagram">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="PageObjects.classdiagram.layout">
+      <SubType>Content</SubType>
+      <DependentUpon>PageObjects.classdiagram</DependentUpon>
+    </Content>
     <Content Include="SingletonDesignPattern.classdiagram">
       <SubType>Content</SubType>
     </Content>

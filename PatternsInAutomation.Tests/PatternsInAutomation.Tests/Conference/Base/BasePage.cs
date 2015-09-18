@@ -3,13 +3,15 @@ using OpenQA.Selenium;
 
 namespace PatternsInAutomation.Tests.Conference.Base
 {
-    public abstract class BasePage<TMap> : BasePage
+    public abstract class BasePage<TMap>
         where TMap : BaseElementMap
     {
         private readonly TMap map;
+        protected IWebDriver driver;
 
-        public BasePage(IWebDriver driver, TMap map) : base(driver)
+        public BasePage( IWebDriver driver, TMap map)
         {
+            this.driver = driver;
             this.map = map;
         }
 
@@ -19,16 +21,6 @@ namespace PatternsInAutomation.Tests.Conference.Base
             {
                 return this.map;
             }
-        }
-    }
-
-    public abstract class BasePage
-    {
-        protected IWebDriver driver;
-
-        public BasePage(IWebDriver driver)
-        {
-            this.driver = driver;
         }
 
         public abstract string Url { get; }
