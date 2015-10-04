@@ -15,14 +15,14 @@ namespace CSharp.Series.Tests.GetValueOrDefaultVsNullCoalescingOperator
             int? j = null;
             int? k = 7;
 
-            var profileResult = Profiler.Profile(100000,
+            var profileResult = Profiler.Profile(int.MaxValue,
                () =>
                {
                    var x = a.GetValueOrDefault(7);
                    var y = b.GetValueOrDefault(7);
                    var z = d.GetValueOrDefault(6) + f.GetValueOrDefault(3) + g.GetValueOrDefault(1) + h.GetValueOrDefault(1) + j.GetValueOrDefault(5) + k.GetValueOrDefault(8);
                });
-            string formattedProfileResult = Profiler.FormatProfileResults(100000, profileResult);
+            string formattedProfileResult = Profiler.FormatProfileResults(int.MaxValue, profileResult);
             FileWriter.WriteToDesktop("ExecuteWithGetValueOrDefaultT", formattedProfileResult);
         }
 
@@ -37,14 +37,14 @@ namespace CSharp.Series.Tests.GetValueOrDefaultVsNullCoalescingOperator
             int? j = null;
             int? k = 7;
 
-            var profileResult = Profiler.Profile(100000,
+            var profileResult = Profiler.Profile(int.MaxValue,
                () =>
                {
                    var x = a ?? 7;
                    var y = b ?? 7;
                    var z = (d ?? 6) + (f ?? 3) + (g ?? 1) + (h ?? 1) + (j ?? 5) + (k ?? 8);
                });
-            string formattedProfileResult = Profiler.FormatProfileResults(100000, profileResult);
+            string formattedProfileResult = Profiler.FormatProfileResults(int.MaxValue, profileResult);
             FileWriter.WriteToDesktop("ExecuteWithNullCoalescingOperatorT", formattedProfileResult);
         }
 

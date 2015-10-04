@@ -35,14 +35,10 @@ namespace CSharp.Series.Tests
         //volatile bool shouldPartyContinue = true;
         public static unsafe void Main(string[] args)
         {
-            for (int i = 0; i < 100; i++)
+            for (int i = 0; i < 10; i++)
             {
-                GetValueOrDefaultVsNullCoalescingOperatorTest.ExecuteWithConditionalOperator();
-                GetValueOrDefaultVsNullCoalescingOperatorTest.ExecuteWithConditionalOperatorZero();
                 GetValueOrDefaultVsNullCoalescingOperatorTest.ExecuteWithGetValueOrDefault();
-                GetValueOrDefaultVsNullCoalescingOperatorTest.ExecuteWithGetValueOrDefaultZero();
                 GetValueOrDefaultVsNullCoalescingOperatorTest.ExecuteWithNullCoalescingOperator();
-                GetValueOrDefaultVsNullCoalescingOperatorTest.ExecuteWithNullCoalescingOperatorZero();
             }
             // 1.1. Curry Invoke Function Example
             ////Func<int, int, int, int> addNumbers = (x, y, z) => x + y + z;
