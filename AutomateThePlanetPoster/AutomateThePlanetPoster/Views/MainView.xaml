@@ -7,61 +7,76 @@
              xmlns:System="clr-namespace:System;assembly=mscorlib"
              xmlns:local="clr-namespace:AutomateThePlanetPoster.Core"
              mc:Ignorable="d" Loaded="UserControl_Loaded">
-    <Grid>
-        <Grid.Resources>
-            <ObjectDataProvider x:Key="dataFromEnum" MethodName="GetValues" ObjectType="{x:Type System:Enum}" >
-                <ObjectDataProvider.MethodParameters>
-                    <x:Type TypeName="local:PostTypes"/>
-                </ObjectDataProvider.MethodParameters>
-            </ObjectDataProvider>
-        </Grid.Resources>
-        <StackPanel Orientation="Vertical">
-            <DataGrid Name="dgData" AutoGenerateColumns="False" IsReadOnly="False"  Margin="10" Height="700" ItemsSource="{Binding Posts}">
-                <DataGrid.Columns>
-                    <DataGridTextColumn Header="URL" Binding="{Binding Url}" Width="4*">
-                        <DataGridTextColumn.HeaderStyle>
-                            <Style TargetType="DataGridColumnHeader" BasedOn="{StaticResource {x:Type DataGridColumnHeader}}">
-                                <Setter Property="HorizontalContentAlignment" Value="Left"/>
-                            </Style>
-                        </DataGridTextColumn.HeaderStyle>
-                    </DataGridTextColumn>
-                    <DataGridTextColumn Header="Title" Binding="{Binding Title}" Width="2.8*">
-                        <DataGridTextColumn.HeaderStyle>
-                            <Style TargetType="DataGridColumnHeader" BasedOn="{StaticResource {x:Type DataGridColumnHeader}}">
-                                <Setter Property="HorizontalContentAlignment" Value="Left"/>
-                            </Style>
-                        </DataGridTextColumn.HeaderStyle>
-                    </DataGridTextColumn>
-                    <DataGridTextColumn Header="Author" Binding="{Binding Author}" Width="2.8*">
-                        <DataGridTextColumn.HeaderStyle>
-                            <Style TargetType="DataGridColumnHeader" BasedOn="{StaticResource {x:Type DataGridColumnHeader}}">
-                                <Setter Property="HorizontalContentAlignment" Value="Left"/>
-                            </Style>
-                        </DataGridTextColumn.HeaderStyle>
-                    </DataGridTextColumn>
-                    <DataGridTextColumn Header="Site" Binding="{Binding Site}" Width="2.8*">
-                        <DataGridTextColumn.HeaderStyle>
-                            <Style TargetType="DataGridColumnHeader" BasedOn="{StaticResource {x:Type DataGridColumnHeader}}">
-                                <Setter Property="HorizontalContentAlignment" Value="Left"/>
-                            </Style>
-                        </DataGridTextColumn.HeaderStyle>
-                    </DataGridTextColumn>
-                    <DataGridComboBoxColumn Header="Type"  Width="2.2*" ItemsSource="{Binding Source={StaticResource dataFromEnum}}" SelectedValueBinding="{Binding Path=PostType, Mode=TwoWay}">
-                    </DataGridComboBoxColumn>
-                    <DataGridCheckBoxColumn Header="IsTrackBack" Width="Auto" Binding="{Binding IsTrackBack}" />
-                </DataGrid.Columns>
-            </DataGrid>
-            <StackPanel Orientation="Vertical">
-                <StackPanel Orientation="Horizontal">
-                    <Label Content="Count: "  FontSize="18" FontWeight="Bold"/>
-                    <Label Content="{Binding ElementName=dgData, Path=Items.Count}" FontSize="18" FontWeight="Bold"/>
-                </StackPanel>
-                <StackPanel Orientation="Horizontal">
-                    <Button Name="btnSave" Margin="10" Height="50" Width="120" Content="Save" HorizontalAlignment="Left" VerticalAlignment="Center"  Grid.Row="3" Grid.Column="0" FontWeight="Bold" Click="btnSave_Click"/>
-                    <Button x:Name="btnGenerate" Margin="10,10,0,10" Height="50" Width="120" Content="Generate" HorizontalAlignment="Left" VerticalAlignment="Center" FontWeight="Bold" Click="btnGenerate_Click"/>
-                </StackPanel>
-            </StackPanel>
-        </StackPanel>
-       
+    <Grid Name="Main">
+        <TabControl HorizontalAlignment="Left" Margin="10" >
+            <TabItem Name="CompellingSunday" Header="Compelling Sunday">
+                <Grid>
+                    <Grid.Resources>
+                        <ObjectDataProvider x:Key="dataFromEnum" MethodName="GetValues" ObjectType="{x:Type System:Enum}" >
+                            <ObjectDataProvider.MethodParameters>
+                                <x:Type TypeName="local:PostTypes"/>
+                            </ObjectDataProvider.MethodParameters>
+                        </ObjectDataProvider>
+                    </Grid.Resources>
+                    <StackPanel Orientation="Vertical">
+                        <DataGrid Name="dgData" AutoGenerateColumns="False" IsReadOnly="False"  Margin="10" Height="700" ItemsSource="{Binding Posts}">
+                            <DataGrid.Columns>
+                                <DataGridTextColumn Header="URL" Binding="{Binding Url}" Width="4*">
+                                    <DataGridTextColumn.HeaderStyle>
+                                        <Style TargetType="DataGridColumnHeader" BasedOn="{StaticResource {x:Type DataGridColumnHeader}}">
+                                            <Setter Property="HorizontalContentAlignment" Value="Left"/>
+                                        </Style>
+                                    </DataGridTextColumn.HeaderStyle>
+                                </DataGridTextColumn>
+                                <DataGridTextColumn Header="Title" Binding="{Binding Title}" Width="2.8*">
+                                    <DataGridTextColumn.HeaderStyle>
+                                        <Style TargetType="DataGridColumnHeader" BasedOn="{StaticResource {x:Type DataGridColumnHeader}}">
+                                            <Setter Property="HorizontalContentAlignment" Value="Left"/>
+                                        </Style>
+                                    </DataGridTextColumn.HeaderStyle>
+                                </DataGridTextColumn>
+                                <DataGridTextColumn Header="Author" Binding="{Binding Author}" Width="2.8*">
+                                    <DataGridTextColumn.HeaderStyle>
+                                        <Style TargetType="DataGridColumnHeader" BasedOn="{StaticResource {x:Type DataGridColumnHeader}}">
+                                            <Setter Property="HorizontalContentAlignment" Value="Left"/>
+                                        </Style>
+                                    </DataGridTextColumn.HeaderStyle>
+                                </DataGridTextColumn>
+                                <DataGridTextColumn Header="Site" Binding="{Binding Site}" Width="2.8*">
+                                    <DataGridTextColumn.HeaderStyle>
+                                        <Style TargetType="DataGridColumnHeader" BasedOn="{StaticResource {x:Type DataGridColumnHeader}}">
+                                            <Setter Property="HorizontalContentAlignment" Value="Left"/>
+                                        </Style>
+                                    </DataGridTextColumn.HeaderStyle>
+                                </DataGridTextColumn>
+                                <DataGridComboBoxColumn Header="Type"  Width="2.2*" ItemsSource="{Binding Source={StaticResource dataFromEnum}}" SelectedValueBinding="{Binding Path=PostType, Mode=TwoWay}">
+                                </DataGridComboBoxColumn>
+                                <DataGridCheckBoxColumn Header="IsTrackBack" Width="Auto" Binding="{Binding IsTrackBack}" />
+                            </DataGrid.Columns>
+                        </DataGrid>
+                        <StackPanel Orientation="Vertical">
+                            <StackPanel Orientation="Horizontal">
+                                <Label Content="Count: "  FontSize="18" FontWeight="Bold"/>
+                                <Label Content="{Binding ElementName=dgData, Path=Items.Count}" FontSize="18" FontWeight="Bold"/>
+                            </StackPanel>
+                            <StackPanel Orientation="Horizontal">
+                                <Button Name="btnSave" Margin="10" Height="50" Width="120" Content="Save" HorizontalAlignment="Left" VerticalAlignment="Center"  Grid.Row="3" Grid.Column="0" FontWeight="Bold" Click="btnSave_Click"/>
+                                <Button x:Name="btnGenerate" Margin="10,10,0,10" Height="50" Width="120" Content="Generate" HorizontalAlignment="Left" VerticalAlignment="Center" FontWeight="Bold" Click="btnGenerate_Click"/>
+                            </StackPanel>
+                        </StackPanel>
+                    </StackPanel>
+                </Grid>
+            </TabItem>
+
+            <TabItem Name="CodeProjectBeautifier" Header="Code Project Beautifier">
+                <Grid Name="grid_CodeProjectBeautifier">
+                    <StackPanel Orientation="Vertical">
+                        <TextBox Name="tbSourceHtml" TextWrapping="Wrap" AcceptsReturn="True" Height="500" Width="1700" MinWidth="780" HorizontalAlignment="Center"/>
+                        <Button x:Name="btnBeautifyHtml" Margin="10,10,0,10" Height="50" Width="120" Content="Beautify" HorizontalAlignment="Left" VerticalAlignment="Bottom"  FontWeight="Bold" Click="btnBeautifyHtml_Click"/>
+                    </StackPanel>
+                </Grid>
+            </TabItem>
+        </TabControl>
     </Grid>
+    
 </UserControl>
