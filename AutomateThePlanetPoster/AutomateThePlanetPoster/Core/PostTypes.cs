@@ -17,6 +17,8 @@ namespace AutomateThePlanetPoster.Core
         [Description("ACF200")]
         Books,
         [Description("9900CC")]
-        SoftSkills
+        SoftSkills,
+        [Description("669900")]
+        Productivity
     }
 }
