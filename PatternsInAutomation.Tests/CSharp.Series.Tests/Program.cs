@@ -21,6 +21,7 @@ using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using CSharp.Series.Tests.GetValueOrDefaultVsNullCoalescingOperator;
+using CSharp.Series.Tests.PropertiesAsLambdas;
 
 ////using static System.Math;
 ////using static System.Console;
@@ -35,11 +36,20 @@ namespace CSharp.Series.Tests
         //volatile bool shouldPartyContinue = true;
         public static unsafe void Main(string[] args)
         {
-            for (int i = 0; i < 10; i++)
+            Client client = new Client();
+            var propertyNames = client.GetMemberNames(c => c.FistName, c => c.LastName, c => c.City);
+            foreach (var cPropertyName in propertyNames)
             {
-                GetValueOrDefaultVsNullCoalescingOperatorTest.ExecuteWithGetValueOrDefault();
-                GetValueOrDefaultVsNullCoalescingOperatorTest.ExecuteWithNullCoalescingOperator();
+                Console.WriteLine(cPropertyName);
             }
+            string nameOfTheMethod = client.GetMemberName(c => c.ToString());
+            Console.WriteLine(nameOfTheMethod);
+
+            ////for (int i = 0; i < 10; i++)
+            ////{
+            ////    GetValueOrDefaultVsNullCoalescingOperatorTest.ExecuteWithGetValueOrDefault();
+            ////    GetValueOrDefaultVsNullCoalescingOperatorTest.ExecuteWithNullCoalescingOperator();
+            ////}
             // 1.1. Curry Invoke Function Example
             ////Func<int, int, int, int> addNumbers = (x, y, z) => x + y + z;
             ////var f1 = addNumbers.Curry();
