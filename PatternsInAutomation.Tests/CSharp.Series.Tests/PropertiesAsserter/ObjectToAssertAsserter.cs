@@ -4,7 +4,6 @@
     {
         public void Assert(ObjectToAssert expected, ObjectToAssert actual)
         {
-            this.Assert(expected, actual, "FirstName");
             this.Assert(expected,
                         actual,
                         e => e.LastName,

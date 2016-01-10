@@ -21,12 +21,12 @@ namespace PatternsInAutomation.Tests.Advanced.Rules
             
             RulesEvaluator rulesEvaluator = new RulesEvaluator();
 
-            rulesEvaluator.Eval(new PromotionalPurchaseRule(purchaseTestInput, this.PerformUIAssert));
-            rulesEvaluator.Eval(new CreditCardChargeRule(purchaseTestInput, 20, this.PerformUIAssert));
-            rulesEvaluator.OtherwiseEval(new PromotionalPurchaseRule(purchaseTestInput, this.PerformUIAssert));
+            rulesEvaluator.Eval(new PromotionalPurchaseRule(purchaseTestInput, () => this.PerformUIAssert()));
+            rulesEvaluator.Eval(new CreditCardChargeRule(purchaseTestInput, 20, () => this.PerformUIAssert()));
+            rulesEvaluator.OtherwiseEval(new PromotionalPurchaseRule(purchaseTestInput, () => this.PerformUIAssert()));
             rulesEvaluator.OtherwiseEval(new CreditCardChargeRule<CreditCardChargeRuleRuleResult>(purchaseTestInput, 30));
             rulesEvaluator.OtherwiseEval(new CreditCardChargeRule<CreditCardChargeRuleAssertResult>(purchaseTestInput, 40));
-            rulesEvaluator.OtherwiseEval(new CreditCardChargeRule(purchaseTestInput, 50, this.PerformUIAssert));
+            rulesEvaluator.OtherwiseEval(new CreditCardChargeRule(purchaseTestInput, 50, () => this.PerformUIAssert()));
             rulesEvaluator.OtherwiseDo(() => Debug.WriteLine("Perform other UI actions"));          
             
             rulesEvaluator.EvaluateRulesChains();
