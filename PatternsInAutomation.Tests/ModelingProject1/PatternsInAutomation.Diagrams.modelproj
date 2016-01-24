@@ -106,6 +106,13 @@
       <SubType>Content</SubType>
       <DependentUpon>SingletonDesignPattern.classdiagram</DependentUpon>
     </Content>
+    <Content Include="SpecificationDesignPattern.classdiagram">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="SpecificationDesignPattern.classdiagram.layout">
+      <SubType>Content</SubType>
+      <DependentUpon>SpecificationDesignPattern.classdiagram</DependentUpon>
+    </Content>
     <Content Include="StrategyDesignPattern.classdiagram">
       <SubType>Content</SubType>
     </Content>
