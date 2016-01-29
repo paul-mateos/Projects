@@ -1,6 +1,6 @@
 ﻿namespace PatternsInAutomation.Tests.Advanced.Specifications
 {
-    public static class ExtensionMethods
+    public static class SpecificationsExtensionMethods
     {
         public static ISpecification<TEntity> And<TEntity>(this ISpecification<TEntity> leftSpecification, ISpecification<TEntity> rightSpecification)
         {

@@ -182,7 +182,10 @@
     <Compile Include="Advanced\Specifications\BingMain\BingMainPageAsserter.cs" />
     <Compile Include="Advanced\Specifications\BingMain\BingMainPageMap.cs" />
     <Compile Include="Advanced\Specifications\ExpressionSpecification.cs" />
-    <Compile Include="Advanced\Specifications\ExtensionMethods.cs" />
+    <Compile Include="Advanced\Specifications\LinqPlaceOrderPage\LinqPlaceOrderPage.cs" />
+    <Compile Include="Advanced\Specifications\LinqPlaceOrderPage\LinqPlaceOrderPage.Map.cs" />
+    <Compile Include="Advanced\Specifications\LinqPlaceOrderPage\LinqPlaceOrderPageAsserter.cs" />
+    <Compile Include="Advanced\Specifications\SpecificationsExtensionMethods.cs" />
     <Compile Include="Advanced\Specifications\FreePurchaseSpecification.cs" />
     <Compile Include="Advanced\Specifications\OrderTestContextConfigurator.cs" />
     <Compile Include="Advanced\Specifications\OrderTestContext.cs" />
