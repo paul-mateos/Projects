@@ -109,6 +109,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ArglistTest.cs" />
+    <Compile Include="Asserters\AntonMachineEventLogAsserter.cs" />
+    <Compile Include="Asserters\NonExistingEventLogException.cs" />
     <Compile Include="CurrencyFormatter\CurrencyDelimiterFormatter.cs" />
     <Compile Include="CurrencyFormatter\DigitsFormattingSettingsShifting.cs" />
     <Compile Include="CurrencyFormatter\DigitsFormattingSettings.cs" />
@@ -118,8 +120,11 @@
     <Compile Include="DefaultValueAttributeTest.cs" />
     <Compile Include="DefaultValueOperatorTest.cs" />
     <Compile Include="DictionaryExtensions.cs" />
+    <Compile Include="Asserters\EventLogAsserter.cs" />
     <Compile Include="GetValueOrDefaultVsNullCoalescingOperator\GetValueOrDefaultAndNullCoalescingOperatorInternals.cs" />
     <Compile Include="GetValueOrDefaultVsNullCoalescingOperator\GetValueOrDefaultVsNullCoalescingOperatorTest.cs" />
+    <Compile Include="Loggers\EventLogger.cs" />
+    <Compile Include="Loggers\ILogger.cs" />
     <Compile Include="Minions.cs" />
     <Compile Include="ObsoleteExample.cs" />
     <Compile Include="Program.cs" />

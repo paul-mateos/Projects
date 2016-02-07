@@ -22,6 +22,7 @@ using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using CSharp.Series.Tests.GetValueOrDefaultVsNullCoalescingOperator;
 using CSharp.Series.Tests.PropertiesAsLambdas;
+using CSharp.Series.Tests.Asserters;
 
 ////using static System.Math;
 ////using static System.Console;
@@ -36,14 +37,16 @@ namespace CSharp.Series.Tests
         //volatile bool shouldPartyContinue = true;
         public static unsafe void Main(string[] args)
         {
-            Client client = new Client();
-            var propertyNames = client.GetMemberNames(c => c.FistName, c => c.LastName, c => c.City);
-            foreach (var cPropertyName in propertyNames)
-            {
-                Console.WriteLine(cPropertyName);
-            }
-            string nameOfTheMethod = client.GetMemberName(c => c.ToString());
-            Console.WriteLine(nameOfTheMethod);
+            AntonMachineEventLogAsserter eventLogAsserter = new AntonMachineEventLogAsserter();
+            eventLogAsserter.AssertMessageExistsInTop("The VSS service is shutting down due to idle timeout.", "VSS", 22);
+            ////Client client = new Client();
+            ////var propertyNames = client.GetMemberNames(c => c.FistName, c => c.LastName, c => c.City);
+            ////foreach (var cPropertyName in propertyNames)
+            ////{
+            ////    Console.WriteLine(cPropertyName);
+            ////}
+            ////string nameOfTheMethod = client.GetMemberName(c => c.ToString());
+            ////Console.WriteLine(nameOfTheMethod);
 
             ////for (int i = 0; i < 10; i++)
             ////{
