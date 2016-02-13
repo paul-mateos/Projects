@@ -10,8 +10,8 @@ namespace TestingTechniques.UnitTests
         private const string SmallerThan123ExpectionMessage = "The age should be smaller than 123.";
         private const string ShouldBeIntegerExpectionMessage = "The age input should be an integer value between 0 - 122.";
 
-        [TestCase("-1", 0, ExpectedException = typeof(ArgumentException), ExpectedMessage = GreaterThanZeroExpectionMessage)]
-        [TestCase("0", 0, ExpectedException = typeof(ArgumentException), ExpectedMessage = GreaterThanZeroExpectionMessage)]
+        ////[TestCase("-1", 0, ExpectedException = typeof(ArgumentException), ExpectedMessage = GreaterThanZeroExpectionMessage)]
+        ////[TestCase("0", 0, ExpectedException = typeof(ArgumentException), ExpectedMessage = GreaterThanZeroExpectionMessage)]
         [TestCase("1", 0)]
         [TestCase("4", 0)]
         [TestCase("5", 0)]
@@ -24,12 +24,12 @@ namespace TestingTechniques.UnitTests
         [TestCase("66", 5)]
         [TestCase("121", 5)]
         [TestCase("122", 5)]
-        [TestCase("123", 0, ExpectedException = typeof(ArgumentException), ExpectedMessage = SmallerThan123ExpectionMessage)]
-        [TestCase("a", 0, ExpectedException = typeof(ArgumentException), ExpectedMessage = ShouldBeIntegerExpectionMessage)]
-        [TestCase("", 0, ExpectedException = typeof(ArgumentException), ExpectedMessage = ShouldBeIntegerExpectionMessage)]
-        [TestCase(null, 0, ExpectedException = typeof(ArgumentException), ExpectedMessage = ShouldBeIntegerExpectionMessage)]
-        [TestCase("2147483648", 0, ExpectedException = typeof(ArgumentException), ExpectedMessage = ShouldBeIntegerExpectionMessage)]
-        [TestCase("–2147483649", 0, ExpectedException = typeof(ArgumentException), ExpectedMessage = ShouldBeIntegerExpectionMessage)]
+        //////[TestCase("123", 0, ExpectedException = typeof(ArgumentException), ExpectedMessage = SmallerThan123ExpectionMessage)]
+        //////[TestCase("a", 0, ExpectedException = typeof(ArgumentException), ExpectedMessage = ShouldBeIntegerExpectionMessage)]
+        //////[TestCase("", 0, ExpectedException = typeof(ArgumentException), ExpectedMessage = ShouldBeIntegerExpectionMessage)]
+        //////[TestCase(null, 0, ExpectedException = typeof(ArgumentException), ExpectedMessage = ShouldBeIntegerExpectionMessage)]
+        //////[TestCase("2147483648", 0, ExpectedException = typeof(ArgumentException), ExpectedMessage = ShouldBeIntegerExpectionMessage)]
+        //////[TestCase("–2147483649", 0, ExpectedException = typeof(ArgumentException), ExpectedMessage = ShouldBeIntegerExpectionMessage)]
         public void ValidateCalculateSubscriptionPrice1(string ageInput, decimal expectedPrice)
         {
             decimal actualPrice = TransportSubscriptionCardPriceCalculator.CalculateSubscriptionPrice(ageInput);
@@ -74,7 +74,7 @@ namespace TestingTechniques.UnitTests
         }
 
         [Test]
-        [ExpectedException(typeof(ArgumentException), ExpectedMessage = ShouldBeIntegerExpectionMessage)]
+        ////[ExpectedException(typeof(ArgumentException), ExpectedMessage = ShouldBeIntegerExpectionMessage)]
         public void ValidateCalculateSubscriptionPrice_NotInteger()
         {
             decimal actualPrice = TransportSubscriptionCardPriceCalculator.CalculateSubscriptionPrice("invalid");
@@ -83,7 +83,7 @@ namespace TestingTechniques.UnitTests
         }
 
         [Test]
-        [ExpectedException(typeof(ArgumentException), ExpectedMessage = GreaterThanZeroExpectionMessage)]
+        ////[ExpectedException(typeof(ArgumentException), ExpectedMessage = GreaterThanZeroExpectionMessage)]
         public void ValidateCalculateSubscriptionPrice_InvalidZero()
         {
             decimal actualPrice = TransportSubscriptionCardPriceCalculator.CalculateSubscriptionPrice("0");
@@ -92,7 +92,7 @@ namespace TestingTechniques.UnitTests
         }
 
         [Test]
-        [ExpectedException(typeof(ArgumentException), ExpectedMessage = SmallerThan123ExpectionMessage)]
+        ////[ExpectedException(typeof(ArgumentException), ExpectedMessage = SmallerThan123ExpectionMessage)]
         public void ValidateCalculateSubscriptionPrice_InvalidGreater122()
         {
             decimal actualPrice = TransportSubscriptionCardPriceCalculator.CalculateSubscriptionPrice("1000");
