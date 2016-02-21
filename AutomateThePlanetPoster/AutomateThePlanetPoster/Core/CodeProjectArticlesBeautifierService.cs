@@ -3,6 +3,7 @@ using System;
 using System.IO;
 using System.Linq;
 using System.Net;
+using System.Text.RegularExpressions;
 using System.Web;
 
 namespace AutomateThePlanetPoster.Core
@@ -45,16 +46,18 @@ namespace AutomateThePlanetPoster.Core
 
         private void ReplaceAllGistUrlsWithFormattedCodeSnippets(HtmlDocument doc)
         {
+            string githubUrlPattern = @"(.*)(?<link>https://(.*)).js(.*)";
             // Fix all code snippets
-            var findclasses = doc.DocumentNode.Descendants("div").Where(d => d.Attributes.Contains("class") && d.Attributes["class"].Value.Contains("oembed-gist")).ToList();
+            var findclasses = doc.DocumentNode.Descendants("div").Where(d => d.Attributes.Contains("class") && d.Attributes["class"].Value.Contains("thrv_wrapper thrv_custom_html_shortcode")).ToList();
             for (int i = 0; i < findclasses.Count(); i++)
             {
-                var currentGistUrlNodes = findclasses[i].SelectNodes("a");
+                var currentGistUrlNodes = findclasses[i].SelectNodes("code");
                 if (currentGistUrlNodes != null)
                 {
-                    string currentGistUrl = currentGistUrlNodes.FirstOrDefault().Attributes["href"].Value;
+                    string currentGistUrl = currentGistUrlNodes.FirstOrDefault().InnerText;
+                    MatchCollection matches = Regex.Matches(currentGistUrl, githubUrlPattern);
                     System.Console.WriteLine(currentGistUrl);
-                    string encodedCode = GetEncodedRawCodeByGistUrl(currentGistUrl);
+                    string encodedCode = GetEncodedRawCodeByGistUrl(matches[0].Groups["link"].Value);
                     encodedCode = string.Concat(Environment.NewLine, "<div class=\"oembed-gist\"><pre lang=\"cs\">", encodedCode, "</pre></div>", Environment.NewLine);
                     findclasses[i].ParentNode.ReplaceChild(HtmlNode.CreateNode(encodedCode).ParentNode, findclasses[i]);
                 }

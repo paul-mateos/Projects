@@ -12,6 +12,7 @@ namespace AutomateThePlanetPoster.Core
     {
         private static PostsService instance;
         private const string FileName = "postsDataBase.xml";
+
         public List<Post> Posts { get; set; }
 
         public static PostsService Instance
@@ -35,21 +36,34 @@ namespace AutomateThePlanetPoster.Core
         {
             StringBuilder sb = new StringBuilder();
             var sortedPosts = Posts.OrderBy(x => x.PostType);
+            
+            PostTypes previousCategoryType = PostTypes.NA;
             foreach (Post currentPost in sortedPosts)
             {
+                if (previousCategoryType != currentPost.PostType)
+                {
+                    if (currentPost.PostType != PostTypes.NA)
+                    {
+                        sb.AppendLine("</ul>");
+                    }
+                    previousCategoryType = currentPost.PostType;
+                    sb.AppendLine(string.Format("<h2>{0}</h2>", currentPost.PostType.GetTitle()));
+                    sb.AppendLine("<ul style=\"list-style-type: disc;\">");
+                }
+               
                 string currentAuthorText = currentPost.Site != null ? string.Format("{0}({1})", currentPost.Author, currentPost.Site) : currentPost.Author;
                 string currentUrl = currentPost.IsTrackBack == true ? string.Format("{0}/trackback", currentPost.Url.TrimEnd('/')) : currentPost.Url;
-                string currentLine = string.Format("<span style=\"font-size: 12pt;\"><a style=\"color: #{0};\" href=\"{1}\" target=\"_blank\">[icon size=\"12px\" icon=\"icon-bolt\" color=\"#000000\"]{2}</a></span> - <span style=\"font-size: 10pt;\"><em>{3}</em></span>", currentPost.PostType.Text(), currentUrl, currentPost.Title, currentAuthorText);
+                string currentLine = string.Format("<li><span style=\"font-size: 12pt;\"><a style=\"color: #{0};\" href=\"{1}\" target=\"_blank\">{2}</a></span> - <span style=\"font-size: 10pt;\"><em>{3}</em></span></li>", currentPost.PostType.Description(), currentUrl, currentPost.Title, currentAuthorText);
                 sb.AppendLine(currentLine);
-                // <span style="font-size: 12pt;"><a style="color: #339966;" href="http://blog.cellfish.se/2015/03/should-bugs-be-user-stories.html" target="_blank">[icon size="12px" icon=" icon-bolt" color="#000000"]Should bugs be user stories</a></span> - <span style="font-size: 10pt;"><em>cellfish</em></span>
             }
+            sb.AppendLine("</ul>");
             return sb.ToString();
         }
 
         public void WritePostsToDisc()
         {
             if 
-                (Posts == null) 
+            (Posts == null) 
             {
                 return;
             }
@@ -78,9 +92,9 @@ namespace AutomateThePlanetPoster.Core
             if (string.IsNullOrEmpty(FileName)) 
             {
                 return new List<Post>()
-                    {
-                        new Post()
-                    }; 
+                {
+                    new Post()
+                }; 
             }
 
             List<Post> objectOut = default(List<Post>);

@@ -68,6 +68,7 @@
     <Compile Include="Core\EnumHelper.cs" />
     <Compile Include="Core\PostsService.cs" />
     <Compile Include="Core\Post.cs" />
+    <Compile Include="Core\TitleAttribute.cs" />
     <Compile Include="Views\MainView.xaml.cs">
       <DependentUpon>MainView.xaml</DependentUpon>
     </Compile>
