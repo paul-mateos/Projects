@@ -69,6 +69,7 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Core\CodeProjectArticlesBeautifierService.cs" />
+    <Compile Include="Core\GitHubCodeBeautifierService.cs" />
     <Compile Include="Core\PostTypes.cs" />
     <Compile Include="Core\EnumHelper.cs" />
     <Compile Include="Core\PostsService.cs" />

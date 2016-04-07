@@ -76,6 +76,18 @@
                     </StackPanel>
                 </Grid>
             </TabItem>
+            <TabItem Name="GitHubCodeBeautifier" Header="GitHub Code Beautifier">
+                <Grid Name="grid_GitHubCodeBeautifier">
+                    <StackPanel Orientation="Vertical">
+                        <StackPanel Orientation="Horizontal">
+                            <Label Content="GitHub URL: "  FontSize="12" FontWeight="Bold"/>
+                            <TextBox Name="tbGitHubJsUrl" AcceptsReturn="True" Height="20" Width="500" MinWidth="500" HorizontalAlignment="Center"/>
+                            
+                        </StackPanel>
+                        <Button x:Name="btnBeautifyGitHubCode" Margin="10,10,0,10" Height="25" Width="120" Content="Beautify" HorizontalAlignment="Left" VerticalAlignment="Bottom"  FontWeight="Bold" Click="btnBeautifyGitHubCode_Click"/>
+                    </StackPanel>                
+                </Grid>
+            </TabItem>
         </TabControl>
     </Grid>
     
