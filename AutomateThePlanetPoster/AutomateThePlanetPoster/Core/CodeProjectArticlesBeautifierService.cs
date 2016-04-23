@@ -34,7 +34,7 @@ namespace AutomateThePlanetPoster.Core
             {
                 string introductionNodeInnerHtml =
                     @"<div><ul class=""download"" style=""background-color: rgb(255, 255, 255);"">
-	                                <li><a href=""https://github.com/angelovstanton/Projects/tree/master/PatternsInAutomation.Tests"">Download full source code from GitHub</a></li>
+	                                <li><a href=""http://automatetheplanet.com/download-source-code/"">Download full source code</a></li>
                                 </ul>
 
                                 <h2 style=""background-color: rgb(255, 255, 255);"">Introduction</h2></div>";
@@ -46,19 +46,19 @@ namespace AutomateThePlanetPoster.Core
 
         private void ReplaceAllGistUrlsWithFormattedCodeSnippets(HtmlDocument doc)
         {
-            string githubUrlPattern = @"(.*)(?<link>https://(.*)).js(.*)";
+            string githubUrlPattern = @"(.*)(?<link>https://(.*).cs)(.*)";
             // Fix all code snippets
-            var findclasses = doc.DocumentNode.Descendants("div").Where(d => d.Attributes.Contains("class") && d.Attributes["class"].Value.Contains("thrv_wrapper thrv_custom_html_shortcode")).ToList();
+            var findclasses = doc.DocumentNode.Descendants("div").Where(d => d.Attributes.Contains("class") && d.Attributes["class"].Value.Equals("gist-file")).ToList();
             for (int i = 0; i < findclasses.Count(); i++)
             {
-                var currentGistUrlNodes = findclasses[i].SelectNodes("code");
+                var currentGistUrlNodes = findclasses[i].Descendants("div").Where(d => d.Attributes.Contains("class") && d.Attributes["class"].Value.Equals("gist-meta")).FirstOrDefault().SelectNodes("a");
                 if (currentGistUrlNodes != null)
                 {
-                    string currentGistUrl = currentGistUrlNodes.FirstOrDefault().InnerText;
+                    string currentGistUrl = currentGistUrlNodes.FirstOrDefault().Attributes["href"].Value;
                     MatchCollection matches = Regex.Matches(currentGistUrl, githubUrlPattern);
                     System.Console.WriteLine(currentGistUrl);
                     string encodedCode = GetEncodedRawCodeByGistUrl(matches[0].Groups["link"].Value);
-                    encodedCode = string.Concat(Environment.NewLine, "<div class=\"oembed-gist\"><pre lang=\"cs\">", encodedCode, "</pre></div>", Environment.NewLine);
+                    encodedCode = string.Concat(Environment.NewLine, "<div class=\"gist\"><pre lang=\"cs\">", encodedCode, "</pre></div>", Environment.NewLine);
                     findclasses[i].ParentNode.ReplaceChild(HtmlNode.CreateNode(encodedCode).ParentNode, findclasses[i]);
                 }
             }
@@ -106,7 +106,7 @@ namespace AutomateThePlanetPoster.Core
                 string sourceCodeNodeInnerHtml =
                     @"<h3>Source Code</h3>
 <ul class=""download"" style=""background-color: rgb(255, 255, 255);"">
-	<li><a href=""https://github.com/angelovstanton/Projects/tree/master/PatternsInAutomation.Tests"">Download full source code from GitHub</a></li>
+	<li><a href=""http://automatetheplanet.com/download-source-code/"">Download full source code</a></li>
 </ul>";
                 HtmlNode newSourceCodeNode = HtmlNode.CreateNode(sourceCodeNodeInnerHtml);
                 sourceCodeDiv.ParentNode.ReplaceChild(newSourceCodeNode.ParentNode, sourceCodeDiv);
@@ -119,7 +119,7 @@ namespace AutomateThePlanetPoster.Core
             if (subscribeDiv != null)
             {
                 string subscribeNodeInnerHtml =
-                    @"<div class=""subscribe""><p>If you enjoy my publications, feel free to <strong><a href=""http://automatetheplanet.com/newsletter/"" style=""color: #bda324;"" target=""_blank"">SUBSCRIBE</a></strong><br />
+                    @"<div class=""subscribe""><p>If you enjoy my publications, feel free to <strong><a href=""http://automatetheplanet.com/download-source-code/"" style=""color: #bda324;"" target=""_blank"">SUBSCRIBE</a></strong><br />
 Also, hit these share buttons. <strong>Thank you!</strong></p></div>";
                 HtmlNode newSubscribeNode = HtmlNode.CreateNode(subscribeNodeInnerHtml);
                 subscribeDiv.ParentNode.ReplaceChild(newSubscribeNode.ParentNode, subscribeDiv);
@@ -129,9 +129,9 @@ Also, hit these share buttons. <strong>Thank you!</strong></p></div>";
         private string GetEncodedRawCodeByGistUrl(string nonRawUrl)
         {
             string html = string.Empty;
-            string rawUrl = string.Concat(nonRawUrl, "/raw");
+            ////string rawUrl = string.Concat(nonRawUrl, "/raw");
 
-            HttpWebRequest request = (HttpWebRequest)WebRequest.Create(rawUrl);
+            HttpWebRequest request = (HttpWebRequest)WebRequest.Create(nonRawUrl);
             request.AutomaticDecompression = DecompressionMethods.GZip;
 
             using (HttpWebResponse response = (HttpWebResponse)request.GetResponse())
